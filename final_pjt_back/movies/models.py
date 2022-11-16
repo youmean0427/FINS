@@ -5,6 +5,7 @@ class Keyword(models.Model):
     keyword = models.CharField(max_length=100)
 
 class Genre(models.Model):
+    genre_id = models.IntegerField()
     genre_name = models.CharField(max_length=1000)
     
 class Movie(models.Model):
@@ -13,8 +14,8 @@ class Movie(models.Model):
     popularity = models.FloatField()
     release_date = models.DateField()
     vote_average = models.FloatField()
-    poster = models.CharField(max_length=1000)
     movie_key = models.IntegerField()
+    poster = models.CharField(max_length=1000)
 
     genres = models.ManyToManyField(Genre)
     keyword = models.ManyToManyField(Keyword)
