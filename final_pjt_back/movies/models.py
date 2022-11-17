@@ -41,7 +41,7 @@ class Movie(models.Model):
 class Movie_Image(models.Model):
     id = models.IntegerField(primary_key=True)
      # 영화 스틸컷
-    movie_id = models.ForeignKey(Movie, on_delete=models.CASCADE) # 영화 id
+    movie_id = models.IntegerField() # 영화 id
     image_path = models.CharField(max_length=1000)
 
     class Meta:
