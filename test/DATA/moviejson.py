@@ -3,7 +3,7 @@ import json
 
 final_result = []
 with open('movie_data.json', 'w', encoding='utf-8') as f:
-    for i in range(1, 500):
+    for i in range(1, 50):
         requestData = requests.get(f"https://api.themoviedb.org/3/movie/popular?api_key=8d2390a7f14da4093a0836c65dfb59a2&language=ko-KR&page={i}")
         jsonData = requestData.json()
         results=jsonData["results"]
