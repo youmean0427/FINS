@@ -9,7 +9,10 @@ class User(AbstractUser):
         db_table = 'user'
 
 class Feed(models.Model):
+    id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=1000)
     content = models.CharField(max_length=1000)
     feed_like_user = models.ManyToManyField(User, related_name='feed_like_user')
+    class Meta:
+        db_table = 'feed'
