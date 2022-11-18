@@ -19,6 +19,7 @@ class MovieListSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'overview',)
 
 class ReviewSerializer(serializers.ModelSerializer):
+    # user_id = serializers.IntegerField(source='user.user_id', read_only=True)
     class Meta:
         model = Review
         fields = '__all__'

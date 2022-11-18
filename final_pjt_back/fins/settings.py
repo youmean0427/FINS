@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'movies',
+    'drf_spectacular', #swagger
+    'corsheaders', #CORS policy
+    'rest_framework_swagger',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,15 +44,33 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+REST_FRAMEWORK = {
+    # spectacular Settings
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Your Project API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080', # vue server주소를 허용
+    'http://localhost:8081',
 ]
 
 ROOT_URLCONF = 'fins.urls'

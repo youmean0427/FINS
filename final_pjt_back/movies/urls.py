@@ -1,6 +1,7 @@
 # from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.urls import path
 from . import views
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 urlpatterns = [
@@ -14,9 +15,9 @@ urlpatterns = [
     path('discoverymovie/<int:genre_pk>/', views.discovery_movie),
 
     # # # 필수 작성
-    # path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # # optional UI
-    # path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 
 ]
 

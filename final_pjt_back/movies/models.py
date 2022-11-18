@@ -32,7 +32,7 @@ class Movie(models.Model):
 
     genres = models.ManyToManyField(Genre)
     keyword = models.ManyToManyField(Keyword)
-    movie_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True) # 좋아요 테이블
+    movie_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL) # 좋아요 테이블
     
     class Meta:
         db_table = 'movie'
@@ -52,7 +52,7 @@ class Review(models.Model):
     id = models.IntegerField(primary_key=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     write_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    review_like_user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE, related_name='like_user')
+    review_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     
