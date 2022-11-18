@@ -31,11 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken',
     'accounts',
     'movies',
     'drf_spectacular', #swagger
     'corsheaders', #CORS policy
-    'rest_framework_swagger',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
