@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,15 +9,34 @@ from .models import Movie_Image, Movie, Review, Genre
 from django.contrib.auth import get_user_model
 
 
-# Create your views here.
+def make_still_dict(movie_id):
+    img_serial = Movie_Image.objects.filter(movie_id=movie_id)
+    img_ser_len = len(img_serial)
+    img_lst = []
+    for im in range(img_ser_len):
+        img_lst.append({ im : img_serial[im].image_path })
+    return img_lst
 
-
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie)
         serializer = MovieListSerializer(movies, many=True)
+
+        for i in range(len(serializer.data)):
+            mk = serializer.data[i]['movie_key']
+            img_lst = make_still_dict(mk)
+            serializer.data[i].update(stil_images=img_lst)
         return Response(serializer.data)
+
+@api_view(['GET'])
+def movie_vote(request):
+    if request.method == 'GET':
+        movies = get_list_or_404(Movie)
+        serializer = MovieListSerializer(movies, many=True)
+        print(serializer)
+        # vote = serializer.data['vote_average']
+
 
 @api_view(['GET', 'POST'])
 def movie_detail(request, movie_pk):
@@ -32,6 +52,7 @@ def movie_detail(request, movie_pk):
         img_lst = []
         for im in range(img_ser_len):
             img_lst.append({ im : img_serial[im].image_path })
+
         sd = dict(serializer.data)
         sd.update(stil_images=img_lst)
 
@@ -39,6 +60,7 @@ def movie_detail(request, movie_pk):
 
 #______________________review______________________
 @api_view(['POST'])
+@permission_classes([IsAuthenticated]) # 이제 댓글은 로그인한 사람만 쓸 수 있어요
 def review_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data= request.data)
