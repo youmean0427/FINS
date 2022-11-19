@@ -15,7 +15,7 @@ import MovieCard from '@/components/Movies/MovieCard'
 export default {
   name: 'MovieList',
   components: {
-    MovieCard,
+      MovieCard,
   },
   computed: {
     movieList() {

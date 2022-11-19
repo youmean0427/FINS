@@ -2,7 +2,11 @@
   <div id="app">
     <nav>
       <router-link :to="{ name: 'MovieView' }">Movie</router-link> |
-      <router-link :to="{ name: 'CreateReview' }">Review</router-link> |
+      <router-link :to="{ name: 'DiscoveryMovieView' }">Discovery</router-link> |
+      <router-link :to="{ name: 'FinderMovieView' }">Finder</router-link> |
+      <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
+
+
     </nav>
     <router-view/>
   </div>
