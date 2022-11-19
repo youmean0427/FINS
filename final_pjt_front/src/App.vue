@@ -5,9 +5,12 @@
       <router-link :to="{ name: 'DiscoveryMovieView' }">Discovery</router-link> |
       <router-link :to="{ name: 'FinderMovieView' }">Finder</router-link> |
       <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
+
+
+      <!-- <router-link :to="{ name: 'ProfileView', params: { username: username } }">프로필</router-link> | -->
+      
+      <router-link :to="{ name: 'ProfileView' }">프로필</router-link> | 
       <router-link :to="{ name: 'SignUpView' }">회원가입</router-link> | 
-
-
       <router-link :to="{ name: 'LogInView' } ">로그인</router-link> | 
       <button @click="logout">로그아웃</button> | 
       <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
