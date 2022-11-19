@@ -16,7 +16,7 @@ export default {
     name: 'CreateReview',
     data() {
         return{
-            content: null,
+            content: null
         }
     },
     methods: {
@@ -28,17 +28,22 @@ export default {
             }
             axios({
                 method: 'post',
-                url: `${API_URL}/api/v1/movies/1/createreview/`, // ------------------------로그인 기능 구현 후 바꿀 부분
+                url: `${API_URL}/api/v1/movies/${this.movieId}/createreview/`, // ------------------------로그인 기능 구현 후 바꿀 부분
                 data: {
                     content : content,
                 }
             })
             .then((res) => {
                 console.log(res)
-                this.$router.push({name: 'MovieView'})
+                // this.$router.push({name: 'MovieDetailView'})
+                // go를 씀 
+                this.$router.go(this.$router.currentRoute)
             })
             .catch(() => {this.$router.push({name: 'MovieView'})})
         }
+    },
+    props: {
+        movieId: Number
     }
 
 }
