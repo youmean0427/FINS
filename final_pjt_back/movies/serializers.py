@@ -16,14 +16,14 @@ class KeywordSerializer(serializers.ModelSerializer):
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'overview',)
+        fields = ('id', 'title', 'overview','movie_key', 'vote_average')
         # fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
-    # user_id = serializers.IntegerField(source='user.user_id', read_only=True)
+    username = serializers.IntegerField(source='user.username', read_only=True)
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = ('id', 'title', 'content', 'user', 'username')
         read_only_fields = ('movie','id','write_user','review_like_user',)
 
 class ReviewListSerializer(serializers.ModelSerializer):

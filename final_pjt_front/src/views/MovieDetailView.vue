@@ -6,25 +6,33 @@
       <img :src="poster" style="width:300px;" alt="">
       <hr>
       <h3>comments</h3>
-      // 컴포넌트 새로 만들어서 댓글 표출하도록!
       <p>댓글 : {{movie.review_set}}</p>
+      <CreateReview :movie="movie.id" />
 
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CreateReview from '@/components/Movies/CreateReview'
+
 const API_URL = 'http://127.0.0.1:8000'
 export default {
     name: 'MovieDetailView',
+    components:{
+        CreateReview,
+    },
     data(){
         return{
-            movie : null,
+            movie : '',
         }
     },
     computed:{
         poster(){
-            const url = this.$store.state.BASE_POSTER_PATH + this.movie.poster
+            let url = ''
+            if (this.movie){
+                url = this.$store.state.BASE_POSTER_PATH + this.movie.poster
+            }
             return url
         }
     },
@@ -39,7 +47,7 @@ export default {
             })
                 .then((res) => {
                     console.log(res)
-                    console.log('데이터를 받았어요?')
+                    console.log('데이터를 받았어요')
                     this.movie = res.data
                 })
                 .catch((err) => {

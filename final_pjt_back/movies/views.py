@@ -7,16 +7,23 @@ from rest_framework import status
 from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer
 from .models import Movie_Image, Movie, Review, Genre
 from django.contrib.auth import get_user_model
+import random
 
 
-def make_still_dict(movie_id):
+# 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
+def make_still(movie_id):
     img_serial = Movie_Image.objects.filter(movie_id=movie_id)
     img_ser_len = len(img_serial)
-    img_lst = []
-    for im in range(img_ser_len):
-        img_lst.append({ im : img_serial[im].image_path })
-    return img_lst
+    if img_ser_len < 1:
+        return '' 
+    rannum = random.randrange(0, img_ser_len)
+    stil_image = img_serial[rannum].image_path
+    # img_lst = []
+    # for im in range(img_ser_len):
+    #     img_lst.append({ im : img_serial[im].image_path })
+    return stil_image
 
+# 인기순 영화목록 (main)
 @api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
@@ -24,19 +31,33 @@ def movie_list(request):
         serializer = MovieListSerializer(movies, many=True)
 
         for i in range(len(serializer.data)):
+            if 'movie_key' not in serializer.data[i]:
+                serializer.data[i].update(movie_key='')
+                continue
             mk = serializer.data[i]['movie_key']
-            img_lst = make_still_dict(mk)
-            serializer.data[i].update(stil_images=img_lst)
+            stil_image = make_still(mk)
+            serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
 
+# 별점순 영화목록
 @api_view(['GET'])
 def movie_vote(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie)
+        movies = Movie.objects.all().order_by('-vote_average')
         serializer = MovieListSerializer(movies, many=True)
-        print(serializer)
-        # vote = serializer.data['vote_average']
+        for i in range(len(serializer.data)):
+            if 'movie_key' not in serializer.data[i]:
+                serializer.data[i].update(movie_key='')
+                continue
+            mk = serializer.data[i]['movie_key']
+            stil_image = make_still(mk)
+            serializer.data[i].update(stil_image=stil_image)
+        return Response(serializer.data)
 
+# 추천 영화목록
+@api_view(['GET'])
+def recommend_movie(request, username):
+    pass
 
 @api_view(['GET', 'POST'])
 def movie_detail(request, movie_pk):
@@ -48,7 +69,6 @@ def movie_detail(request, movie_pk):
         # 스틸컷 딕셔너리 만들기
         img_serial = Movie_Image.objects.filter(movie_id=mk)
         img_ser_len = len(img_serial)
-                    # REF  Post.objects.all().order_by('id') 쿼리셋에 order by 지정할 수 있음
         img_lst = []
         for im in range(img_ser_len):
             img_lst.append({ im : img_serial[im].image_path })
@@ -62,13 +82,14 @@ def movie_detail(request, movie_pk):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated]) # 이제 댓글은 로그인한 사람만 쓸 수 있어요
 def review_create(request, movie_pk):
+    print('로그인 되었습니다..............', request.data)
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = ReviewSerializer(data= request.data)
     if serializer.is_valid(raise_exception=True):
-        user = get_user_model()
-        user = user.objects.get(pk=1)  # ------------------------로그인 기능 구현 후 바꿀 부분
-        serializer.save(movie=movie, write_user=user)
-        # serializer.save(movie=movie, write_user=request.user)
+        # user = get_user_model()
+        # user = user.objects.get(pk=1)  # ------------------------로그인 기능 구현 후 바꿀 부분
+        # serializer.save(movie=movie, write_user=user)
+        serializer.save(movie=movie, write_user=request.user)
         # serializer.save(movie=movie)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
