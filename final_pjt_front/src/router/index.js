@@ -6,26 +6,15 @@ import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import DiscoveryMovieView from '../views/movies/DiscoveryMovieView.vue'
 import FinderMovieView from '../views/movies/FinderMovieView.vue'
 
-import SignupView from '../views/accounts/SignUpView.vue'
-import LoginView from '../views/accounts/LogInView.vue'
+
 import ProfileView from '../views/accounts/ProfileView.vue'
+import LogInView from '../views/accounts/LogInView.vue'
+import SignUpView from '../views/accounts/SignUpView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
 
-  {
-    path: '/signup',
-    name: 'SignupView',
-    component: SignupView
-
-  },
-  {
-    path: '/Login',
-    name: 'LoginView',
-    component: LoginView
-
-  },
   {
     path: '/profile',
     name: 'ProfileView',

@@ -23,15 +23,17 @@ export default new Vuex.Store({
       return state.token ? true : false
     }
   },
-
   mutations: {
     GET_MOVIES(state,movies){
-      state.movies = movies
+      return state.movies = movies
     },
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'MovieView' })
+    },
+    LOGOUT(state){
+      state.token = null
     }
 
   },
@@ -40,9 +42,9 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
+        // headers: {
+        //   Authorization: `Token ${context.state.token}`
+        // }
       })
         .then((res) => {
           // console.log(res, context) // 받은 데이터 state에 저장
@@ -83,6 +85,9 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data.key)
         })
     },
+    logout(context){
+      context.commit('LOGOUT')
+    }
 
   },
   modules: {

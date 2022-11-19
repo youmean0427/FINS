@@ -23,7 +23,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.IntegerField(source='user.username', read_only=True)
     class Meta:
         model = Review
-        fields = ('id', 'title', 'content', 'user', 'username')
+        fields = ('id', 'content', 'username', 'created_at')
         read_only_fields = ('movie','id','write_user','review_like_user',)
 
 class ReviewListSerializer(serializers.ModelSerializer):

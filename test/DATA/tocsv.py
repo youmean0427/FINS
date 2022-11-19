@@ -8,5 +8,9 @@ import json
 #     ]
 #     return df_all
 # df = load_data()
-df = pd.read_json(r'movie_genre_test.json')
-df.to_csv('movie_genre_test.csv', header=True, index=True, encoding='UTF-8')
+
+# .json 데이터 입력
+df = pd.read_json(r'movie_data.json')
+
+# csv 파일이름 똑같이 하자! (movie_test.csv)
+df.to_csv('movie_test.csv', header=True, index=True, encoding='UTF-8')
