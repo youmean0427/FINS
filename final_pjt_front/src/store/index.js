@@ -165,7 +165,17 @@ export default new Vuex.Store({
         })
     },
     logout(context){
-      context.commit('LOGOUT')
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/logout/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+          console.log('로그아웃 되었습니다..', res)
+          context.commit('DELETE_TOKEN')
+        })
     },
 
     // search
@@ -197,17 +207,6 @@ export default new Vuex.Store({
         commit('SUBMIT_GENRES')
       })
       .catch(err => console.log(err))
-      axios({
-        method: 'post',
-        url: `${API_URL}/accounts/logout/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
-      })
-        .then((res) => {
-          console.log('로그아웃 되었습니다..', res)
-          context.commit('DELETE_TOKEN')
-        })
     },
     // 요청한 사용자의 이름을 반환해주는 메서드
     request_user(context){
