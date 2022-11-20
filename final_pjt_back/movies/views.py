@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer
+from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
 from .models import Movie_Image, Movie, Review, Genre, Keyword
 import random
 from django.contrib.auth import get_user_model
@@ -80,19 +80,26 @@ def recommend_movie(request, username):
     for l in range(len_likemovies):
         genres += user_like_movie_list.data[l]['genres']
     # 장르의 갯수가 많은 순서로 정렬
-    genres_dict = []
+    genres_dict = {}
     for l in genres:
-        genres_dict.append({l : genres.count(l)})
-        while l in genres:
-            genres.remove(l)
-    like_genres = list(map(lambda x : Genre.objects.get(pk=x).movie_set.all(), genres))
-    print(len(like_genres))
-    #     like_genres = [l for l in like_genres if l not in like_genres]
+        if l in genres_dict:
+            continue
+        genres_dict[l] = genres.count(l)
+    # print(genres_dict) # {0: 2, 1: 3, 14: 1, 6: 1, 17: 1, 10: 1, 16: 1, 4: 1, 12: 1, 2: 1, 3: 1, 7: 1, 8: 1}
+    
+    # 2. 키워드 | 좋아하는 영화에서 많이 나온 순서로 키워드 정렬
+    mm = list(map(lambda x : MovieSerializer(x).data, user_like_movie))
+    for kw in range(len_likemovies):
+        mm[kw]['keyword']
+        pass
+    # print('\-------------------')
+    # print(mm[0]['keyword'][0]['movie_set'])
+    print(mm[0]['keyword'][0]['id'])
     # 장르 테이블에서 역참조
-        # genre = Genre.objects.get(pk=genre_pk)
-        # seri = genre.movie_set.all()
-        # # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
-        # serializer = MovieListSerializer(seri, many=True)
+    # genre = Genre.objects.get(pk=genre_pk)
+    # seri = genre.movie_set.all()
+    # # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
+    # serializer = MovieListSerializer(seri, many=True)
 
 
 
@@ -106,8 +113,8 @@ def recommend_movie(request, username):
     # like_genre_movies = list(map(lambda x : Movie.objects.get(pk=x), like_genres))
 
     # 3. 해당 리스트에서 키워드가 중복되는 영화들을 우선순위로 보여준다 
-
-    return Response(user_like_movie_list.data)
+    return Response(mm)
+    # return Response(user_like_movie_list.data)
 #______________________movie_detail______________________
 
 @api_view(['GET', 'POST'])
