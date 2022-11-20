@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>GenreCardList</h1>
-    <GenreCard/>
+    <GenreCard
+      v-for="genre in genreList"
+      :key="genre.id"
+      :genre="genre"       
+    />
   </div>
 </template>
 
@@ -13,6 +17,9 @@ export default {
     name: "GenreCardList",
     components: {
         GenreCard
+    },
+    props: {
+      genreList: Array
     }
 }
 </script>
