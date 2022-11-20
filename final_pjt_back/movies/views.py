@@ -9,6 +9,8 @@ from .models import Movie_Image, Movie, Review, Genre, Keyword
 import random
 from django.contrib.auth import get_user_model
 # from ..accounts.models import User
+# from myapp.models import Entry
+from django.db.models import Q
 
 
 # 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
@@ -58,13 +60,21 @@ def movie_vote(request):
 #______________________recommend_movie______________________
 @api_view(['GET'])
 def recommend_movie(request, username):
-    pass
+#     좋아요를 누른 영화는 제거한다(50000)
+#       장르별로 가장 많이 나온 장르 10개를 위에서부터 10점씩 준다
+#       키워드별로 가장 많이 나온 키워드에 10점씩 준다
+#       점수 기반으로 리스트를 정렬한다
+
+    
     userId = get_user_model().objects.filter(username=username)[0].id
     # 1. request.user가 좋아하는 영화 목록을 받는다 == feed와 동일함
     user_like_movie = Movie.objects.filter(movie_like_user=userId)
     user_like_movie_list = MovieListSerializer(user_like_movie, many=True)
+    # 1.. 좋아요를 누르지 않은 영화만 가져온다! 
+    user_like_non = Movie.objects.filter(~Q(movie_like_user=userId))
+    
 
-    # 2. 포함된 영화 장르만 리스트로 만든다
+    # 2. 좋아하는 영화 기반 | 포함된 영화 장르만 리스트로 만든다
     len_likemovies = len(user_like_movie_list.data)
     genres = []
     for l in range(len_likemovies):
@@ -166,15 +176,31 @@ def discovery_movie(request, genre_pk):
         seri = genre.movie_set.all()
         # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
         serializer = MovieListSerializer(seri, many=True)
+
+        for i in range(len(serializer.data)):
+            if 'movie_key' not in serializer.data[i]:
+                serializer.data[i].update(movie_key='')
+                continue
+            mk = serializer.data[i]['movie_key']
+            stil_image = make_still(mk)
+            serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
+
+
 
 @api_view(['GET'])
 def keyword_movie(request, keyword_pk):
     keyword = Keyword.objects.filter(pk=keyword_pk)
     movie = Movie.objects.filter(keyword= keyword[0])
     serializer = MovieListSerializer(movie, many=True)
+    for i in range(len(serializer.data)):
+        if 'movie_key' not in serializer.data[i]:
+            serializer.data[i].update(movie_key='')
+            continue
+        mk = serializer.data[i]['movie_key']
+        stil_image = make_still(mk)
+        serializer.data[i].update(stil_image=stil_image)
     return Response(serializer.data)
-
 #______________________like movie______________________
 @api_view(['POST'])
 def like(request, movie_pk):
@@ -194,3 +220,5 @@ def like(request, movie_pk):
             'status': status
         }
         return Response(data)
+        # serializer =MovieSerializer(movie)
+        # return Response(serializer.data)
