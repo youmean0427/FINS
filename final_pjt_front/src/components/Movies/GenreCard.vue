@@ -1,9 +1,19 @@
 <template>
   <div>
-    <h1>GenreCard</h1>
-    <router-link :to="{ name: 'GenreMovieListView' }">
+    <h5>GenreCard</h5>
+    <!-- params 작성하세요 -->
+    <!-- <router-link :to="{ name: 'GenreMovieListView' }">
       [Genre]
+    </router-link> -->
+    <router-link :to="{ name: 'GenreMovieListView', params: { id: genre.id } }">
+      {{ genre.id}}
+      {{ genre.genre_name }}
     </router-link>
+    
+
+
+
+    <hr>
 
 
   </div>
@@ -12,8 +22,10 @@
 <script>
 
 export default {
-    name: 'GenreCard'
-    
+    name: 'GenreCard',
+    props: {
+      genre: Object
+    }
 }
 </script>
 

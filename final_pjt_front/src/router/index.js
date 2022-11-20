@@ -10,6 +10,7 @@ import FinderMovieView from '../views/movies/FinderMovieView.vue'
 import GenreMovieListView from '../views/movies/GenreMovieListView.vue'
 import MovieView from '../views/movies/MovieView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
+import KeywordMovieView from '../views/movies/KeywordMovieView.vue'
 
 
 
@@ -42,25 +43,39 @@ const routes = [
     name: 'DiscoveryMovieView',
     component : DiscoveryMovieView,
   },
+  
   {
-    path: '/finder',
-    name: 'FinderMovieView',
-    component : FinderMovieView,
-  },
-  {
-    path: '/discovery/:genre',
+    path: '/discovery/:id',
     name: 'GenreMovieListView',
     component : GenreMovieListView,
   },  
+
+  {
+    path: '/discovery/:keyword',
+    name: 'search',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/movies/SearchView.vue')
+  },
+
+  {
+    path: '/movies',
+    name: 'MovieView',
+    component: MovieView
+  },
+  {
+    path: '/finder',
+    name: 'FinderMovieView',
+    
+    component : FinderMovieView,
+  },
   {
     path: '/movies/:id',
     name: 'MovieDetailView',
     component : MovieDetailView,
   },
   {
-    path: '/movies',
-    name: 'MovieView',
-    component: MovieView
+    path: '/movies/keyword/:id',
+    name: 'KeywordMovieView',
+    component : KeywordMovieView,
   },
   // {
   //   path: '/movies/:id/createreview',
