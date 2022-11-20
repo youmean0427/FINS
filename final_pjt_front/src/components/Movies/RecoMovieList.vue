@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>RecoMovieList</h1>
+    <h1>RecoMovieCard</h1>
     <RecoMovieCard
       v-for="keyword in movieKeyword"
       :key="keyword.id"

@@ -166,6 +166,14 @@ def discovery_movie(request, genre_pk):
         seri = genre.movie_set.all()
         # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
         serializer = MovieListSerializer(seri, many=True)
+
+        for i in range(len(serializer.data)):
+            if 'movie_key' not in serializer.data[i]:
+                serializer.data[i].update(movie_key='')
+                continue
+            mk = serializer.data[i]['movie_key']
+            stil_image = make_still(mk)
+            serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
 
 @api_view(['GET'])
@@ -173,6 +181,13 @@ def keyword_movie(request, keyword_pk):
     keyword = Keyword.objects.filter(pk=keyword_pk)
     movie = Movie.objects.filter(keyword= keyword[0])
     serializer = MovieListSerializer(movie, many=True)
+    for i in range(len(serializer.data)):
+        if 'movie_key' not in serializer.data[i]:
+            serializer.data[i].update(movie_key='')
+            continue
+        mk = serializer.data[i]['movie_key']
+        stil_image = make_still(mk)
+        serializer.data[i].update(stil_image=stil_image)
     return Response(serializer.data)
 
 #______________________like movie______________________
