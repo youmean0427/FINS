@@ -15,6 +15,13 @@ urlpatterns = [
     #discoveryMovie
     path('discoverymovie/', views.discovery_movie_list),
     path('discoverymovie/<int:genre_pk>/', views.discovery_movie),
+    #keywordMovie
+    path('movies/keyword/<int:keyword_pk>/', views.keyword_movie),
+
+    #likemovie
+    path('movies/like/<int:movie_pk>/', views.like),
+
+
 
     # # # 필수 작성
     path('schema/', SpectacularAPIView.as_view(), name='schema'),

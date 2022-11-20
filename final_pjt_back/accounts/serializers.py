@@ -1,25 +1,23 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from .models import User
+from movies.serializers import MovieSerializer
 
 class UserDetailsSerializer(serializers.ModelSerializer):
-    class Meta: 
-        model = get_user_model()
+    like_movies = MovieSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
         fields = [
             "id",
             "username",
-            "is_superuser",
             "email",
             "password",
-            "first_name",
-            "last_name",
-            "date_joined",
             "last_login",
             "profile_img",
+            "like_movies",
         ]
         read_only_fields = [
             "id",
-            "is_superuser",
             "password",
-            "date_joined",
             "last_login",
         ]

@@ -32,7 +32,7 @@ class Movie(models.Model):
 
     genres = models.ManyToManyField(Genre)
     keyword = models.ManyToManyField(Keyword)
-    movie_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL) # 좋아요 테이블
+    movie_like_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies') # 좋아요 테이블
     
     class Meta:
         db_table = 'movie'

@@ -25,7 +25,7 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
     # user profile img 필드로 추가
-    profile_img = models.ImageField(upload_to="profile", blank=True)
+    profile_img = models.ImageField(upload_to="profile", blank=True, null=True)
 
 
     class Meta:
