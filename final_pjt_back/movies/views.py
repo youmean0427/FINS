@@ -81,13 +81,12 @@ def recommend_movie(request, username):
         genres += user_like_movie_list.data[l]['genres']
     # 장르의 갯수가 많은 순서로 정렬
     genres_dict = []
-    print(genres)
     for l in genres:
         genres_dict.append({l : genres.count(l)})
-        print(l, genres.count(l))
         while l in genres:
             genres.remove(l)
     like_genres = list(map(lambda x : Genre.objects.get(pk=x).movie_set.all(), genres))
+    print(len(like_genres))
     #     like_genres = [l for l in like_genres if l not in like_genres]
     # 장르 테이블에서 역참조
         # genre = Genre.objects.get(pk=genre_pk)
