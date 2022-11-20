@@ -1,7 +1,7 @@
 import requests
 import json
 
-gen_table = [
+key_table = [
   {
     "keyword_id": 1701,
     "keyword": "hero"
@@ -416,21 +416,21 @@ gen_table = [
 final_result = []
 with open('movie_data_test.json', 'r') as f:
     kw_data = json.load(f)
-    with open('keyword_movie.json', 'w', encoding='utf-8') as f:
-        for k in range(len(kw_data)//10):
+    with open('keyword_movie_edit.json', 'w', encoding='utf-8') as f:
+        for k in range(len(kw_data)):
             print(k)
             movie_id = kw_data[k]['movie_key']
             requestData = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}/keywords?api_key=8d2390a7f14da4093a0836c65dfb59a2")
-            jsonData = requestData.json()
-            keywords=jsonData["keywords"]
+            mData = requestData.json()
+            keywords = mData["keywords"]
 
             # with open('../1117JSON/keyword_table.json', 'r', encoding='utf-8') as f:
             #     gen_table = json.load(f)
                 # kk['id']이 일치하는 keyword의 인덱스 번호를 담아야함..
             for k1 in range(len(keywords)):
-                for k2 in range(len(gen_table)):
-                    if keywords[k1]['id'] == gen_table[k2]['keyword_id']:
-                        keyword_id = k1
+                for k2 in range(len(key_table)):
+                    if keywords[k1]['id'] == key_table[k2]['keyword_id']:
+                        keyword_id = k2
                         keywords_dic = {
                             'movie_id' : k,
                             'keyword_id' : keyword_id,

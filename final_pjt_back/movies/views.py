@@ -5,9 +5,10 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer
-from .models import Movie_Image, Movie, Review, Genre
-from django.contrib.auth import get_user_model
+from .models import Movie_Image, Movie, Review, Genre, Keyword
 import random
+from django.contrib.auth import get_user_model
+# from ..accounts.models import User
 
 
 # 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
@@ -23,7 +24,7 @@ def make_still(movie_id):
     #     img_lst.append({ im : img_serial[im].image_path })
     return stil_image
 
-# 인기순 영화목록 (main)
+# ______________________인기순 영화목록 (main)vote_movie______________________
 @api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
@@ -39,7 +40,7 @@ def movie_list(request):
             serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
 
-# 별점순 영화목록
+#______________________vote_movie______________________
 @api_view(['GET'])
 def movie_vote(request):
     if request.method == 'GET':
@@ -54,10 +55,51 @@ def movie_vote(request):
             serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
 
-# 추천 영화목록
+#______________________recommend_movie______________________
 @api_view(['GET'])
 def recommend_movie(request, username):
     pass
+    userId = get_user_model().objects.filter(username=username)[0].id
+    # 1. request.user가 좋아하는 영화 목록을 받는다 == feed와 동일함
+    user_like_movie = Movie.objects.filter(movie_like_user=userId)
+    user_like_movie_list = MovieListSerializer(user_like_movie, many=True)
+
+    # 2. 포함된 영화 장르만 리스트로 만든다
+    len_likemovies = len(user_like_movie_list.data)
+    genres = []
+    for l in range(len_likemovies):
+        genres += user_like_movie_list.data[l]['genres']
+    # 장르의 갯수가 많은 순서로 정렬
+    genres_dict = []
+    print(genres)
+    for l in genres:
+        genres_dict.append({l : genres.count(l)})
+        print(l, genres.count(l))
+        while l in genres:
+            genres.remove(l)
+    like_genres = list(map(lambda x : Genre.objects.get(pk=x).movie_set.all(), genres))
+    #     like_genres = [l for l in like_genres if l not in like_genres]
+    # 장르 테이블에서 역참조
+        # genre = Genre.objects.get(pk=genre_pk)
+        # seri = genre.movie_set.all()
+        # # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
+        # serializer = MovieListSerializer(seri, many=True)
+
+
+
+
+
+    # like_movie = GenreSerializer(like_genres[0],  many=True)
+    # like_movies = []
+    # for g in like_genres:
+    #     like_movies += GenreSerializer(g,  many=True)
+    # print(like_movie.data)
+    # like_genre_movies = list(map(lambda x : Movie.objects.get(pk=x), like_genres))
+
+    # 3. 해당 리스트에서 키워드가 중복되는 영화들을 우선순위로 보여준다 
+
+    return Response(user_like_movie_list.data)
+#______________________movie_detail______________________
 
 @api_view(['GET', 'POST'])
 def movie_detail(request, movie_pk):
@@ -125,3 +167,30 @@ def discovery_movie(request, genre_pk):
         # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
         serializer = MovieListSerializer(seri, many=True)
         return Response(serializer.data)
+
+@api_view(['GET'])
+def keyword_movie(request, keyword_pk):
+    keyword = Keyword.objects.filter(pk=keyword_pk)
+    movie = Movie.objects.filter(keyword= keyword[0])
+    serializer = MovieListSerializer(movie, many=True)
+    return Response(serializer.data)
+
+#______________________like movie______________________
+@api_view(['POST'])
+def like(request, movie_pk):
+    if request.user.is_authenticated:
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        user = get_user_model().objects.filter(username=request.user)
+
+        user_id = user[0].id
+        if movie.movie_like_user.filter(pk=user_id).exists():
+            movie.movie_like_user.remove(request.user)
+            status = '싫어하는상태'
+        else:
+            movie.movie_like_user.add(request.user)
+            status = '좋아하는상태'
+
+        data = {
+            'status': status
+        }
+        return Response(data)

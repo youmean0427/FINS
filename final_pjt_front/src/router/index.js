@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import LogInView from '../views/accounts/LogInView.vue'
-import ProfileView from '../views/accounts/ProfileView.vue'
 import SignUpView from '../views/accounts/SignUpView.vue'
 
 import DiscoveryMovieView from '../views/movies/DiscoveryMovieView.vue'
@@ -11,9 +10,14 @@ import GenreMovieListView from '../views/movies/GenreMovieListView.vue'
 import MovieView from '../views/movies/MovieView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import KeywordMovieView from '../views/movies/KeywordMovieView.vue'
+import store from '../store/index';
 
-
-
+const requireAuth = () => (to, from, next) => {
+  if (store.state.token) {
+    return next();
+  }
+  next('/login');
+};
 
 Vue.use(VueRouter)
 
@@ -27,8 +31,13 @@ const routes = [
   {
     path: '/profile/:username',
     name: 'ProfileView',
-    component: ProfileView
-    
+    component: () => import('../views/accounts/ProfileView.vue'),
+    beforeEnter : requireAuth()
+  },
+  {
+    path: '/profile/edit',
+    name : 'ProfileEditView',
+    component: () => import('../views/accounts/ProfileEditView.vue')
   },
   {
     path: '/signup',
@@ -77,14 +86,10 @@ const routes = [
     name: 'KeywordMovieView',
     component : KeywordMovieView,
   },
-  // {
-  //   path: '/movies/:id/createreview',
-  //   name: 'CreateReview',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../components/Movies/CreateReview.vue')
-  // },
+  {
+    path: '*',
+    redirect: { name: 'MovieView' }
+  },
 
 
 

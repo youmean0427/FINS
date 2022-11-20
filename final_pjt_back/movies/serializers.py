@@ -3,6 +3,8 @@ from .models import Review, Movie, Genre, Keyword
 
 
 class GenreSerializer(serializers.ModelSerializer):
+    movie_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # comment_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Genre
         fields = '__all__'
@@ -16,8 +18,8 @@ class KeywordSerializer(serializers.ModelSerializer):
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'overview','movie_key', 'vote_average')
-        # fields = '__all__'
+        # fields = ('id', 'title', 'overview','movie_key', 'vote_average')
+        fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.IntegerField(source='user.username', read_only=True)
