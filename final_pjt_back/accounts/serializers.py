@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import User
+from .models import User,Feed
 from movies.serializers import MovieSerializer
 
 class UserDetailsSerializer(serializers.ModelSerializer):
@@ -21,3 +21,13 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             "password",
             "last_login",
         ]
+class FeelListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feed
+        fields = '__all__'
+
+class FeedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feed
+        fields = '__all__'
+        read_only_fields = ['id', 'movie_id', 'user', 'feed_like_user']

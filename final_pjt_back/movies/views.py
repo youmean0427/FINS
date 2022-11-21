@@ -220,14 +220,16 @@ def like(request, movie_pk):
         if movie.movie_like_user.filter(pk=user_id).exists():
             movie.movie_like_user.remove(request.user)
             status = '싫어하는상태'
-            Feed.objects.create(
-                user=request.user, 
-                content='', 
-            )
-            # still cut methods 사용
+            Feed.objects.filter(movie_id=movie_pk).delete()
         else:
             movie.movie_like_user.add(request.user)
             status = '좋아하는상태'
+            feed = Feed(user=request.user, 
+                content='', 
+                movie_id = movie.id,
+                # still cut methods 사용
+                image_path = make_still(movie.movie_key))
+            feed.save()
 
         data = {
             'status': status
