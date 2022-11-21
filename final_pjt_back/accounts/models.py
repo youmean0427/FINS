@@ -36,6 +36,7 @@ class Feed(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image_path = models.CharField(max_length=1000)
     content = models.CharField(max_length=1000)
+    # movie = models.ForeignKey(Movie,)
     feed_like_user = models.ManyToManyField(User, related_name='feed_like_user')
     class Meta:
         db_table = 'feed'

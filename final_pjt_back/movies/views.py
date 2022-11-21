@@ -6,11 +6,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
 from .models import Movie_Image, Movie, Review, Genre, Keyword
+from accounts.models import Feed
 import random
 from django.contrib.auth import get_user_model
 # from ..accounts.models import User
 # from myapp.models import Entry
 from django.db.models import Q
+
 
 
 # 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
@@ -218,6 +220,11 @@ def like(request, movie_pk):
         if movie.movie_like_user.filter(pk=user_id).exists():
             movie.movie_like_user.remove(request.user)
             status = '싫어하는상태'
+            Feed.objects.create(
+                user=request.user, 
+                content='', 
+            )
+            # still cut methods 사용
         else:
             movie.movie_like_user.add(request.user)
             status = '좋아하는상태'

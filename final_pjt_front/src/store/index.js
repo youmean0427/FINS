@@ -11,8 +11,8 @@ import createPersistedState from 'vuex-persistedstate' // 인증받은 사용자
 
 const API_URL = 'http://127.0.0.1:8000'
 
-// tinder
-const SERVER_URL = 'http://127.0.0.1:8080/'
+// // tinder
+// const SERVER_URL = 'http://127.0.0.1:8080/'
 
 Vue.use(Vuex)
 
@@ -204,18 +204,18 @@ export default new Vuex.Store({
     movieNope({commit}, genres) {
       commit('MOVIE_NOPE', genres)
     },
-    submitGenres({commit}, genreItems) {
-      axios({
-        method: 'POST',
-        url: `${SERVER_URL}movies/genres/`,
-        data: genreItems.genres,
-        headers: genreItems.token
-      })
-      .then(() => {
-        commit('SUBMIT_GENRES')
-      })
-      .catch(err => console.log(err))
-    },
+    // submitGenres({commit}, genreItems) {
+    //   axios({
+    //     method: 'POST',
+    //     url: `${SERVER_URL}movies/genres/`,
+    //     data: genreItems.genres,
+    //     headers: genreItems.token
+    //   })
+    //   .then(() => {
+    //     commit('SUBMIT_GENRES')
+    //   })
+    //   .catch(err => console.log(err))
+    // },
     // 요청한 사용자의 이름을 반환해주는 메서드
     request_user(context){
       if(context.state.token){
@@ -262,22 +262,49 @@ export default new Vuex.Store({
         return is_sameuser
     },
     editProfile(context, payload){
+
       axios({
         method: 'put',
         url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        },
         data: {
           username: payload.username,
           email : payload.email,
           profile_img: payload.profile_img,
         },
-        headers: {
-          Authorization: `Token ${context.state.token}`
-        }
+
       })
         .then((res) => {
           console.log('회원정보 수정 요청_____',res)
           alert('회원정보가 수정되었습니다')
+          context.state.now_user = payload.username
+          router.push({name:'ProfileView', params: { username: payload.username}})
         })
+        .error((err) =>{
+          console.log('회원정보 수정에 실패했습니다.')
+          alert('로그인이 만료되었습니다')
+          console.log(err.message)
+        })
+    },
+    changePwd(context, payload){
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/password/change/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        },
+        data:{
+          new_password1 : payload.new_password1,
+          new_password2 : payload.new_password2
+        }
+      })
+      .then(() => {
+        console.log('비밀번호 변경 성공')
+        router.push({name:'ProfileView', params: { username: context.state.now_user}})
+      })
+      .catch((err) => console.log('비밀번호 변경 실패...',err ))
     },
 
     // --------------------- like ----------------------------
