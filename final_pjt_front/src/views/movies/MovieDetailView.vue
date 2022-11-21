@@ -1,11 +1,17 @@
 <template>
   <div>
       <h1>MovieDetail</h1>
+      <iframe 
+        width="600"
+        height="400"
+        :src="videoUrl"></iframe>
+
       <p>제목 : {{movie.title}}</p>
       <p>시놉시스 : {{movie.overview}}</p>
       <img :src="poster" style="width:300px;" alt="">
       <p><button @click="likeMovie">{{islike}}</button></p>
-      <!-- <p> {{ movie }} </p> -->
+
+      <p> {{ this.movie.movie_like_user }} </p>
       <hr>
       <RecoMovieList :movieKeyword= 'movie.keyword' />
       <hr>
@@ -30,6 +36,8 @@ export default {
         return {
             movie: '',
             // null 값 오류 확인
+            // youtube_key:'kyMMq8Kz-8I'
+            youtube_key: 1
         };
     },
     components: { 
@@ -57,9 +65,9 @@ export default {
             });
         },
         
-    likeMovie() {
-        return this.$store.dispatch('like_movie', this.movie.id)
-        }
+        likeMovie() {
+            return this.$store.dispatch('like_movie', this.movie.id)
+            }
         
         
         
@@ -74,15 +82,42 @@ export default {
             return url;
         },
         islike(){
+            console.log(Array(this.movie.movie_like_user))
+            // console.log(this.$store.state.now_user_pk)
             if(this.$store.state.likeCheck){
-                return '싫어요'
-            } else {
-                return '좋아요'
-            }
-        }
+                // if ( this.movie.movie_like_user.includes(this.$store.state.now_user_pk) )
+                //     {
+                //         return '싫어요'
+                //     } else {
+                //         return '좋아요'
+                //     }
+                if ( this.movie.movie_like_user.includes(this.$store.state.now_user_pk)) {
+                    return '좋아요'
+                } else {
+                    return '싫어요'}
+                } else {
+                     return '좋아요'
+                }
+            },
+        videoUrl(){
+            const keykey = this.movie.video_path
+            // console.log(keykey)
+            // String 변환
+            const index_e = String(keykey).indexOf('=')
+            // console.log(index_e)
+            const youtube_key = String(keykey).slice(index_e+1)
+            // console.log(youtube_key)
+            return 'https://www.youtube.com/embed/'+ youtube_key
+        },
+    
+
+
     },
     created() {
+
         this.getMovieDetail();
+        
+        
     },
     
     
