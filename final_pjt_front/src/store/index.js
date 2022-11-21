@@ -102,6 +102,8 @@ export default new Vuex.Store({
     DELETE_TOKEN(state){
       state.token = null
     },
+
+    // Tinder
     GET_RANDOM_MOVIES(state, res) {
       state.randomMovies = res
     },
@@ -198,6 +200,8 @@ export default new Vuex.Store({
       context.state.randomMovie = context.state.movieList[randomNumber]
       context.commit('GET_RANDOM_MOVIES',context.state.randomMovie)
     },
+
+    // mutation해서 넣어보자
     movieLike({commit}, genres) {
       commit('MOVIE_LIKE', genres)
     },
@@ -216,6 +220,7 @@ export default new Vuex.Store({
     //   })
     //   .catch(err => console.log(err))
     // },
+
     // 요청한 사용자의 이름을 반환해주는 메서드
     request_user(context){
       if(context.state.token){

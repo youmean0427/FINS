@@ -1,41 +1,27 @@
 <template>
   <div>
     <h1>DiscoveryMovieView</h1>
-
-
     <!-- 서치 수정 -->
+
+    <input 
+    @keyup.enter="searchMovie"
+    v-model.trim="keyword"
+    type="text"
+    >
+    <button @click="searchMovie"> + </button>
+
+
     <div>
-        <div>
-        <!-- 영화 검색 input bar -->
-        <div>
-          <input 
-            @keyup.enter="searchMovie"
-            v-model.trim="keyword"
-            type="text"
-            placeholder="search movie">
-           <button @click="searchMovie" variant="outline-success"> + </button>
-        </div>
-        <div v-if="searchMovieListLen">
-          <div>
-              <div>
-              <SearchMovieCard 
-               v-for="(movie, idx) in searchMovieList" 
-              :key="idx"
-              :movie="movie"
-              />
-              </div>
-          </div>
-        </div>
-        <div v-else>
-          <h5>
-              검색결과가 존재하지 않습니다.
-          </h5>
-        </div>
-      </div>
+        <SearchMovieCard 
+        v-for="(movie, idx) in searchMovieList" 
+        :key="idx"
+        :movie="movie"
+        />
     </div>
+    
 
     <GenreCardList :genreList="genre" />
-
+    
   </div>
 </template>
 
@@ -61,7 +47,6 @@ export default {
         return {
              genre : null,
             // Array -> null
-            
 
             // SE
             keyword : null,
@@ -124,27 +109,28 @@ export default {
             console.log(response)
             console.log('====================================')
             this.$store.dispatch('search_movie', response.data.results)
-      
-            
-            
+
           })
           .catch((error) => {
             // 검색한 키워드의 영화 결과가 없으면 영화 결과가 없다는 페이지로 ..
             console.log(error)
           })
         }
-        this.keyword = null
+        // this.keyword = null
       },
 
 
        
     },
     created() {
+        this.$store.state.searchMovieList=null
         this.getGenreList();
+        this.searchMovie();
+        
         //SE
         // this.keyword = this.$route.params.keyword
         // console.log(this.keyword)
-        this.searchMovie() 
+        
    
     },
 }
