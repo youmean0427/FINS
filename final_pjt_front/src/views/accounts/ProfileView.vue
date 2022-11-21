@@ -1,33 +1,42 @@
 <template>
-  <div>
+  <div id="profileView">
     <h1>{{ username }}</h1>
     <div v-if='isMyPage'>
       <h1>마이페이지</h1>
       <router-link :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
     </div>
-    <FeedList :likeMovies="likeMovies"/>
-
     <button @click="followCheck">{{isfollow}} </button>
 
+    <FeedDetailView v-if="showModal" @close-modal="showModal = false">
+      <FeedModal :id="modalId" />
+    </FeedDetailView> 
+    <FeedList :likeMovies="likeMovies" @showFeedDetail="feedModal"/>
   </div>
 </template>
 
 <script>
+import FeedDetailView from '@/views/accounts/FeedDetailView'
 import FeedList from '@/components/Accounts/FeedList.vue'
-// import axios from 'axios'
-// const API_URL = 'http://127.0.0.1:8000'
+import FeedModal from '@/components/Accounts/FeedModal.vue'
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
+
 export default {
     name: 'ProfileView',
     components: {
       FeedList,
+      FeedDetailView,
+      FeedModal,
     },
     data(){
       return {
         username : this.$route.params.username,
         likeMovies : [],
 
-        isfollow : '팔로우'
+        isfollow : '팔로우',
 
+        showModal : false,
+        modalId : '',
       }
     },
     computed:{
@@ -48,6 +57,7 @@ export default {
     },
     created(){
       this.getFollowings()
+      this.feeds()
     },
       // 팔로우 목록 받기
     methods:{
@@ -67,6 +77,22 @@ export default {
       followCheck(){
         this.getFollowings()
         return this.$store.dispatch('follow', this.username)
+      },
+      feeds(){
+        axios({
+          method:'get',
+          url: `${API_URL}/user/feedlist/${this.username}/`,
+        })
+        .then((res) => {
+          this.likeMovies = res.data
+          // console.log(typeof(res.data))
+        })
+        .catch(() => {return false})
+      },
+      feedModal(id){
+        console.log('modal~~~~~~~~~~~~~~~~~~',id)
+        this.modalId = id
+        this.showModal = true
       }
     // -----------여기까지 팔로우기능
     
@@ -75,5 +101,12 @@ export default {
 </script>
 
 <style>
-
+  #profileView{
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
 </style>

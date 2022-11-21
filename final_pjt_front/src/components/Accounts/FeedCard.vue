@@ -1,8 +1,11 @@
 <template>
   <div>
-    <h5>{{ movie.id }}</h5>
-    <p>{{ movie.title }}</p>
-    <img :src="poster" style="width:300px;">
+    <h5>{{ feed.id }}</h5>
+    <p>{{ feed.title }}</p>
+      <img @click="clickfeed(feed.id)" :src="poster" style="width:300px;">
+    <!-- <router-link :to="{ name: 'FeedDetailView', params: { id: feedId } }">
+      여기에 이미지
+    </router-link> -->
   </div>
 </template>
 
@@ -10,11 +13,19 @@
 export default {
     name: 'FeedCard',
     props:{
-      movie : Object
+      feed : Object
     },
     computed:{
       poster(){
-        return this.movie.stil_image
+        return this.feed.image_path
+      },
+      feedId(){
+        return this.feed.id
+      }
+    },
+    methods:{
+      clickfeed(id){
+        this.$emit('showFeed', id)
       }
     }
 }

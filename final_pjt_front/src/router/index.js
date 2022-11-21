@@ -94,9 +94,14 @@ const routes = [
     component : PasswordEditView,
   },
   {
-    path: 'password/check',
+    path: '/password/check',
     name : 'PasswordCheckView',
     component : PasswordCheckView,
+  },
+  {
+    path: '/profile/:feed',
+    name : 'FeedDetailView',
+    component : () => import('../views/accounts/FeedDetailView.vue')
   },
   {
     path: '*',

@@ -83,6 +83,7 @@ export default {
             }
             return url;
         },
+        //============================수정 해야함=======================
         islike(){
             if(this.$store.state.likeCheck){
                 return '싫어요'
