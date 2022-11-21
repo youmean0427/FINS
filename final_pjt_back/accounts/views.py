@@ -4,15 +4,36 @@ from rest_framework.response import Response
 from .serializers import UserDetailsSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
+from movies.models import Movie_Image
+import random
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserDetailsSerializer()
 
+
+# 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
+def make_still(movie_id):
+    img_serial = Movie_Image.objects.filter(movie_id=movie_id)
+    img_ser_len = len(img_serial)
+    if img_ser_len < 1:
+        return '' 
+    rannum = random.randrange(0, img_ser_len)
+    stil_image = img_serial[rannum].image_path
+    return stil_image
+
 @api_view(['GET'])
 def user_info(request, username):
-    user = get_user_model().objects.filter(username=username)
-    serializer = UserDetailsSerializer(user[0])
+    user = get_user_model().objects.get(username=username)
+    serializer = UserDetailsSerializer(user)
+    # print(serializer.data['like_movies'][0]['movie_key'])
+    for i in range(len(serializer.data['like_movies'])):
+        if 'movie_key' not in serializer.data['like_movies'][i]:
+            serializer.data['like_movies'][i].update(movie_key='')
+            continue
+        mk = serializer.data['like_movies'][i]['movie_key']
+        stil_image = make_still(mk)
+        serializer.data['like_movies'][i].update(stil_image=stil_image)
     return Response(serializer.data)
 
 @api_view(['GET'])

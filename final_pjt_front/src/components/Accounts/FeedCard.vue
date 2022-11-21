@@ -1,12 +1,22 @@
 <template>
   <div>
-    <h1>FeedCard</h1>
+    <h5>{{ movie.id }}</h5>
+    <p>{{ movie.title }}</p>
+    <img :src="poster" style="width:300px;">
   </div>
 </template>
 
 <script>
 export default {
-    name: 'FeedCard'
+    name: 'FeedCard',
+    props:{
+      movie : Object
+    },
+    computed:{
+      poster(){
+        return this.movie.stil_image
+      }
+    }
 }
 </script>
 
