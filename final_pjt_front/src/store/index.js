@@ -165,7 +165,6 @@ export default new Vuex.Store({
         })
     },
     logout(context){
-      // context.commit('LOGOUT')
       axios({
         method: 'post',
         url: `${API_URL}/accounts/logout/`,

@@ -2,6 +2,7 @@
     <div>
         <div>
         <!-- 영화 검색 input bar -->
+        
         <div>
           <input 
             @keyup.enter="searchMovie"
@@ -61,6 +62,7 @@ export default {
         }
       }
     },
+    // 검색 DB로 바꾸기
     methods:{
         searchMovie(){
         const params = {

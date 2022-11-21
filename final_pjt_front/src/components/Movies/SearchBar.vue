@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1>SearchBar</h1>
-    <div class="main-input-group">
+    <div>
           <input 
-            class="inputBox"
             @keyup.enter="getKeyword"
             v-model.trim="keyword"
             type="text"
@@ -19,12 +18,12 @@ export default {
     data() {
         return {
         keyword:null,
-        search:'search'
+        search:'keyword'
         }
     },
     methods: {
       getKeyword(){
-        this.$router.push({ name: 'search', params:{ keyword : this.search}})
+        this.$router.push({ name: 'search', params:{ keyword : this.keyword}})
       },
     }
 }
