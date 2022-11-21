@@ -12,27 +12,30 @@
       <router-link :to="{ name: 'ProfileView', params: { username: username } }">마이페이지</router-link> |
       
       <!-- <router-link :to="{ name: 'ProfileView' }">프로필</router-link> |  -->
-      <router-link v-if="notLoggedIn" :to="{ name: 'SignUpView' }">회원가입</router-link> | 
+      <router-link :to="{ name: 'SignUpView' }">회원가입</router-link> | 
       <router-link v-if="notLoggedIn" :to="{ name: 'LogInView' } ">로그인 </router-link>
       <button v-if="loggedIn" @click="logout">로그아웃 </button> | 
       <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
+
       
     </nav>
     
     <router-view/>
 
     <!-- 이거 첫화면에 뛰우고 싶음 근데 계속 유지됨  -->
-
+    <TodayMovie/>
 
 
   </div>
 </template>
 
 <script>
-
+import TodayMovie from './components/Movies/TodayMovie.vue'
 export default {
     name: "App",
-
+    components: {
+      TodayMovie
+    },
   computed:{
     username(){
       this.$store.dispatch('request_user')

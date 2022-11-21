@@ -10,8 +10,6 @@ import GenreMovieListView from '../views/movies/GenreMovieListView.vue'
 import MovieView from '../views/movies/MovieView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import KeywordMovieView from '../views/movies/KeywordMovieView.vue'
-import PasswordEditView from '../views/accounts/PasswordEditView.vue'
-import PasswordCheckView from '../views/accounts/PasswordCheckView.vue'
 import store from '../store/index';
 
 const requireAuth = () => (to, from, next) => {
@@ -87,16 +85,6 @@ const routes = [
     path: '/movies/keyword/:id',
     name: 'KeywordMovieView',
     component : KeywordMovieView,
-  },
-  {
-    path: '/password/change',
-    name: 'PasswordEditView',
-    component : PasswordEditView,
-  },
-  {
-    path: 'password/check',
-    name : 'PasswordCheckView',
-    component : PasswordCheckView,
   },
   {
     path: '*',

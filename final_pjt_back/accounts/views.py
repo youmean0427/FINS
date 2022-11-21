@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
-from .serializers import UserDetailsSerializer,FeelListSerializer, FeedSerializer
+from .serializers import UserDetailsSerializer,FeelListSerializer, FeedSerializer,FollowSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
 from movies.models import Movie_Image
@@ -64,6 +64,20 @@ def follow(request, username):
         data = { 'status' : stts }
         return Response(data)
     return Response({'status' : '로그인이 필요합니다'}, status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['GET'])
+def followinglist(request):
+    user = get_user_model().objects.get(pk = request.user.pk)
+    serializer = FollowSerializer(user)
+    following_list = serializer.data['followings']
+    result = []
+    # print(user)
+    for f in range(len(following_list)):
+        nu = get_user_model().objects.get(pk = following_list[f])
+        se = FollowSerializer(nu)
+        # print(se.data['username'])
+        result+= [se.data['username']]
+    return Response(result)
 
 @api_view(['GET'])
 def feed_list(request,username):

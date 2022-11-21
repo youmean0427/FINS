@@ -21,6 +21,12 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             "password",
             "last_login",
         ]
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username','followings')
+
 class FeelListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feed

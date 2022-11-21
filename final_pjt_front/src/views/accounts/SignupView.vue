@@ -27,10 +27,10 @@ export default {
   name: 'SignUpView',
   data() {
     return {
-      username: '',
-      password1: '',
-      password2: '',
-      email : '',
+      username: null,
+      password1: null,
+      password2: null,
+      email : null,
       validEmail :'',
       is_valid_e : false,
       validPwd : '숫자와 문자를 포함하여 8자리 이상 작성해주세요',
@@ -77,18 +77,15 @@ export default {
       }
     },
     isValidPwd(){
-      if (!this.password1){
-        this.is_valid_pwd = false
+      this.is_valid_pwd = false
+      if (! this.password1){
         return
       } else if (this.password1 && this.password1.length < 8){
         this.validPwd = '8자리 이상 입력해주세요!'
-        this.is_valid_pwd = false
       } else if (this.password1 && !/[0-9]/.test(this.password1)){
         this.validPwd = '숫자를 포함하여 입력해주세요!'
-        this.is_valid_pwd = false
       } else if (this.password1 &&!/[A-Za-z]/.test(this.password1)){
         this.validPwd = '문자를 포함하여 입력해주세요!'
-        this.is_valid_pwd = false
       } else {
         this.validPwd = ''
         this.is_valid_pwd = true
@@ -97,13 +94,9 @@ export default {
     isValidPwd2(){
       console.log(this.password1 == this.password2)
       if(!this.password1){ return }
-      else if (!this.password2){ 
-        this.is_valid_pwd2 = false
-        return 
-      } 
+      else if (!this.password2){ return } 
       else if (! (this.password1 == this.password2)){
-        this.validPwd2 =  '비밀번호가 다릅니다'
-        this.is_valid_pwd2 = false
+        this.validPwd2 = this.password2 + '비밀번호가 다릅니다'
       } else {
         this.validPwd2 = ''
         this.is_valid_pwd2 = true
@@ -119,40 +112,17 @@ export default {
     },
     signUp() {
       this.similiarInfo()
-      const validEmailTag = document.querySelector('#validPwd')
-      if (!this.password1){
-        // alert('비밀번호를 입력하세요!')
-        this.validPwd = '비밀번호를 입력하세요!'
-        validEmailTag.style.color = 'red'
-        return
-      }
-      if(!this.password2){
-        this.validPwd = '비밀번호 확인이 필요합니다'
-        document.querySelector('#validPwd2').style.color = 'red'
-        return
-      }
       if (this.email_pwd_distance < 5) {
-        this.validPwd = '이메일과 비밀번호가 유사합니다'
-        validEmailTag.style.color = 'red'
-        // alert('이메일과 비밀번호가 유사합니다')
+        alert('이메일과 비밀번호가 유사합니다')
         return
       }
-      else if (this.name_pwd_distance < 5){
-        this.validPwd = '이름과 비밀번호가 유사합니다'
-        validEmailTag.style.color = 'red'
-        // alert('이름과 비밀번호가 유사합니다')
+      if (this.name_pwd_distance < 5){
+        alert('이름과 비밀번호가 유사합니다')
         return
       }
-      else if (!this.is_valid_e){
+      if (!this.is_valid_e){
         document.querySelector('#validEmail').style.color = 'red'
-        this.validEmail = '유효한 이메일을 입력하세요!'
-        // alert('유효한 이메일을 입력하세요!')
-        return
-      }
-      else if (!this.is_valid_pwd2 || !this.is_valid_pwd){
-        this.validPwd = '유효한 비밀번호를 입력하세요!'
-        validEmailTag.style.color = 'red'
-        // alert('유효한 비밀번호를 입력하세요!')
+        alert('유효한 이메일을 입력하세요!')
         return
       }
       else{

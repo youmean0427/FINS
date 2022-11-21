@@ -5,14 +5,12 @@
       <h1>마이페이지</h1>
       <router-link :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
     </div>
-    <FeedList :likeMovies="likeMovies"/>
+    <FeedList/>
   </div>
 </template>
 
 <script>
 import FeedList from '@/components/Accounts/FeedList.vue'
-import axios from 'axios'
-const API_URL = 'http://127.0.0.1:8000'
 export default {
     name: 'ProfileView',
     components: {
@@ -20,8 +18,7 @@ export default {
     },
     data(){
       return {
-        username : this.$route.params.username,
-        likeMovies : [],
+        username : this.$route.params.username
       }
     },
     computed:{
@@ -35,26 +32,9 @@ export default {
         } else {
           return this.$store.dispatch('isMyPage', this.username)
         }
-      },
-    },
-    created(){
-      this.user()
+      }
     },
     methods:{
-      user(){
-        // http://127.0.0.1:8000/user/profile/mincho3/
-        // like_movies.[num].id
-        axios({
-        method: 'get',
-        url: `${API_URL}/user/profile/${this.username}/`,
-      })
-        .then((res) => {
-          this.likeMovies = res.data.like_movies
-          console.log(this.likeMovies)
-        })
-        .catch(() => {return false})
-      
-      }
     }
 }
 </script>
