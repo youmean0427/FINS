@@ -3,10 +3,10 @@
     <h5>GenreMovieCard</h5>
     <router-link :to="{ name: 'MovieDetailView', params: { id: genre_movie.id } }">
     [DETAIL]</router-link>
-    {{genre_movie.title}}
+    <p>{{genre_movie.title}}</p>
 
     <!-- 데이터에 스틸컷이나 포스터 정보가  없음 -->
-    {{genre_movie}}
+    <p><img :src="genre_movie.stil_image" alt=""></p>
     <!-- {{genre_movie.stil_image}} -->
   </div>
 </template>

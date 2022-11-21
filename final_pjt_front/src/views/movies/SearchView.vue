@@ -12,10 +12,12 @@
         </div>
         <div v-if="searchMovieListLen">
           <div>
-              <div 
-              v-for="(movie, idx) in searchMovieList" 
-              :key="idx">
-              <SearchMovieCard :movie="movie"/>
+              <div>
+              <SearchMovieCard 
+               v-for="(movie, idx) in searchMovieList" 
+              :key="idx"
+              :movie="movie"
+              />
               </div>
           </div>
         </div>
@@ -32,6 +34,8 @@
 import SearchMovieCard from '@/components/Movies/SearchMovieCard'
 
 
+
+
 import axios from 'axios'
 
 // KEy
@@ -41,6 +45,7 @@ export default {
     name: 'SearchView',
     components:{
         SearchMovieCard,
+
 
     },
     data(){
@@ -61,6 +66,7 @@ export default {
         }
       }
     },
+    // 검색 DB로 바꾸기
     methods:{
         searchMovie(){
         const params = {
