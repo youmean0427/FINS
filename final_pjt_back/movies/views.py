@@ -13,6 +13,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 
 
+
 # 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
 def make_still(movie_id):
     img_serial = Movie_Image.objects.filter(movie_id=movie_id)

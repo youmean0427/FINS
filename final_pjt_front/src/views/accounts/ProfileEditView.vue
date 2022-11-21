@@ -14,6 +14,7 @@
       
       <input @click="editProfile" type="button" value="EditProfile">
     </form> 
+    <router-link :to="{ name: 'PasswordCheckView' }">비밀번호 변경</router-link>
   </div>
 </template>
 
@@ -34,10 +35,6 @@ export default {
   created(){
     this.getUser()
   },
-
-  // mounted(){
-  //   this.getUser()
-  // },
   methods:{
     isValidEmail(){
       if (!this.email) {

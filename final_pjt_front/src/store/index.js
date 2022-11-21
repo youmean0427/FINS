@@ -277,6 +277,24 @@ export default new Vuex.Store({
           console.log(err.message)
         })
     },
+    changePwd(context, payload){
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/password/change/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`
+        },
+        data:{
+          new_password1 : payload.new_password1,
+          new_password2 : payload.new_password2
+        }
+      })
+      .then(() => {
+        console.log('비밀번호 변경 성공')
+        router.push({name:'ProfileView', params: { username: context.state.now_user}})
+      })
+      .catch((err) => console.log('비밀번호 변경 실패...',err ))
+    }
 
   },
   modules: {
