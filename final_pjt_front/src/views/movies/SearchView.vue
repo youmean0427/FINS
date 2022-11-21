@@ -2,7 +2,6 @@
     <div>
         <div>
         <!-- 영화 검색 input bar -->
-        <SearchBar/>
         <div>
           <input 
             @keyup.enter="searchMovie"
@@ -33,7 +32,7 @@
 
 <script>
 import SearchMovieCard from '@/components/Movies/SearchMovieCard'
-import SearchBar from '@/components/Movies/SearchBar'
+
 
 
 
@@ -46,7 +45,7 @@ export default {
     name: 'SearchView',
     components:{
         SearchMovieCard,
-        SearchBar
+
 
     },
     data(){
