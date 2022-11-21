@@ -1,11 +1,13 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
-from .serializers import UserDetailsSerializer
+from .serializers import UserDetailsSerializer,FeelListSerializer, FeedSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
 from movies.models import Movie_Image
 import random
+from .models import Feed
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = get_user_model().objects.all()
@@ -62,3 +64,26 @@ def follow(request, username):
         data = { 'status' : stts }
         return Response(data)
     return Response({'status' : '로그인이 필요합니다'}, status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['GET'])
+def feed_list(request,username):
+    user = get_user_model().objects.get(username=username)
+    # print(user.id)
+    feeds = Feed.objects.filter(user=user.id)
+    serializer = FeelListSerializer(feeds, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET', 'DELETE', 'PUT'])
+def feed_detail(request, feed_pk):
+    feed = get_object_or_404(Feed, pk=feed_pk)
+    if request.method == 'GET':
+        serializer = FeedSerializer(feed)
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        feed.delete() 
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'PUT':
+        serializer = FeedSerializer(feed, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
