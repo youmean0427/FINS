@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>FeedList</h1>
-    <FeedCard/>
+    <FeedCard
+      v-for="movie in likeMovies"
+      :key="movie.id"
+      :movie="movie"
+    />
   </div>
 </template>
 
@@ -12,8 +16,7 @@ export default {
     name: 'FeedList',
     components: {
         FeedCard
-<<<<<<< HEAD
-=======
+
     },
     computed:{
       // user(){
@@ -22,9 +25,10 @@ export default {
     },
     props:{
       likeMovies : Array
->>>>>>> Search_Problem
+
     }
 }
+
 </script>
 
 <style>

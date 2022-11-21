@@ -1,11 +1,10 @@
 <template>
-  <div>
-  </div>
+  
 </template>
 
 <script>
 export default {
-    name: 'TodayMovie'
+  name : 'FeedDetailView'
 }
 </script>
 

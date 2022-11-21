@@ -1,15 +1,40 @@
 <template>
   <div>
     <h1>DiscoveryMovieView</h1>
+
+
     <!-- 서치 수정 -->
+    <div>
+        <div>
+        <!-- 영화 검색 input bar -->
+        <div>
+          <input 
+            @keyup.enter="searchMovie"
+            v-model.trim="keyword"
+            type="text"
+            placeholder="search movie">
+           <button @click="searchMovie" variant="outline-success"> + </button>
+        </div>
+        <div v-if="searchMovieListLen">
+          <div>
+              <div>
+              <SearchMovieCard 
+               v-for="(movie, idx) in searchMovieList" 
+              :key="idx"
+              :movie="movie"
+              />
+              </div>
+          </div>
+        </div>
+        <div v-else>
+          <h5>
+              검색결과가 존재하지 않습니다.
+          </h5>
+        </div>
+      </div>
+    </div>
 
-    <input 
-    @keyup.enter="searchMovie"
-    v-model.trim="keyword"
-    type="text"
-    >
-    <button @click="searchMovie"> + </button>
-
+    <GenreCardList :genreList="genre" />
 
     <div>
         <SearchMovieCard 
@@ -27,25 +52,48 @@
 
 <script>
 import GenreCardList from '@/components/Movies/GenreCardList.vue';
-import SearchBar from '@/components/Movies/SearchBar.vue';
+
+import SearchMovieCard  from '@/components/Movies/SearchMovieCard.vue';
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
+const API_KEY = '8d2390a7f14da4093a0836c65dfb59a2'
 // const API_KEY = '8d2390a7f14da4093a0836c65dfb59a2'
+
+
 
 export default {
     name: "DiscoveryMovieView",
     components: {
       GenreCardList,
-      SearchBar
+      SearchMovieCard 
     },
     data() {
         return {
              genre : null,
             // Array -> null
+            
 
+            // SE
+            keyword : null,
 
         };
+    },
+
+    // SE
+
+    computed:{
+      searchMovieList(){
+        return this.$store.state.searchMovieList
+      },
+      searchMovieListLen(){
+        const smll = this.$store.getters.searchMovieListLen
+        if (smll > 0){
+          return true
+        } else {
+          return false
+        }
+      }
     },
 
 
@@ -87,14 +135,16 @@ export default {
             console.log(response)
             console.log('====================================')
             this.$store.dispatch('search_movie', response.data.results)
-
+      
+            
+            
           })
           .catch((error) => {
             // 검색한 키워드의 영화 결과가 없으면 영화 결과가 없다는 페이지로 ..
             console.log(error)
           })
         }
-        // this.keyword = null
+        this.keyword = null
       },
 
 
@@ -103,12 +153,10 @@ export default {
     created() {
         this.$store.state.searchMovieList=null
         this.getGenreList();
-        this.searchMovie();
-        
         //SE
         // this.keyword = this.$route.params.keyword
         // console.log(this.keyword)
-        
+        this.searchMovie() 
    
     },
 }

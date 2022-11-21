@@ -4,6 +4,13 @@
     <h5>Write_user : {{ review.write_user }}</h5>
     <h5>Content : {{ review.content }}</h5>
     <h5>Created_at : {{ review.created_at }}</h5>
+    <div v-show='isAuth'>
+    <input v-show='isActive' v-model="inputData" type="text" name="">
+    <button @click="createReviewInput" v-show='!isActive'>Edit</button>
+    <button @click="editReview" v-show='isActive'>Edit</button>
+    
+    <button @click="deleteReview">Delete</button>
+    </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->
 
@@ -17,8 +24,11 @@ export default {
     props: {
     review: Object,
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
 =======
+=======
+>>>>>>> temp
     },
     data() {
         return {
@@ -54,13 +64,19 @@ export default {
       // console.log(this.nowUser, this.review.write_user)
       if (this.nowUser === this.review.write_user) {
         this.isAuth = true
+<<<<<<< HEAD
       }  else {
         this.isAuth = false
+=======
+>>>>>>> temp
       }
       this.getReview()
     }
  
+<<<<<<< HEAD
 >>>>>>> Search_Problem
+=======
+>>>>>>> temp
 }
 </script>
 
