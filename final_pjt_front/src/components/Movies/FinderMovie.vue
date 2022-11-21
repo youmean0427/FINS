@@ -28,8 +28,6 @@
         offset: 0,
       }),
       created() {
-        
-        
         this.mock();
       },
       computed:{

@@ -23,13 +23,8 @@ export default {
     name: 'ReviewList',
     props: {
     review: Object,
-<<<<<<< HEAD
-<<<<<<< HEAD
-  }
-=======
-=======
->>>>>>> temp
     },
+
     data() {
         return {
         isActive:false,
@@ -64,19 +59,12 @@ export default {
       // console.log(this.nowUser, this.review.write_user)
       if (this.nowUser === this.review.write_user) {
         this.isAuth = true
-<<<<<<< HEAD
       }  else {
         this.isAuth = false
-=======
->>>>>>> temp
       }
       this.getReview()
     }
- 
-<<<<<<< HEAD
->>>>>>> Search_Problem
-=======
->>>>>>> temp
+
 }
 </script>
 

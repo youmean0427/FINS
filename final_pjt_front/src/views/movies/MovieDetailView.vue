@@ -10,6 +10,7 @@
       <p>시놉시스 : {{movie.overview}}</p>
       <img :src="poster" style="width:300px;" alt="">
       <p><button @click="likeMovie">{{islike}}</button></p>
+      {{ movie.movie_like_user }}
       <!-- <p> {{ movie }} </p> -->
       <hr>
       <RecoMovieList :movieKeyword= 'movie.keyword' />
