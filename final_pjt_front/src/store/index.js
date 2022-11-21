@@ -97,6 +97,7 @@ export default new Vuex.Store({
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
+      
       router.push({ name: 'MovieView' })
     },
     DELETE_TOKEN(state){
@@ -167,7 +168,10 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res)
+          // console.log(res.data.pk)
           context.commit('SAVE_TOKEN', res.data.key)
+        
+
         })
         .catch((err)=>{
           console.log('왜 로그인이 안되죠?', err)
@@ -234,9 +238,9 @@ export default new Vuex.Store({
           .then((res) => {
             console.log('res.data.username======',res.data.username)
             const name = res.data.username
-            const name_id = res.data.id
+
             context.state.now_user = name
-            context.state.now_user_id = name_id
+
           })
           .catch((err) => {
             console.log('-==--------이름을 받아올 수 없엉')

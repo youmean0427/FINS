@@ -58,6 +58,8 @@ export default {
       // console.log(this.nowUser, this.review.write_user)
       if (this.nowUser === this.review.write_user) {
         this.isAuth = true
+      }  else {
+        this.isAuth = false
       }
       this.getReview()
     }

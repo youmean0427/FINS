@@ -4,6 +4,7 @@
         <!-- 영화 검색 input bar -->
         <div>
           <input 
+            
             @keyup.enter="searchMovie"
             v-model.trim="keyword"
             type="text"
@@ -104,7 +105,10 @@ export default {
         this.keyword = this.$route.params.keyword
         console.log(this.keyword)
         this.searchMovie()
-    }
+    },
+
+
+
 }
 </script>
 
