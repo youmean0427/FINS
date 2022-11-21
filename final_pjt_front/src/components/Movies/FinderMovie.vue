@@ -17,47 +17,50 @@
   </template>
   
   <script>
-  import Tinder from "vue-tinder";
-  // import source from "@/bing";
-  
-  export default {
-    name: "FinderMovieView",
-    components: { Tinder },
-    data: () => ({
-      queue: [],
-      offset: 0,
-    }),
-    created() {
-      
-      
-      this.mock();
-    },
-    computed:{
-      source(){
-        return this.$store.getters.tinderMovie
-      }
-    },
-    methods: {
-      mock(count = 5) {
-        const list = [];
-        for (let i = 0; i < count; i++) {
-          // console.log(this.source) 영화 전체 url + movieList의 idx 담긴 리스트
-          if (this.$store.getters.tinderMovie[this.offset].selected === false){
-            list.push({ id: this.source[this.offset].url, idx : this.source[this.offset].idx });
-            this.$store.getters.tinderMovie[this.offset].selected = true
-          }
-          this.offset++;
-        }
-        this.queue = this.queue.concat(list);
+    import Tinder from "vue-tinder";
+    // import source from "@/bing";
+    
+    export default {
+      name: "FinderMovieView",
+      components: { Tinder },
+      data: () => ({
+        queue: [],
+        offset: 0,
+      }),
+      created() {
+        
+        
+        this.mock();
       },
-      onSubmit({ item }) {
-        if (this.queue.length < 3) {
-          this.mock();
-          console.log(item)
+      computed:{
+        source(){
+          return this.$store.getters.tinderMovie
+        }
+      },
+      methods: {
+        mock(count = 5) {
+          
+          const list = [];
+          for (let i = 0; i < count; i++) {
+            // console.log(this.source) 영화 전체 url + movieList의 idx 담긴 리스트
+            console.log(this.$store.getters.tinderMovie[this.offset])
+            if (this.$store.getters.tinderMovie[this.offset].selected === false){
+              list.push({ id: this.source[this.offset].url, idx : this.source[this.offset].idx });
+      
+            }
+            this.offset++;
+          }
+          console.log(list)
+          this.queue = this.queue.concat(list);
+        },
+        onSubmit({ item }) {
+          if (this.queue.length < 3) {
+            this.mock();
+            console.log(item)
+          }
         }
       }
-    }
-  };
+    };
   </script>
   
   <style>

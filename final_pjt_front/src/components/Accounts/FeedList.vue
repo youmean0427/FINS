@@ -12,6 +12,17 @@ export default {
     name: 'FeedList',
     components: {
         FeedCard
+<<<<<<< HEAD
+=======
+    },
+    computed:{
+      // user(){
+      //   return 
+      // }
+    },
+    props:{
+      likeMovies : Array
+>>>>>>> Search_Problem
     }
 }
 </script>

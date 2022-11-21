@@ -93,11 +93,14 @@ export default new Vuex.Store({
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
+      
       router.push({ name: 'MovieView' })
     },
     DELETE_TOKEN(state){
       state.token = null
     },
+
+    // Tinder
     GET_RANDOM_MOVIES(state, res) {
       state.randomMovies = res
     },
@@ -157,7 +160,10 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res)
+          // console.log(res.data.pk)
           context.commit('SAVE_TOKEN', res.data.key)
+        
+
         })
         .catch((err)=>{
           console.log('왜 로그인이 안되죠?', err)
@@ -191,6 +197,8 @@ export default new Vuex.Store({
       context.state.randomMovie = context.state.movieList[randomNumber]
       context.commit('GET_RANDOM_MOVIES',context.state.randomMovie)
     },
+
+    // mutation해서 넣어보자
     movieLike({commit}, genres) {
       commit('MOVIE_LIKE', genres)
     },
