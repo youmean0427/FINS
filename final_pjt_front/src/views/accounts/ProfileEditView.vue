@@ -34,6 +34,10 @@ export default {
   created(){
     this.getUser()
   },
+
+  // mounted(){
+  //   this.getUser()
+  // },
   methods:{
     isValidEmail(){
       if (!this.email) {
@@ -64,27 +68,29 @@ export default {
           Authorization: `Token ${this.$store.state.token}`
         }
       })
-        .then((res) => {
-          console.log(res.data)
-          this.email = res.data.email
-          this.username = res.data.username
-          this.profile_img = res.data.profile_img
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      },
-      editProfile(){
-        const username = this.username
-        const email = this.email
-        const profile_img = this.profile_img
-        const payload = {
-          username,
-          email,
-          profile_img
-        }
-        this.$store.dispatch('editProfile', payload)
+      .then((res) => {
+        console.log(res.data)
+        this.email = res.data.email
+        this.username = res.data.username
+        this.profile_img = res.data.profile_img
+      })
+      .catch((err) => {
+        console.log('유저정보를 불러오기에 실패했습니다.')
+        console.log(err)
+      })
+    },
+    editProfile(){
+      console.log('프로필 수정 요청중...')
+      const username = this.username
+      const email = this.email
+      const profile_img = this.profile_img
+      const payload = {
+        username,
+        email,
+        profile_img
       }
+      this.$store.dispatch('editProfile', payload)
+    }
   }
 }
 </script>
