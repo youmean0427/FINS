@@ -194,6 +194,11 @@ def discovery_movie(request, genre_pk):
             serializer.data[i].update(stil_image=stil_image)
         return Response(serializer.data)
 
+@api_view(['GET'])
+def search_movie(reqeust, keyword):
+    search_movies = Movie.objects.filter(title__contains=keyword)
+    serializer = MovieListSerializer(search_movies, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])

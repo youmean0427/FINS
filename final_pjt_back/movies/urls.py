@@ -15,6 +15,8 @@ urlpatterns = [
     #discoveryMovie
     path('discoverymovie/', views.discovery_movie_list),
     path('discoverymovie/<int:genre_pk>/', views.discovery_movie),
+    path('search/<str:keyword>/', views.search_movie),
+
     #keywordMovie
     path('movies/keyword/<int:keyword_pk>/', views.keyword_movie),
 
