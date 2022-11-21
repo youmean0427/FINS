@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>KeywordMovieCard</h1>
-    {{keyword_movie.title}}
+    <router-link :to="{ name: 'MovieDetailView', params: { id: keyword_movie.id } }">
+      [DETAIL]
+    </router-link>
+    <p>{{keyword_movie.title}}</p>
     <img :src="keyword_movie.stil_image" alt="">
     
     <hr>

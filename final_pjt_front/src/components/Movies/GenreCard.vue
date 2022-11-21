@@ -9,10 +9,7 @@
       {{ genre.id}}
       {{ genre.genre_name }}
     </router-link>
-    
-
-
-
+  
     <hr>
 
 

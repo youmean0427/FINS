@@ -18,7 +18,6 @@ export default {
     data() {
         return {
         keyword:null,
-        search:'keyword'
         }
     },
     methods: {

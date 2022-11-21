@@ -4,7 +4,7 @@
       <p>제목 : {{movie.title}}</p>
       <p>시놉시스 : {{movie.overview}}</p>
       <img :src="poster" style="width:300px;" alt="">
-      <p><button>Like</button></p>
+      <p><button @click="likeMovie">{{islike}}</button></p>
       <!-- <p> {{ movie }} </p> -->
       <hr>
       <RecoMovieList :movieKeyword= 'movie.keyword' />
@@ -21,6 +21,7 @@ import CreateReview from '@/components/Movies/CreateReview.vue'
 import ReviewList from '@/components/Movies/ReviewList.vue'
 import RecoMovieList from '@/components/Movies/RecoMovieList.vue'
 import axios from 'axios'
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
@@ -56,6 +57,9 @@ export default {
             });
         },
         
+    likeMovie() {
+        return this.$store.dispatch('like_movie', this.movie.id)
+        }
         
         
         
@@ -68,6 +72,13 @@ export default {
                 url = this.$store.state.BASE_POSTER_PATH + this.movie.poster;
             }
             return url;
+        },
+        islike(){
+            if(this.$store.state.likeCheck){
+                return '싫어요'
+            } else {
+                return '좋아요'
+            }
         }
     },
     created() {

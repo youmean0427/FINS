@@ -2,7 +2,7 @@
     <div>
         <div>
         <!-- 영화 검색 input bar -->
-        
+        <SearchBar/>
         <div>
           <input 
             @keyup.enter="searchMovie"
@@ -13,10 +13,12 @@
         </div>
         <div v-if="searchMovieListLen">
           <div>
-              <div 
-              v-for="(movie, idx) in searchMovieList" 
-              :key="idx">
-              <SearchMovieCard :movie="movie"/>
+              <div>
+              <SearchMovieCard 
+               v-for="(movie, idx) in searchMovieList" 
+              :key="idx"
+              :movie="movie"
+              />
               </div>
           </div>
         </div>
@@ -31,6 +33,8 @@
 
 <script>
 import SearchMovieCard from '@/components/Movies/SearchMovieCard'
+import SearchBar from '@/components/Movies/SearchBar'
+
 
 
 import axios from 'axios'
@@ -42,6 +46,7 @@ export default {
     name: 'SearchView',
     components:{
         SearchMovieCard,
+        SearchBar
 
     },
     data(){

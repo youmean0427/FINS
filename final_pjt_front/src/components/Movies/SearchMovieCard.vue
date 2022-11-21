@@ -2,24 +2,14 @@
   <div>
     <div v-if="movie" style="max-width: 20rem;">
       <span>
-        <img  :src="movieURL" alt="" style="width: 100%;">
-      </span>
-      
-      <div>
-        <!-- <p>{{title}}</p> -->
-        <span 
-          style="font-size:0.6em; 
-          max-width: calc(100% - 38px); 
-          overflow: hidden; 
-          text-overflow: ellipsis; 
-          display: -webkit-box;
-          -webkit-line-clamp: 3; 
-          -webkit-box-orient: vertical;"
-        >
-        <!-- {{overview}} -->
-        </span>
         
-      </div>
+      <img  :src="movieURL" alt="" style="width: 100%;">
+        <router-link :to="{ name: 'MovieDetailView', params: { id: movie.id } }">
+          [DETAIL]
+        </router-link>
+      </span>
+      <hr>
+      
 
     </div>
   </div>
