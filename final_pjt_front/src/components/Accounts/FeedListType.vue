@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>FeedList</h1>
-    <FeedCard
+    <FeedListTypeItems
       v-for="feed in likeMovies"
       :key="feed.id"
       :feed="feed"
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import FeedCard from '@/components/Accounts/FeedCard.vue'
+import FeedListTypeItems from '@/components/Accounts/FeedListTypeItems.vue'
 
 export default {
-    name: 'FeedList',
+    name: 'FeedListType',
     components: {
-        FeedCard
+        FeedListTypeItems
 
     },
     props:{

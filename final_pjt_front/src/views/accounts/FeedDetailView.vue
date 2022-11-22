@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modla_c">
     <div class="overlay" @click="$emit('close-modal')"></div>
     <div class="modal-card">
       <h1>{{id}}</h1>
@@ -19,7 +19,7 @@ export default {
 
 <style>
 /* Modal */
-.modal,
+.modla_c,
 .overlay {
   width: 100%;
   height: 100%;
