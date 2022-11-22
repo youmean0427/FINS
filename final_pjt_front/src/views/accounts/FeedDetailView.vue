@@ -2,7 +2,6 @@
   <div class="modal">
     <div class="overlay" @click="$emit('close-modal')"></div>
     <div class="modal-card">
-      <h1>{{id}}</h1>
       <slot />
     </div>
   </div>

@@ -84,7 +84,11 @@ export default new Vuex.Store({
     // Search
 
     searchMovieListLen(state){
-      return state.searchMovieList.length
+      if (!state.searchMovieList){
+        return 0
+      }else{
+        return state.searchMovieList.length
+      }
     },
    
 
@@ -93,6 +97,7 @@ export default new Vuex.Store({
 
   mutations: {
     GET_MOVIES(state,movies){
+      console.log('받아온 영화목록 : ', movies)
       return state.movies = movies
     },
 

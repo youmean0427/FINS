@@ -1,10 +1,9 @@
 <template>
   <div class="content">
-    <h1>title</h1>
+    <h1>{{title}}</h1>
     <div>
-      <h2>{{id}}</h2>
-      <h2>{{feed.content}}</h2>
-      <img :src="feed.image_path" style="width:300px;">
+      <img :src="feed.image_path" style="width:500px;">
+      <p>한줄평 : {{feed.content}}</p>
     </div>
   </div>
 </template>
@@ -20,8 +19,15 @@ export default {
       feed : '',
     }
   },
+  computed:{
+    title(){
+      return '하하'
+      // state에 있는 영화 데이터에서 영화 feed.movie_id에 맞는 ..
+    }
+  },
   props: {
     id: Number,
+    user : String,
   },
   created(){
     this.feedInfo()

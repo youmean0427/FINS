@@ -33,11 +33,9 @@ export default {
                 })
                     .then((res) => {
                     console.log(res);
-                    console.log("데이터를 받았어요!");
                     this.genre_movie = res.data;
                 })
                     .catch((err) => {
-                    console.log("데이터를 받지 못했어요!");
                     console.log(err);
                 });
             },

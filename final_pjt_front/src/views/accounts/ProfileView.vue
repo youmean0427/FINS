@@ -8,7 +8,7 @@
     <button @click="followCheck">{{isfollow}} </button>
 
     <FeedDetailView v-if="showModal" @close-modal="showModal = false">
-      <FeedModal :id="modalId" />
+      <FeedModal :id="modalId" :user="username"/>
     </FeedDetailView> 
     <FeedList :likeMovies="likeMovies" @showFeedDetail="feedModal"/>
   </div>
