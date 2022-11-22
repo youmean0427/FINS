@@ -1,13 +1,16 @@
 <template>
   <div id="profileView">
     <h1>{{ username }}</h1>
-    <div v-if='isMyPage'>
-      <h1>마이페이지</h1>
-      <router-link :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
+    <div id="btns">
+      <div id="editBtn" v-if='isMyPage'>
+        <router-link  :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
+      </div>
+      <div v-if="!isMyPage">
+        <b-button @click="followCheck">{{isfollow}} </b-button>
+      </div>
     </div>
-    <button @click="followCheck">{{isfollow}} </button>
 
-    <FeedDetailView v-if="showModal" @close-modal="showModal = false">
+    <FeedDetailView v-if="showModal" @close-modal="closeModal">
       <FeedModal :id="modalId" :user="username"/>
     </FeedDetailView> 
     <FeedList :likeMovies="likeMovies" @showFeedDetail="feedModal"/>
@@ -93,9 +96,13 @@ export default {
         console.log('modal~~~~~~~~~~~~~~~~~~',id)
         this.modalId = id
         this.showModal = true
-      }
+        console.log(this.showModal)
+      },
     // -----------여기까지 팔로우기능
-    
+      closeModal(){
+        this.showModal = false
+        location.reload(true);
+      }
     }
 }
 </script>
@@ -108,5 +115,19 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  #editBtn{
+    background-color: rgb(113, 113, 113);
+    
+    width: fit-content;
+    height: 2.5em;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  #editBtn > a {
+    color:white;
+  }
+  #btns{
+    
   }
 </style>

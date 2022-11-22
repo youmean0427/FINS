@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>FeedList</h1>
     <FeedCard
       v-for="feed in likeMovies"
       :key="feed.id"

@@ -12,7 +12,7 @@
     />
     <br>
     <p>선택한 이미지 = {{selectedImgId}}</p>
-    <button @click="editFeed">수정완료</button>
+    <b-button @click="editFeed">수정완료</b-button>
   </div>
 </template>
 
@@ -51,7 +51,9 @@ export default {
     editFeed(){
       const content = this.feedContent
       let image_path = ''
-      if(!this.selectedImgId){
+      if(this.selectedImgId === 0){
+        image_path = this.still_images[this.selectedImgId].image_path
+      } else if(!this.selectedImgId){
         image_path = this.img
       } else {
         image_path = this.still_images[this.selectedImgId].image_path

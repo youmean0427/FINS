@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal-c">
     <div class="overlay" @click="$emit('close-modal')"></div>
     <div class="modal-card">
       <slot />
@@ -12,13 +12,13 @@ export default {
   name : 'FeedDetailView',
   props : {
     id : Number
-  }
+  },
 }
 </script>
 
 <style>
 /* Modal */
-.modal,
+.modal-c,
 .overlay {
   width: 100%;
   height: 100%;

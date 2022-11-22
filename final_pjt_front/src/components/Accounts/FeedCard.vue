@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h5>{{ feed.id }}</h5>
-    <p>{{ feed.title }}</p>
-      <img @click="clickfeed(feed.id)" :src="poster" style="width:300px;">
+    <img @click="clickfeed(feed.id)" :src="poster" style="width:300px;">
   </div>
 </template>
 
