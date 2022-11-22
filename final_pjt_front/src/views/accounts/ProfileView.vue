@@ -5,7 +5,9 @@
       <h1>마이페이지</h1>
       <router-link :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
     </div>
-    <button @click="followCheck">{{isfollow}} </button>
+    <FeedList :likeMovies="likeMovies"/>
+
+    <button v-if="isNotMyPage" @click="followCheck">{{isfollow}} </button>
 
     <FeedDetailView v-if="showModal" @close-modal="showModal = false">
       <FeedModal :id="modalId" />
@@ -53,6 +55,9 @@ export default {
       },
 
       // 이건 팔로우기능-----------
+      isNotMyPage(){
+        return this.isMyPage ? false : true
+      }
   
     },
     created(){

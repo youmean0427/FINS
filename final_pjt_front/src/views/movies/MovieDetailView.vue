@@ -29,6 +29,7 @@ import ReviewList from '@/components/Movies/ReviewList.vue'
 import RecoMovieList from '@/components/Movies/RecoMovieList.vue'
 import axios from 'axios'
 
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
@@ -96,7 +97,6 @@ export default {
                     if (((this.user_id) === (this.movie.movie_like_user[i]))) {
                     this.input_value = "싫어요"
                     }
-                
                 }
                 
                 
@@ -108,6 +108,7 @@ export default {
         },
 
 
+        
         
         
         
