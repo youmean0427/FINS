@@ -17,11 +17,11 @@
   </template>
   
   <script>
-    import Tinder from "vue-tinder";
-    // import source from "@/bing";
+    import Tinder from "vue-tinder"
+    // import source from "@/bing"
     
     export default {
-      name: "FinderMovieView",
+      name: "FinderMovie",
       components: { Tinder },
       data: () => ({
         queue: [],
@@ -37,21 +37,32 @@
       },
       methods: {
         mock(count = 5) {
-          
+
           const list = [];
           for (let i = 0; i < count; i++) {
+
             // console.log(this.source) 영화 전체 url + movieList의 idx 담긴 리스트
-            console.log(this.$store.getters.tinderMovie[this.offset])
+
             if (this.$store.getters.tinderMovie[this.offset].selected === false){
-              list.push({ id: this.source[this.offset].url, idx : this.source[this.offset].idx });
+
+              list.push({ id: this.source[this.offset].url, idx : this.source[this.offset].idx })
       
             }
             this.offset++;
           }
-          console.log(list)
+
           this.queue = this.queue.concat(list);
         },
-        onSubmit({ item }) {
+        
+        // FINDER LIKE
+        onSubmit({ item, type }) {
+          console.log(item, this.$store.state.tinderLike )
+
+          if (type === 'like') {
+            this.$store.dispatch('movieLike', item.idx)
+          } else if (type === 'nope') {
+            this.$store.dispatch('movieNope', item.idx)
+          }
           if (this.queue.length < 3) {
             this.mock();
             console.log(item)

@@ -39,7 +39,7 @@ export default new Vuex.Store({
     BASE_POSTER_PATH : 'https://image.tmdb.org/t/p/original/',
 
     // Tinder
-    genres: [],
+    tinderLike: [],
     tinderMovie : [],
 
     // Search
@@ -56,24 +56,26 @@ export default new Vuex.Store({
       return state.token ? true : false
     },
 
-    // Tinder
+    // Tinder GETTERS
 
     randomMovie(state) {
       // lodash를 사용해서 랜덤한 번호를 추출
       // 영화 요청 9번 했을 때 180개의 영화가 담겨있음 
       const randomNumber = _.sample(_.range(0, 180))
       state.randomMovie = state.movieList[randomNumber]
+ 
       return state.randomMovie
     },
-
+   
 
     
-
+    // !!!!!!!!
     tinderMovie(state){
+      console.log(state.movies, '==')
       for (var i = 0; i < 100; i++){
         const randomNumber = _.sample(_.range(0, 180))
         state.tinderMovie[i] = {
-          url : state.BASE_POSTER_PATH + state.movieList[randomNumber].poster_path,
+          url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster,
           idx : randomNumber,
           selected : false,
         }
@@ -81,11 +83,14 @@ export default new Vuex.Store({
       return state.tinderMovie
     },
 
-    // Search
+     // END Tinder GETTERS
 
-    searchMovieListLen(state){
-      return state.searchMovieList.length
-    },
+
+    // Search ERROR!!
+
+    // searchMovieListLen(state){
+    //   return state.searchMovieList.length
+    // },
    
 
   },
@@ -107,10 +112,25 @@ export default new Vuex.Store({
       state.token = null
     },
 
-    // Tinder
+    // _________________TINDER MUTAITONS_________________
     GET_RANDOM_MOVIES(state, res) {
       state.randomMovies = res
-    },
+      },
+    MOVIE_LIKE(state, tinderLikeM) {
+        state.tinderLike.push(tinderLikeM)
+        
+      },
+    MOVIE_NOPE(state, tinderLikeM) {
+        state.tinderLike.pop(tinderLikeM)
+        // this.like_movie(tinderLikeM)
+      },
+    
+
+    // _________________END TINDER MUTAITONS_________________
+    
+
+
+    // _________________SEARCH MUTAITONS_________________
 
     SEARCH_MOVIE(state, m){
       state.searchMovieList = m
@@ -118,10 +138,9 @@ export default new Vuex.Store({
       console.log(state.searchMovieList)
       console.log('======================')
     },
-    
+
+    // _________________END SEARCH MUTAITONS_________________
   },
-
-
 
 
   actions: {
@@ -195,38 +214,51 @@ export default new Vuex.Store({
         })
     },
 
-    // search
+    // _________________SEARCH ACTIONS_________________
 
     search_movie(context, movies){
       context.commit('SEARCH_MOVIE', movies)
     },
 
-    // Tinder
+    // _________________TINDER ACTIONS_________________
     getRandomMovies(context) {
       const randomNumber = _.sample(_.range(0, 5))
       context.state.randomMovie = context.state.movieList[randomNumber]
       context.commit('GET_RANDOM_MOVIES',context.state.randomMovie)
     },
 
-    // mutation해서 넣어보자
-    movieLike({commit}, genres) {
-      commit('MOVIE_LIKE', genres)
+    // mutation
+    // Axios로 DB에 저장해보아요
+    movieLike({commit}, Finder_like_Movie_pk) {
+      console.log(Finder_like_Movie_pk)
+      commit('MOVIE_LIKE', Finder_like_Movie_pk)
+      axios({
+        method: 'post',
+        url: `${API_URL}/api/v1/movies/like/${Finder_like_Movie_pk}/`,
+        headers: {
+          Authorization: `Token ${this.state.token}`
+        }
+      })
+        .then((res) => {
+          console.log(res)
+          if (res.data.status == '좋아하는상태'){
+            this.state.likeCheck  = true
+          }else{
+            this.state.likeCheck  = false
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
     },
     movieNope({commit}, genres) {
       commit('MOVIE_NOPE', genres)
     },
-    // submitGenres({commit}, genreItems) {
-    //   axios({
-    //     method: 'POST',
-    //     url: `${SERVER_URL}movies/genres/`,
-    //     data: genreItems.genres,
-    //     headers: genreItems.token
-    //   })
-    //   .then(() => {
-    //     commit('SUBMIT_GENRES')
-    //   })
-    //   .catch(err => console.log(err))
-    // },
+
+    // _________________END TINDER ACTIONS_________________
+
+
     // 요청한 사용자의 이름을 반환해주는 메서드
     request_user(context){
       if(context.state.token){
@@ -318,7 +350,7 @@ export default new Vuex.Store({
       .catch((err) => console.log('비밀번호 변경 실패...',err ))
     },
 
-    // --------------------- like ----------------------------
+    // _________________LIKE ACTIONS_________________
     like_movie(context, movieId){
       axios({
         method: 'post',
@@ -339,6 +371,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // _________________END LIKE ACTIONS_________________
 
     // review_delete
     delete_review(context, reviewId){

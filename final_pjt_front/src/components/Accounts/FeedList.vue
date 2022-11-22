@@ -2,9 +2,10 @@
   <div>
     <h1>FeedList</h1>
     <FeedCard
-      v-for="movie in likeMovies"
-      :key="movie.id"
-      :movie="movie"
+      v-for="feed in likeMovies"
+      :key="feed.id"
+      :feed="feed"
+      @showFeed="feedDetail(feed.id)"
     />
   </div>
 </template>
@@ -18,14 +19,13 @@ export default {
         FeedCard
 
     },
-    computed:{
-      // user(){
-      //   return 
-      // }
-    },
     props:{
       likeMovies : Array
-
+    },
+     methods: {
+      feedDetail(id) {
+        this.$emit('showFeedDetail', id)
+    }
     }
 }
 

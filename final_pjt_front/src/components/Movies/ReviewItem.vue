@@ -64,6 +64,7 @@ export default {
       }
       this.getReview()
     }
+ 
 
 }
 </script>
