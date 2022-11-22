@@ -98,11 +98,7 @@ const routes = [
     name : 'PasswordCheckView',
     component : PasswordCheckView,
   },
-  {
-    path: '/profile/:feed',
-    name : 'FeedDetailView',
-    component : () => import('../views/accounts/FeedDetailView.vue')
-  },
+
   {
     path: '*',
     redirect: { name: 'MovieView' }

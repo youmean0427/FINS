@@ -62,7 +62,7 @@ export default new Vuex.Store({
       // lodash를 사용해서 랜덤한 번호를 추출
       // 영화 요청 9번 했을 때 180개의 영화가 담겨있음 
       const randomNumber = _.sample(_.range(0, 180))
-      state.randomMovie = state.movieList[randomNumber]
+      state.randomMovie = state.movies[randomNumber]
       return state.randomMovie
     },
 
@@ -73,7 +73,7 @@ export default new Vuex.Store({
       for (var i = 0; i < 100; i++){
         const randomNumber = _.sample(_.range(0, 180))
         state.tinderMovie[i] = {
-          url : state.BASE_POSTER_PATH + state.movieList[randomNumber].poster_path,
+          url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster_path,
           idx : randomNumber,
           selected : false,
         }
@@ -134,6 +134,9 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
+        data : {
+          'len' : 1
+        }
       })
         .then((res) => {
           // console.log(res, context) // 받은 데이터 state에 저장
@@ -209,7 +212,7 @@ export default new Vuex.Store({
     // Tinder
     getRandomMovies(context) {
       const randomNumber = _.sample(_.range(0, 5))
-      context.state.randomMovie = context.state.movieList[randomNumber]
+      context.state.randomMovie = context.state.movies[randomNumber]
       context.commit('GET_RANDOM_MOVIES',context.state.randomMovie)
     },
 
@@ -423,8 +426,7 @@ export default new Vuex.Store({
           .catch((err) => {
             console.log(err)
           })
-      }
-      // -----------------여기까지 팔로우
+      },
 
   },
   modules: {

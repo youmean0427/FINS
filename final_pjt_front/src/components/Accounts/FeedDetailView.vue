@@ -31,11 +31,13 @@ export default {
   background-color: black;
 }
 .modal-card {
+  border-radius: 7px;
   position: relative;
   max-width: 80%;
   margin: auto;
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 17%;
+  margin-bottom: 17%;
+  padding: 10px;
   background-color: white;
   min-height: 500px;
   z-index: 10;

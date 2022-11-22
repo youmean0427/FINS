@@ -97,6 +97,13 @@ def feed_detail(request, feed_pk):
         feed.delete() 
         return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == 'PUT':
+        # if not request.data['content']:
+        #     data = {
+        #         'image_path' : request.data['image_path']
+        #     }
+        # else:
+        #     data = request.data
+        # print(data)
         serializer = FeedSerializer(feed, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()

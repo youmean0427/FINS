@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
+from .serializers import MovieListSerializer, GenreSerializer,StillImageSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
 from .models import Movie_Image, Movie, Review, Genre, Keyword
 from accounts.models import Feed
 import random
@@ -32,7 +32,7 @@ def make_still(movie_id):
 @api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie)
+        movies = Movie.objects.all().order_by('id')[:100]
         serializer = MovieListSerializer(movies, many=True)
 
         for i in range(len(serializer.data)):
@@ -42,6 +42,7 @@ def movie_list(request):
             mk = serializer.data[i]['movie_key']
             stil_image = make_still(mk)
             serializer.data[i].update(stil_image=stil_image)
+
         return Response(serializer.data)
 
 #______________________vote_movie______________________
@@ -242,3 +243,9 @@ def like(request, movie_pk):
         return Response(data)
         # serializer =MovieSerializer(movie)
         # return Response(serializer.data)
+
+@api_view(['GET'])
+def still_images(request,movie_key):
+    stills = Movie_Image.objects.filter(movie_id=movie_key)
+    serializer = StillImageSerializer(stills, many=True)
+    return Response(serializer.data)

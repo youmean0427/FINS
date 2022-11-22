@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import FeedDetailView from '@/views/accounts/FeedDetailView'
-import FeedList from '@/components/Accounts/FeedList.vue'
+import FeedDetailView from '@/components/Accounts/FeedDetailView'
+import FeedList from '@/views/accounts/FeedList.vue'
 import FeedModal from '@/components/Accounts/FeedModal.vue'
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
