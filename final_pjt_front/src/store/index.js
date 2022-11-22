@@ -63,17 +63,19 @@ export default new Vuex.Store({
       // 영화 요청 9번 했을 때 180개의 영화가 담겨있음 
       const randomNumber = _.sample(_.range(0, 180))
       state.randomMovie = state.movieList[randomNumber]
+ 
       return state.randomMovie
     },
 
 
     
-
+    // 중요!
     tinderMovie(state){
+      console.log(state.movies, '==')
       for (var i = 0; i < 100; i++){
         const randomNumber = _.sample(_.range(0, 180))
         state.tinderMovie[i] = {
-          url : state.BASE_POSTER_PATH + state.movieList[randomNumber].poster_path,
+          url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster,
           idx : randomNumber,
           selected : false,
         }
