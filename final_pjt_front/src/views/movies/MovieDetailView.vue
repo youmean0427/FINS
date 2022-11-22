@@ -10,6 +10,7 @@
       <p>시놉시스 : {{movie.overview}}</p>
       <img :src="poster" style="width:300px;" alt="">
       <p><button @click="likeMovie">{{islike}}</button></p>
+      <p>{{ movie.movie_like_user}}</p>
       <!-- <p> {{ movie }} </p> -->
       <hr>
       <RecoMovieList :movieKeyword= 'movie.keyword' />
@@ -38,7 +39,7 @@ export default {
             // youtube_key:'kyMMq8Kz-8I'
             youtube_key: 1,
             user_id: '',
-            input_value: '좋아요요'
+            input_value: '좋아요'
         };
     },
     components: { 
