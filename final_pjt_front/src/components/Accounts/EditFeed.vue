@@ -6,9 +6,8 @@
     <EditFeedStills 
       v-for="(image, key) in still_images"
       :key="image.id"
-      :pk="key"
       :image="image"
-      @imageId="getImgId"
+      @selectedImg="getImgId(key)"
       :imgid = image.id
     />
     <br>
@@ -47,7 +46,6 @@ export default {
       this.feedContent = this.content
     },
     getImgId(imageId){
-      console.log(this.still_images)
       this.selectedImgId = imageId
     },
     editFeed(){
@@ -58,7 +56,7 @@ export default {
       } else {
         image_path = this.still_images[this.selectedImgId].image_path
       }
-
+      console.log('요청정보 :::: ', content, image_path)
       axios({
           method:'put',
           url: `${API_URL}/user/feed/${this.feedId}/`,
