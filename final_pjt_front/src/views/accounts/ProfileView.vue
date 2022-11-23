@@ -5,7 +5,7 @@
       <h1>마이페이지</h1>
       <router-link :to="{ name: 'ProfileEditView' }">회원정보 수정</router-link>
     </div>
-    <FeedList :likeMovies="likeMovies"/>
+    <!-- <FeedList :likeMovies="likeMovies"/> -->
 
     <button v-if="isNotMyPage" @click="followCheck">{{isfollow}} </button>
 

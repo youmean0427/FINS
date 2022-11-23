@@ -6,7 +6,9 @@
       :key="keyword.id"
       :keyword="keyword"
     />
-    {{keyarr}}
+    <hr>
+    <!-- {{ movieKeyword }} -->
+  
 
   </div>
 </template>
@@ -18,7 +20,9 @@ export default {
      data() {
         return {
           keyarr :[],
-          eachkeyword: ''
+          eachkeyword: '',
+          keyarr_result: [],
+          top : []
       }
     },
     components: {
@@ -32,13 +36,13 @@ export default {
     computed: {
     keywordMovieList() {
       return this.$store.state.movies
-    }
+      }
     },
+    methods: {
+    },
+
     created() {
 
-      for (const i of (this.movieKeyword) ) {
-        this.keyarr.push(i)
-      }
     }
 
 }

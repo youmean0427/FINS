@@ -5,11 +5,10 @@
     <h5>Content : {{ review.content }}</h5>
     <h5>Created_at : {{ review.created_at }}</h5>
     <div v-show='isAuth'>
-    <input v-show='isActive' v-model="inputData" type="text" name="">
-    <button @click="createReviewInput" v-show='!isActive'>Edit</button>
-    <button @click="editReview" v-show='isActive'>Edit</button>
-    
-    <button @click="deleteReview">Delete</button>
+      <input v-show='isActive' v-model="inputData" type="text" name="">
+      <button @click="createReviewInput" v-show='!isActive'>Edit</button>
+      <button @click="editReview" v-show='isActive'>Edit</button>
+      <button @click="deleteReview">Delete</button>
     </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->
@@ -63,7 +62,9 @@ export default {
         this.isAuth = false
       }
       this.getReview()
-    }
+    },
+    
+    
  
 
 }

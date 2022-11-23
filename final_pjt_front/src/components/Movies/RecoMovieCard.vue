@@ -4,8 +4,10 @@
 
     <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }">
       {{ keyword.keyword }}
-      {{ keyarr }}
+      
     </router-link>
+    
+    <!-- {{ keyword }} -->
   </div>
 </template>
 
