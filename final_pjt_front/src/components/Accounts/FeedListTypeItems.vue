@@ -2,28 +2,27 @@
   <div class="vuegram-post">
     <div class="header level">
       <div class="level-left">
-        <figure class="image">
-          <img class="imageimg" src="https://user-images.githubusercontent.com/87971876/203341350-7975d794-b740-4247-a30c-76542d13b71a.png" alt="프로필이미지"/>
-        </figure>
-        <span class="username">{{movieTitle}}</span>
+        <div class="image">
+          <img class="imageimg" src="https://user-images.githubusercontent.com/87971876/203572590-35117aa5-e24e-4c08-9402-489b2c9888da.png" alt="프로필이미지"/>
+        </div>
+          <p>username</p>
+        
       </div>
     </div>
-    <div class="image-container" :style="{backgroundImage:'url('+poster+')'}"> </div>
+    <div id="movie-view-card" @click="clickfeed(feed.id)" class="image-container" :style="{backgroundImage:'url('+poster+')'}"> </div>
+    <div class="content hidden-title">
+      <span class="movieTitle">{{movieTitle}}</span>
+      <p class="likes heartbtn"><img :src="heart" alt=""></p>
+    </div>
 
-    <div class="content">
-      <p class="likes">{{feed.id}} likes</p>
-      <p class="caption"><span>{{feed.id}}</span> {{feed.content}}</p>
+    <div>
+      <p class="caption">{{feed.content}}</p>
     </div>
   </div>
 </template>
 
 <script>
-      // <div class="heart">
-      //   <!-- <i class="far fa-heart fa-lg"
-      //     :class="{'fas': this.post.hasBeenLiked}"
-      //     @click="like">
-      //   </i> -->
-      // </div>
+
 export default {
     name: 'FeedCardTypeItems',
     props:{
@@ -31,7 +30,8 @@ export default {
     },
     data(){
       return{
-        movieTitle:''
+        movieTitle:'',
+        heart:'https://user-images.githubusercontent.com/87971876/203576382-75664732-87ee-4657-acad-fdad8d9c1c18.png'
       }
     },
     created(){
@@ -62,12 +62,22 @@ export default {
 
 <style>
 .vuegram-post {
+  border: 1px solid rgb(90, 90, 90);
+  border-radius: 10px;
   padding-top: 50px;
+  margin-top:15px;
+  width: 900px;
 }
 .level-left{
+  padding-left:10px;
+  padding-top:10px;
   display: flex;
   align-items: center;
 
+}
+.level-left p {
+  padding-left:10px;
+  padding-top:10px;
 }
 .vuegram-post ~ .vuegram-post {
   padding-top: 0;
@@ -85,14 +95,15 @@ export default {
       overflow: hidden;
       width:50px;
       margin: 0;
-      padding-right: 50px;
+      height: 50px;
+      border-radius: 50%;
   
     }
     .imageimg {
       object-fit: cover;
-      border-radius: 99px;
-      width : -webkit-fill-available;
-  
+      width : 100%;
+      height: 100%;
+      padding:0;
     }
 
     .username {
@@ -144,5 +155,43 @@ export default {
 .vuegram-post:last-child {
   margin-bottom: 80px;
 }
+.heartbtn img{
+    width: 30px;
+  }
+  .heartbtn{
+    background-color: transparent;
+    border: none;
+  }
+   .hidden-title{
+    z-index: 2;
+    width: 100%;
+    padding:1em;
+    position: absolute;
+    text-align : center;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    display:none;
+    color:rgb(59, 59, 59);
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0.8) 40%, rgb(121, 128, 121, 0.8) 100%);
+    top : 50%;
+    left: 50%;
+    height: 100%;
+   }
+  #movie-view-card{
+    max-width: inherit;
+    vertical-align : middle;
+    transition: .5s ease;
+    border-radius : 6px;
+   }
+   #movie-view-card:hover{
+     transition: .5 ease;
+     z-index: 1;
+     
+   }
+   #movie-view-card:hover + .hidden-title{
+    transition: .5 ease;
+    display: block;
+   }
 
 </style>

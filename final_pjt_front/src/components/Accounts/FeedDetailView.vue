@@ -25,6 +25,9 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 .overlay {
   opacity: 0.5;
@@ -33,14 +36,15 @@ export default {
 .modal-card {
   border-radius: 7px;
   position: relative;
-  max-width: 80%;
+  width: 70%;
+  height: 70%;
   margin: auto;
-  margin-top: 17%;
-  margin-bottom: 17%;
-  padding: 10px;
+  margin-top: 5%;
+  margin-bottom: 14%;
   background-color: white;
-  min-height: 500px;
+  max-height: 700px;
   z-index: 10;
   opacity: 1;
+  
 }
 </style>

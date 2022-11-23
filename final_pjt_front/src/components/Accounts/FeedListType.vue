@@ -5,7 +5,7 @@
         v-for="feed in likeMovies"
         :key="feed.id"
         :feed="feed"
-        @showFeed="feedDetail(feed.id)"
+        @showFeed="feedDetail()"
       />
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
     },
      methods: {
       feedDetail(id) {
-        this.$emit('showFeedDetail', id)
+        this.$emit('showFeedModal', id)
     }
     }
 }

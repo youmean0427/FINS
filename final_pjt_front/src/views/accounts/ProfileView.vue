@@ -10,11 +10,13 @@
       </div>
     </div>
     <div class="layoutBrn">
-      <b-button class="btn btn-outline-light" @click="showList = true">list</b-button>
-      <b-button class="btn btn-outline-light" @click="showCard">card</b-button>
+      <b-button class="btn listbtn" @click="showList = true"><img class="listbtnimg"
+        src="https://user-images.githubusercontent.com/87971876/203548123-671886dc-e145-43ae-9200-497e93c14ff1.png" alt="">
+      </b-button>
+      <b-button class="btn listbtn" @click="showCard"><img class="listbtnimg" src="https://user-images.githubusercontent.com/87971876/203549185-61ad8416-cb3f-46c0-8c22-1a0025a14ba4.png" alt=""></b-button>
     </div>
-    <FeedListType v-if="showList" :likeMovies="likeMovies" :username="username" />
-    <FeedCardType v-if="!showList" :likeMovies="likeMovies" :username="username" />
+    <FeedListType v-if="showList" :likeMovies="likeMovies" :username="username" @showFeedModal="showFeedModal"/>
+    <FeedCardType v-if="!showList" :likeMovies="likeMovies" :username="username"  @showFeedModal="showFeedModal"/>
 
     <FeedDetailView v-if="showModal" @close-modal="closeModal">
       <FeedModal :id="modalId" :user="username"/>
@@ -103,7 +105,7 @@ export default {
         })
         .catch(() => {return false})
       },
-      feedModal(id){
+      showFeedModal(id){
         console.log('modal~~~~~~~~~~~~~~~~~~',id)
         this.modalId = id
         this.showModal = true
@@ -129,6 +131,9 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    padding-left: 10%;
+    padding-right: 10%;
+
   }
   #editBtn{
     background-color: rgb(113, 113, 113);
@@ -147,5 +152,18 @@ export default {
   .layoutBrn button {
     background-color: white;
     color: rgb(17, 17, 17);
+  }
+  .listbtnimg{
+    object-fit:fill;
+    height: 100%;
+    width: 100%;
+  }
+  .listbtn{
+    overflow: hidden;
+    width:50px;
+    border: none;
+  }
+  .listbtn:hover{
+    background-color: #ffffff;
   }
 </style>

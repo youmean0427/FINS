@@ -9,8 +9,6 @@
       :keyword="keyword"
     />
     </div>
-    <!-- {{keyarr}} -->
-
   </div>
 </template>
 
