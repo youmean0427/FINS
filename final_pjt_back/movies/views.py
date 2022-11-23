@@ -48,7 +48,7 @@ def movie_list(request):
 @api_view(['GET'])
 def movie_list_limit(request, limit):
     movies = get_list_or_404(Movie)
-    serializer = MovieListSerializer(movies[0:limit+1], many=True)
+    serializer = MovieListSerializer(movies[limit:limit+21], many=True)
     
     for i in range(len(serializer.data)):
         if 'movie_key' not in serializer.data[i]:
