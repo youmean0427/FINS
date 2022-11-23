@@ -1,9 +1,8 @@
 <template>
-  <div>
 
-    <div id="mcard" @mouseover="bigger" @click="moveDetail" class="card text-start" v-if="movie" style="max-width: 20rem;">
+    <div id="mcard" @click="moveDetail" class="card text-start" v-if="movie" style="max-width: 33.3%;">
       <div v id="movie-view-card">
-        <img class="card-img-top" :src="movie.stil_image" alt="movieImg">
+        <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">
         <p id="movieTitle">{{movie.title}}</p>
@@ -21,7 +20,6 @@
       </div>
     </div>
     
-  </div>
 </template>
 
 <script>
@@ -34,8 +32,14 @@ export default {
     moveDetail(){
       this.$router.push({ name: 'MovieDetailView', params: { id: this.movie.id } })
     },
-    bigger(){
-      document.querySelector('#mcard').style.width = '40em'
+  },
+  computed:{
+    url(){
+      if(this.movie.still_image){
+        return this.movie.still_image
+      } else{
+        return 'https://image.tmdb.org/t/p/original/' + this.movie.poster
+      }
     }
   },
   

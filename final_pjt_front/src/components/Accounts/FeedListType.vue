@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <FeedListTypeItems
-      v-for="feed in likeMovies"
-      :key="feed.id"
-      :feed="feed"
-      @showFeed="feedDetail(feed.id)"
-    />
+  <div id="listFeed">
+    <div id="list">
+      <FeedListTypeItems
+        v-for="feed in likeMovies"
+        :key="feed.id"
+        :feed="feed"
+        @showFeed="feedDetail(feed.id)"
+      />
+    </div>
   </div>
 </template>
 
@@ -31,5 +33,11 @@ export default {
 </script>
 
 <style>
-
+  #listFeed{
+    display: flex;
+    justify-content: center;
+  }
+  #list{
+    width: 80%;
+  }
 </style>

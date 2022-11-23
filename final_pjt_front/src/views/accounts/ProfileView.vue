@@ -10,8 +10,8 @@
       </div>
     </div>
     <div class="layoutBrn">
-      <button @click="showList = true">list</button>
-      <button @click="showCard">card</button>
+      <b-button class="btn btn-outline-light" @click="showList = true">list</b-button>
+      <b-button class="btn btn-outline-light" @click="showCard">card</b-button>
     </div>
     <FeedListType v-if="showList" :likeMovies="likeMovies" :username="username" />
     <FeedCardType v-if="!showList" :likeMovies="likeMovies" :username="username" />
@@ -143,5 +143,9 @@ export default {
   }
   #btns{
     
+  }
+  .layoutBrn button {
+    background-color: white;
+    color: rgb(17, 17, 17);
   }
 </style>

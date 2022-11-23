@@ -1,51 +1,70 @@
 <template>  
-    <div>
-        <h1>GenreMovieListView</h1>
-        <GenreMovieCard
+    <div class="genreMovieFrame">
+        <MovieCard
             v-for="genre_movie in genre_movie"
             :key="genre_movie.id"
-            :genre_movie="genre_movie"
+            :movie="genre_movie"
 
         />
     </div>  
 </template>
 
 <script>
-import GenreMovieCard from "@/components/Movies/GenreMovieCard.vue/"
+import MovieCard from "@/components/Movies/MovieCard.vue/"
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
     name: 'GenreMovieListView',
     components: {
-        GenreMovieCard
+        MovieCard
     },
     data() {
         return {
             genre_movie: null
         };
     },
+    computed:{
+        gid(){
+            return this.genreId.id
+        }
+    },
+    props:{
+        genreId:Object,
+    },
     methods: {
-        getGenreMovieList() {
-                axios({
-                    method: "get",
-                    url: `${API_URL}/api/v1/discoverymovie/${this.$route.params.id}`
-                })
-                    .then((res) => {
-                    console.log(res);
-                    this.genre_movie = res.data;
-                })
-                    .catch((err) => {
-                    console.log(err);
-                });
-            },
+        getGenreMovieList(g_id) {
+            axios({
+                method: "get",
+                url: `${API_URL}/api/v1/discoverymovie/${g_id}`
+            })
+                .then((res) => {
+                console.log(res);
+                this.genre_movie = res.data;
+            })
+                .catch((err) => {
+                console.log(err);
+            });
+        },
     },
     created() {
-        this.getGenreMovieList()
+        this.getGenreMovieList(this.gid)
     },
+    watch: {
+        gid(val) {
+            console.log(val, 'aa')
+            this.getGenreMovieList(val)
+        }
+    }
 }
 </script>
 
 <style>
-
+    .genreMovieFrame{
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        padding: 1rem;
+        height: 100%;
+    }
 </style>

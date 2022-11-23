@@ -12,7 +12,7 @@
                     <input 
                       id="form-control"
                       class="form-control form-control-lg rounded"
-                      @keyup.enter="searchMovie"
+                      @keyup="searchMovie"
                       v-model.trim="keyword"
                       type="search"
                       placeholder="search movie">
@@ -21,37 +21,40 @@
                   <!-- <b-button @click="searchMovie" variant="outline-success"> + </b-button> -->
                 </div>
               </div>
-            </div>
-            <div class="card" style="width:746px;">
-                <h6 class="mt-3 mb-4" style="color: #939597;">장르별 영화검색</h6>
-                    <GenreCardList :genreList="genre" />
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                  <div>
-                    <button type="button" class="btn btn-link btn-rounded" style="color: #939597;" data-mdb-ripple-color="dark">
-                      선택초기화
-                    </button>
+            <div class="card" style="border:none;">
+              <div v-if="keyword">
+                <div v-if="searchMovieListLen">
+                    <div class="movieCardFrame">
+                      <MovieCard 
+                      v-for="(movie, idx) in searchMovieList" 
+                      :key="idx"
+                      :movie="movie"
+                      />
+                    </div>
+                </div>
+                <div v-else>
+                  <p>
+                      <span id="keywordnotfound">{{keyword}}</span>에 대한 검색결과가 존재하지 않습니다.
+                  </p>
+                </div>
+              </div>
+              <div v-else>
+                <a style="width:100%;" class="btn btn-success" @click="switchToggle" >장르별 영화검색</a>
+                  <div v-if="showt">
+                    <GenreCardList @selectedGenre="getGenreId" @resetGenre="genId = false"/>
+                      <div v-if="genreIdSelected" >
+                        <GenreMovieListView
+                          :genreId="selectedGenre"       
+                        />
+                      </div>
                   </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div v-if="keyword">
-        <div v-if="searchMovieListLen">
-            <div>
-            <SearchMovieCard 
-            v-for="(movie, idx) in searchMovieList" 
-            :key="idx"
-            :movie="movie"
-            />
-            </div>
-        </div>
-        <div v-else>
-          <p>
-              <span id="keywordnotfound">{{keyword}}</span>에 대한 검색결과가 존재하지 않습니다.
-          </p>
-        </div>
       </div>
+
     </div>
 
 
@@ -63,7 +66,8 @@
 
 <script>
 import GenreCardList from '@/components/Movies/GenreCardList.vue';
-import SearchMovieCard  from '@/components/Movies/SearchMovieCard.vue';
+import MovieCard  from '@/components/Movies/MovieCard.vue';
+import GenreMovieListView from '@/views/movies/GenreMovieListView.vue'
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
@@ -75,19 +79,32 @@ export default {
     name: "DiscoveryMovieView",
     components: {
       GenreCardList,
-      SearchMovieCard 
+      MovieCard,
+      GenreMovieListView
     },
     data() {
         return {
-             genre : null,
+            genre : null,
             keyword : null,
             lst : [],
+            showt : false,
+            genId : null,
         };
     },
 
     // SE
 
     computed:{
+      genreIdSelected(){
+        if(this.genId){
+          return true
+        }else{
+          return false
+        }
+      },
+      selectedGenre() {
+        return this.genId
+      },
       resultsLen(){
         return this.lst.length
       },
@@ -106,34 +123,28 @@ export default {
 
 
     methods: {
-        getGenreList() {
-            axios({
-                method: "get",
-                url: `${API_URL}/api/v1/discoverymovie/`
-            })
-                .then((res) => {
-                console.log('getGenreList',res);
-                this.genre = res.data;
-            })
-                .catch((err) => {
-                console.log('getGenreList',err);
-            });
-        },
+      getGenreId(selected){
+        console.log(selected)
+        // this.genreIdSelected = false
+        this.genId = false
+        this.genId = {'id' : Number(selected)}
+      },
+      switchToggle(){
+        return this.showt = !this.showt
+      },
         //------------------------------------------------------------------------------CUSTOM search
         searchMovie(){
           if (this.keyword){
-            // this.$store.dispatch('search_movie', this.keyword)
             const API_URL_SEARCH_MOVIE = `${API_URL}/api/v1/search/${this.keyword}` 
             axios({
               method: 'get',
               url: API_URL_SEARCH_MOVIE,
             })
               .then((response) => {
-                // console.log('검색된 키워드에 일치하는 영화목록입니다.')
-                // console.log(response)
-                // console.log('====================================')
+
                 this.$store.dispatch('search_movie', response.data)
                 this.lst = this.$store.state.searchMovieList
+                console.log('받아온 영화리스트',this.$store.state.searchMovieList )
               })
               .catch((error) => {
                 console.log(error)
@@ -143,8 +154,9 @@ export default {
     },
     created() {
         this.$store.state.searchMovieList=null
-        this.getGenreList();
-        this.searchMovie();
+        if(this.keyword){
+          this.searchMovie();
+        }
     },
 }
 </script>
@@ -164,4 +176,16 @@ export default {
     border-color: transparent;
     box-shadow: inset 0 0 0 1px transparent;
   }
+  .genrelist{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+  }
+  .movieCardFrame{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding: 1rem;
+    height: 100%;  
+  }   
 </style>

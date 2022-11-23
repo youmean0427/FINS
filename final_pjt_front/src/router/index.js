@@ -67,11 +67,6 @@ const routes = [
     component : GenreMovieListView,
   },  
 
-  {
-    path: '/discovery/:keyword',
-    name: 'search',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/movies/SearchView.vue')
-  },
 
   {
     path: '/movies',
