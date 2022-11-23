@@ -10,13 +10,15 @@
       </div>
     </div>
     <div id="movie-view-card" @click="clickfeed(feed.id)" class="image-container" :style="{backgroundImage:'url('+poster+')'}"> </div>
-    <div class="content hidden-title">
-      <span class="movieTitle">{{movieTitle}}</span>
-      <p class="likes heartbtn"><img :src="heart" alt=""></p>
-    </div>
 
-    <div>
-      <p class="caption">{{feed.content}}</p>
+    <div class="textarea">
+      <div class="contenttitle">
+        <p class="caption">{{feed.content}}</p>
+        <span class="movieTitle">{{movieTitle}}</span>
+      </div>
+      <div>
+        <p class="likes heartbtn"><img :src="heart" alt=""></p>
+      </div>
     </div>
   </div>
 </template>
@@ -147,7 +149,8 @@ export default {
   }
 
   .caption {
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-weight: bold;
   }
     span {
       font-weight: bold;
@@ -162,7 +165,21 @@ export default {
     background-color: transparent;
     border: none;
   }
-   .hidden-title{
+  .textarea{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding:10px 10px 0px 10px;
+  }
+  .contenttitle{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+  }
+  .movieTitle{
+    color: rgb(145, 145, 145);
+  }
+   /* .hidden-title{
     z-index: 2;
     width: 100%;
     padding:1em;
@@ -177,8 +194,8 @@ export default {
     top : 50%;
     left: 50%;
     height: 100%;
-   }
-  #movie-view-card{
+   } */
+  /* #movie-view-card{
     max-width: inherit;
     vertical-align : middle;
     transition: .5s ease;
@@ -192,6 +209,6 @@ export default {
    #movie-view-card:hover + .hidden-title{
     transition: .5 ease;
     display: block;
-   }
+   } */
 
 </style>

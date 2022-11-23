@@ -5,7 +5,7 @@
         v-for="feed in likeMovies"
         :key="feed.id"
         :feed="feed"
-        @showFeed="feedDetail()"
+        @showFeed="feedDetail(feed.id)"
       />
     </div>
   </div>
