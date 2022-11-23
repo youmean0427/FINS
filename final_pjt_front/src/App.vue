@@ -14,7 +14,7 @@
       <!-- <router-link :to="{ name: 'ProfileView' }">프로필</router-link> |  -->
       <router-link v-if="notLoggedIn" :to="{ name: 'SignUpView' }">회원가입</router-link> | 
       <router-link v-if="notLoggedIn" :to="{ name: 'LogInView' } ">로그인 </router-link>
-      <button v-if="loggedIn" @click="logout">로그아웃 </button> | 
+      <b-button v-if="loggedIn" @click="logout">로그아웃 </b-button> | 
       <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
       
     </nav>

@@ -119,39 +119,32 @@ export default {
     },
     signUp() {
       this.similiarInfo()
-      const validEmailTag = document.querySelector('#validPwd')
       if (!this.password1){
         // alert('비밀번호를 입력하세요!')
         this.validPwd = '비밀번호를 입력하세요!'
-        validEmailTag.style.color = 'red'
         return
       }
       if(!this.password2){
         this.validPwd = '비밀번호 확인이 필요합니다'
-        document.querySelector('#validPwd2').style.color = 'red'
         return
       }
       if (this.email_pwd_distance < 5) {
         this.validPwd = '이메일과 비밀번호가 유사합니다'
-        validEmailTag.style.color = 'red'
         // alert('이메일과 비밀번호가 유사합니다')
         return
       }
       else if (this.name_pwd_distance < 5){
         this.validPwd = '이름과 비밀번호가 유사합니다'
-        validEmailTag.style.color = 'red'
         // alert('이름과 비밀번호가 유사합니다')
         return
       }
       else if (!this.is_valid_e){
-        document.querySelector('#validEmail').style.color = 'red'
         this.validEmail = '유효한 이메일을 입력하세요!'
         // alert('유효한 이메일을 입력하세요!')
         return
       }
       else if (!this.is_valid_pwd2 || !this.is_valid_pwd){
         this.validPwd = '유효한 비밀번호를 입력하세요!'
-        validEmailTag.style.color = 'red'
         // alert('유효한 비밀번호를 입력하세요!')
         return
       }
