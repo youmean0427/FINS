@@ -4,12 +4,13 @@
     <h5>Write_user : {{ review.write_user }}</h5>
     <h5>Content : {{ review.content }}</h5>
     <h5>Created_at : {{ review.created_at }}</h5>
+
     <div v-show='isAuth && loggedIn'>
     <input v-show='isActive' v-model="inputData" type="text" name="">
-    <button @click="createReviewInput" v-show='!isActive'>Edit</button>
-    <button @click="editReview" v-show='isActive'>Edit</button>
-    
-    <button @click="deleteReview">Delete</button>
+    <button @click="createReviewInput" v-show='!isActive' type="button" class="btn btn-primary" >Edit</button>
+    <button @click="editReview" v-show='isActive' type="button" class="btn btn-primary" >Edit</button>
+
+    <button @click="deleteReview" type="button" class="btn btn-danger">Delete</button>
     </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->

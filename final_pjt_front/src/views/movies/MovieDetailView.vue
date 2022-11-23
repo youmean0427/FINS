@@ -1,26 +1,45 @@
 <template>
   <div>
-      <h1>MovieDetail</h1>
-      <iframe 
-        width="600"
-        height="400"
-        :src="videoUrl"></iframe>
+      <!-- <h1>MovieDetail</h1> -->
+      <hr>
+      <div id="layout_01">
+        <iframe 
+            width="600"
+            height="400"
+            :src="videoUrl"></iframe>
+       
+        <img :src="poster" style="width:300px;" alt="">
+        <!-- <img :src="movie.stil_image" style="width:300px;" alt=""> -->
+        </div>
 
-      <p>제목 : {{movie.title}}</p>
-      <p>시놉시스 : {{movie.overview}}</p>
-      <img :src="poster" style="width:300px;" alt="">
-      
-      <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p>
-      <p>{{ movie.movie_like_user}}</p>
-      <!-- <p> {{ movie }} </p> -->
-      <hr>
-      <RecoMovieList :movieKeyword= 'movie.keyword' />
-      <hr>
-      <h3>comments</h3>
-      <!-- <p>댓글 : {{movie.review_set}}</p> -->
-      <ReviewList :movieReviewSet ='movie.review_set'/>
-      <CreateReview :movieId = 'movie.id'/>
-  </div>
+        <hr>
+        <div id="layout_01">
+        <p>제목 : {{movie.title}}</p>
+        
+        <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p>
+        </div>
+        <!-- 좋아요 유저 확인용 -->
+        <!-- <p>{{ movie.movie_like_user}}</p> -->
+        <p>시놉시스 : {{movie.overview}}</p>
+        
+
+        <hr>
+        
+        <RecoMovieList :movieKeyword= 'movie.keyword' />
+        <hr>
+        <!-- <p>댓글 : {{movie.review_set}}</p> -->
+        <ReviewList :movieReviewSet ='movie.review_set'/>
+        <CreateReview :movieId = 'movie.id'/>
+
+
+
+
+
+
+
+
+
+    </div>
 </template>
 
 <script>
@@ -163,5 +182,13 @@ export default {
 </script>
 
 <style>
+/* 가로로 정렬 */
+#layout_01 {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+
+}
 
 </style>

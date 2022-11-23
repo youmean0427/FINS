@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h1>RecoMovieCard</h1>
+    <h4>RecoMovieCard</h4>
+    <div id="layout_01">
+ 
     <RecoMovieCard
       v-for="keyword in movieKeyword"
       :key="keyword.id"
       :keyword="keyword"
     />
-    {{keyarr}}
+    </div>
+    <!-- {{keyarr}} -->
 
   </div>
 </template>
