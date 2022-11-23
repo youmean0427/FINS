@@ -1,6 +1,12 @@
 <template>
-  <div>KeywordMovieView
+  <div>
+    <!-- {{this.$route.params}} -->
+
     <KeywordMovieList :movie="movie"/>
+  
+  
+    
+  
   </div>
 
 </template>
@@ -41,7 +47,8 @@ export default {
     },
     created() {
       this.getMovieDetail();
-    }
+    },
+    
 }
 </script>
 

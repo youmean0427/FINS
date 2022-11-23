@@ -28,9 +28,9 @@
         offset: 0,
       }),
       created() {
-        console.log('?')
+
         this.mock()
-        console.log('??')
+
       },
       computed:{
         source(){
@@ -39,7 +39,7 @@
       },
       methods: {
         mock(count = 5) {
-          console.log('a???')
+
           const list = [];
           for (let i = 0; i < count; i++) {
 
@@ -96,12 +96,14 @@
     left: 0;
     right: 0;
     /* Size Control */
-    top: 23px;
+    top: 200px;
     bottom: 46px;
     margin: auto;
     /* Size Control */
     min-width: 300px;
     max-width: 355px;
+    /* 세로 크기 줄이기 */
+    height: 600px;
   }
   
   .nope-pointer,

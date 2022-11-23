@@ -1,11 +1,14 @@
 <template>
-    <div class="">
-        <h3>Reviews</h3>
+    <div>
+        
+        <br>
         <ReviewItem
             v-for="review in movieReviewSet"
             :key="review.id"
             :review = "review"
         />
+        <br>
+        <br>
     </div>
 </template>
 

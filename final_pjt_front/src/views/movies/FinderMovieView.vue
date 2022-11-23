@@ -1,134 +1,10 @@
-<!-- <template>
-  <div>
-    <Tinder key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
-      <template slot-scope="scope">
-        <div
-          class="pic"
-          :style="{
-            'background-image': `url(${scope.data.id})`
-          }"
-        />
-      </template>
-      <img class="like-pointer" slot="like" src="https://user-images.githubusercontent.com/87971876/201873421-3a6e624e-aa15-4b23-abd7-e99c383b2c6d.png" />
-  <img class="nope-pointer" slot="nope" src="https://user-images.githubusercontent.com/87971876/201873445-07aac418-fb7c-4e51-aa1a-280b43243243.png" />
-  <img class="super-pointer" slot="super" src="https://user-images.githubusercontent.com/87971876/201873473-65515497-c38c-488c-8066-3fabc516f98b.png" />
-    </Tinder>
-  </div>
-</template>
-
-<script>
-import Tinder from "vue-tinder";
-// import source from "@/bing";
-
-export default {
-  name: "FinderMovieView",
-  components: { Tinder },
-  data: () => ({
-    queue: [],
-    offset: 0,
-  }),
-  created() {
-    
-    
-    this.mock();
-  },
-  computed:{
-    source(){
-      return this.$store.getters.tinderMovie
-    }
-  },
-  methods: {
-    mock(count = 5) {
-      const list = [];
-      for (let i = 0; i < count; i++) {
-        // console.log(this.source) 영화 전체 url + movieList의 idx 담긴 리스트
-        if (this.$store.getters.tinderMovie[this.offset].selected === false){
-          list.push({ id: this.source[this.offset].url, idx : this.source[this.offset].idx });
-          this.$store.getters.tinderMovie[this.offset].selected = true
-        }
-        this.offset++;
-      }
-      this.queue = this.queue.concat(list);
-    },
-    onSubmit({ item }) {
-      if (this.queue.length < 3) {
-        this.mock();
-        console.log(item)
-      }
-    }
-  }
-};
-</script>
-
-<style>
-
-/* Scroll 이슈 */
-
-/*
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  /* background-color: #20262e; */
-  /*  overflow: hidden;
-} */
-
-#app .vue-tinder {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  /* Size Control */
-  top: 23px;
-  bottom: 46px;
-  margin: auto;
-  /* Size Control */
-  min-width: 300px;
-  max-width: 355px;
-}
-
-.nope-pointer,
-.like-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  width: 64px;
-  height: 64px;
-}
-
-.nope-pointer {
-  right: 10px;
-}
-
-.like-pointer {
-  left: 10px;
-}
-
-.super-pointer {
-  position: absolute;
-  z-index: 1;
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 112px;
-  height: 78px;
-}
-
-.pic {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-}
-</style> -->
-
 
 <template>
-  <div>
+  <div style="margin-left: 20%; margin-right: 20%;">
+    <img src="@/assets/Finder.png" alt="" width="150px">
+    <hr>
+    <h4 class="font_font">오른쪽은 좋아요, 왼쪽은 싫어요</h4>
+  
     <FinderMovie/>
   </div>
 </template>
@@ -147,5 +23,13 @@ export default {
 </script>
 
 <style>
+.font_font {
+         font-family: 'NanumGothic';
+        font-style: normal;
+        /* font-weight: 700; */
+        font-size: 20px;
+        /* line-height: 37px; */
 
+        color: #000000;
+    }
 </style>

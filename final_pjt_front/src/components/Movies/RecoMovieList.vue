@@ -1,13 +1,19 @@
 <template>
   <div>
-    <h4>RecoMovieCard</h4>
-    <div id="layout_01">
- 
-    <RecoMovieCard
-      v-for="keyword in movieKeyword"
-      :key="keyword.id"
-      :keyword="keyword"
-    />
+    <img src="@/assets/Recommend.png" alt="" width="150px">
+    <br>
+    <hr>
+    <br>
+    <div >
+      <div id="container">
+        <div class="row">
+        <RecoMovieCard  class="col-4"
+          v-for="keyword in movieKeyword.keyword"
+          :key="keyword.id"
+          :keyword="keyword"
+        />
+        </div>
+      </div>
     </div>
     <!-- {{keyarr}} -->
 

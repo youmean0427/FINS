@@ -1,16 +1,18 @@
 <template>
   <div>
 
-    <h5>Write_user : {{ review.write_user }}</h5>
-    <h5>Content : {{ review.content }}</h5>
-    <h5>Created_at : {{ review.created_at }}</h5>
+    <!-- <h5>Write_user : {{ review.write_user }}</h5> -->
+    <h5 class="font_font">{{ review.content }}</h5>
+    <h5 class="font_font"> {{ review.created_at }}</h5>
 
     <div v-show='isAuth && loggedIn'>
     <input v-show='isActive' v-model="inputData" type="text" name="">
-    <button @click="createReviewInput" v-show='!isActive' type="button" class="btn btn-primary" >Edit</button>
-    <button @click="editReview" v-show='isActive' type="button" class="btn btn-primary" >Edit</button>
+    <br>
+    <img src="@/assets/Update.png" alt="" width="50px" height="20px" type="button" @click="createReviewInput" v-show='!isActive' >
+    <img src="@/assets/Update.png" alt="" width="50px" height="20px" type="button" @click="editReview" v-show='isActive'>
 
-    <button @click="deleteReview" type="button" class="btn btn-danger">Delete</button>
+    |
+    <img src="@/assets/Delete.png" width="50px" height="20px" @click="deleteReview" type="button">
     </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->
@@ -77,5 +79,13 @@ export default {
 </script>
 
 <style>
+.font_font {
+         font-family: 'NanumGothic';
+        font-style: normal;
+        /* font-weight: 700; */
+        font-size: 15px;
+        /* line-height: 37px; */
 
+        color: #000000;
+    }
 </style>

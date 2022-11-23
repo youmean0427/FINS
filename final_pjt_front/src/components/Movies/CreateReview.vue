@@ -1,10 +1,13 @@
 <template>
-  <div class="review_form">
+  <div style="margin-right: 20%; margin-left: 20%;">
+
         <form @submit.prevent="createReview">
-            <label for="content">내용 ㅣ </label>
-            <input type="text" id="content" v-model.trim="content">
-            <input type="submit" id="sumbit">
+            <div class="input-group mb-5" >
+            <input type="text" class="form-control" id="content" v-model.trim="content">
+            <button class="btn btn-outline-secondary" type="submit" id="submit">+</button>
+            </div>
         </form>
+    <progress></progress>
   </div>
 </template>
 
@@ -68,7 +71,7 @@ export default {
 </script>
 
 <style>
-    .review_form{
-        margin-bottom: 300px;
-    }
+
+
+    
 </style>

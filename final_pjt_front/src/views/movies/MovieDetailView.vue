@@ -1,39 +1,61 @@
 <template>
-  <div>
+  <div style="margin-left: 20%; margin-right: 20%;">
+    <img src="@/assets/Movie.png" alt="" width="150px">
       <!-- <h1>MovieDetail</h1> -->
       <hr>
       <div id="layout_01">
-        <iframe 
-            width="600"
-            height="400"
-            :src="videoUrl"></iframe>
-       
+    
+        
+        <h1>여백</h1>
         <img :src="poster" style="width:300px;" alt="">
+        <h1>여백</h1>
+        <div id="layout_02">
+            <img :src="this.stil_image[0].image_path" class="size_size_0" alt="">
+        <div id="layout_01">
+            <img :src="this.stil_image[1].image_path" class="size_size_1" alt="">
+            <img :src="this.stil_image[2].image_path" class="size_size_2" alt="">
+        </div>
+        </div>
+       
         <!-- <img :src="movie.stil_image" style="width:300px;" alt=""> -->
         </div>
 
-        <hr>
+        <br>
+        <br>
         <div id="layout_01">
-        <p>제목 : {{movie.title}}</p>
-        
-        <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p>
+            <div width="600px">
+            <iframe 
+            width="600px"
+            height="400px"
+            :src="videoUrl"></iframe>
+            </div>
+            <h1>여백</h1>
+            <div id="layout_02">
+                <h2 class="font_font_big">{{movie.title}}</h2>
+                <hr>
+                <!-- <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p> -->
+                <p v-if="loggedIn"><img type='button' @click="likeMovie" :src='require(`@/assets/${lovevalue}.png`)' width="50px"></p>
+                
+                <!-- 좋아요 유저 확인용 -->
+                <!-- <p>{{ movie.movie_like_user}}</p> -->
+                <p class="font_font">{{movie.overview}}</p>
+                
+            </div>
         </div>
-        <!-- 좋아요 유저 확인용 -->
-        <!-- <p>{{ movie.movie_like_user}}</p> -->
-        <p>시놉시스 : {{movie.overview}}</p>
-        
 
-        <hr>
+        <br>
+        <br>
+        <RecoMovieList :movieKeyword= 'movie' />
+        <br>
         
-        <RecoMovieList :movieKeyword= 'movie.keyword' />
-        <hr>
+        <br>
         <!-- <p>댓글 : {{movie.review_set}}</p> -->
-        <ReviewList :movieReviewSet ='movie.review_set'/>
+        <img src="@/assets/Reviews.png" alt="" width="150px">
+        <br>
+        <hr>
+        <br>
         <CreateReview :movieId = 'movie.id'/>
-
-
-
-
+        <ReviewList :movieReviewSet ='movie.review_set'/>
 
 
 
@@ -60,7 +82,10 @@ export default {
             // youtube_key:'kyMMq8Kz-8I'
             youtube_key: 1,
             user_id: '',
-            input_value: '좋아요'
+            // input_value: '좋아요',
+            lovevalue: 'Love',
+            movie_key: 0,
+            stil_image: [],
         };
     },
     components: { 
@@ -81,6 +106,9 @@ export default {
                 console.log(res);
                 console.log("데이터를 받았어요!");
                 this.movie = res.data;
+                this.movie_key = res.data.movie_key;
+                this.getStil()
+                
             })
             .catch((err) => {
                 console.log("데이터를 받지 못했어요");
@@ -94,7 +122,7 @@ export default {
         },
 
         // ________________Like__________________
-
+      
         islike(){
 
             axios({
@@ -115,6 +143,7 @@ export default {
                     console.log("이것이다", this.movie.movie_like_user[i])
                     if (((this.user_id) === (this.movie.movie_like_user[i]))) {
                     this.input_value = "싫어요"
+                    this.lovevalue = "Unlove"
                     }
                 }
                 
@@ -126,6 +155,30 @@ export default {
             });
         },
 
+         // ________________Stil__________________
+
+         getStil(){
+            console.log(this.movie_key)
+            axios({
+                method: "get",
+                url: `http://127.0.0.1:8000/api/v1/movie/${this.movie_key}/stills`,
+            
+            })
+            .then((res) => {
+                // console.log(res);
+                console.log("데이터를 받았어요!");
+                console.log(res.data)
+                this.stil_image = res.data
+                
+            
+                
+                
+            })
+            .catch((err) => {
+                console.log("데이터를 받지 못했어요");
+                console.log(err);
+            });
+        },
 
         
         
@@ -173,6 +226,7 @@ export default {
     created() {
         this.getMovieDetail()
         this.islike()
+       
 
         
     },
@@ -189,6 +243,65 @@ export default {
 
     justify-content: center;
 
+    
 }
+
+#layout_02 {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    
+}
+.font_font {
+         font-family: 'NanumGothic';
+        font-style: normal;
+        /* font-weight: 700; */
+        font-size: 20px;
+        /* line-height: 37px; */
+
+        color: #000000;
+    }
+
+.font_font_big {
+    font-family: 'NanumGothic';
+    font-style: normal;
+    /* font-weight: 700; */
+    font-size: 30px;
+    /* line-height: 37px; */
+
+    color: #000000;
+}
+.size_size_0 {
+/* position: absolute; */
+width: 500px;
+height: 200px;
+left: 868.65px;
+top: 0px;
+
+transform: rotate(5deg);
+}
+
+.size_size_1 {
+/* position: absolute; */
+width: 300px;
+height: 150px;
+left: 868.65px;
+top: 0px;
+
+transform: rotate(-10deg);
+}
+
+.size_size_2 {
+/* position: absolute; */
+width: 300px;
+height: 150px;
+left: 868.65px;
+top: 0px;
+
+transform: rotate(10deg);
+}
+
 
 </style>
