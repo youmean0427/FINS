@@ -56,6 +56,9 @@ export default {
       },
 
       // 이건 팔로우기능-----------
+      isNotMyPage(){
+        return this.isMyPage ? false : true
+      }
   
     },
     created(){

@@ -9,7 +9,9 @@
       <p>제목 : {{movie.title}}</p>
       <p>시놉시스 : {{movie.overview}}</p>
       <img :src="poster" style="width:300px;" alt="">
-      <p><button @click="likeMovie">{{islike}}</button></p>
+      
+      <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p>
+      <p>{{ movie.movie_like_user}}</p>
       <!-- <p> {{ movie }} </p> -->
       <hr>
       <RecoMovieList :movieKeyword= 'movie.keyword' />
@@ -27,6 +29,7 @@ import ReviewList from '@/components/Movies/ReviewList.vue'
 import RecoMovieList from '@/components/Movies/RecoMovieList.vue'
 import axios from 'axios'
 
+
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
@@ -38,7 +41,7 @@ export default {
             // youtube_key:'kyMMq8Kz-8I'
             youtube_key: 1,
             user_id: '',
-            input_value: '좋아요요'
+            input_value: '좋아요'
         };
     },
     components: { 
@@ -66,9 +69,46 @@ export default {
             });
         },
         
-    likeMovie() {
+        likeMovie() {
+        this.$router.go(this.$router.currentRoute)
         return this.$store.dispatch('like_movie', this.movie.id)
-        }
+        },
+
+        // ________________Like__________________
+
+        islike(){
+
+            axios({
+                method: "get",
+                url: `http://127.0.0.1:8000/accounts/user/`,
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`
+                }
+            })
+            .then((res) => {
+                // console.log(res);
+                console.log("데이터를 받았어요!");
+                this.user_id = res.data.id;
+                // console.log(this.user_id)
+                // console.log((this.movie.movie_like_user))
+                
+                for (const i in this.movie.movie_like_user ){
+                    console.log("이것이다", this.movie.movie_like_user[i])
+                    if (((this.user_id) === (this.movie.movie_like_user[i]))) {
+                    this.input_value = "싫어요"
+                    }
+                }
+                
+                
+            })
+            .catch((err) => {
+                console.log("데이터를 받지 못했어요");
+                console.log(err);
+            });
+        },
+
+
+        
         
         
         
@@ -83,14 +123,32 @@ export default {
             }
             return url;
         },
-        //============================수정 해야함=======================
-        islike(){
-            if(this.$store.state.likeCheck){
-                return '싫어요'
-            } else {
-                return '좋아요'
-            }
-        }
+        //_______________________ No ____________________
+        // islike(){
+        //     if(this.$store.state.likeCheck){
+        //         return '싫어요'
+        //     } else {
+        //         return '좋아요'
+        //     }
+        // },
+
+        // __________________YOUTUBE__________________
+        videoUrl(){
+            const keykey = this.movie.video_path
+            // console.log(keykey)
+            // String 변환
+            const index_e = String(keykey).indexOf('=')
+            // console.log(index_e)
+            const youtube_key = String(keykey).slice(index_e+1)
+            // console.log(youtube_key)
+            return 'https://www.youtube.com/embed/'+ youtube_key
+        },
+        // __________________END YOUTUBE__________________
+
+        // __________________LOGIN__________________
+        loggedIn(){
+            return this.$store.getters.isLogin
+    }
     },
 
     created() {

@@ -6,6 +6,8 @@
       :key="keyword.id"
       :keyword="keyword"
     />
+    {{keyarr}}
+
   </div>
 </template>
 
@@ -13,6 +15,12 @@
 import RecoMovieCard from '@/components/Movies/RecoMovieCard.vue';
 export default {
     name: "RecoMovieList",
+     data() {
+        return {
+          keyarr :[],
+          eachkeyword: ''
+      }
+    },
     components: {
       RecoMovieCard
     },
@@ -25,7 +33,13 @@ export default {
     keywordMovieList() {
       return this.$store.state.movies
     }
-  }
+    },
+    created() {
+
+      for (const i of (this.movieKeyword) ) {
+        this.keyarr.push(i)
+      }
+    }
 
 }
 </script>

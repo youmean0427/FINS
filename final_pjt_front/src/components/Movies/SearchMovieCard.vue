@@ -30,6 +30,8 @@ export default {
     movieURL(){
       // TMDB에서 영화 poster url을 불러올때 BASE URL 사용
       const url = this.$store.state.BASE_POSTER_PATH + this.movie.poster
+      // console.log(this.movie)
+      // return this.movie.poster
       return url
     }
   },

@@ -1,8 +1,6 @@
 <template>
   <div>
     <h1>DiscoveryMovieView</h1>
-
-
     <!-- 서치 수정 -->
     <div>
         <div>
@@ -15,8 +13,8 @@
             placeholder="search movie">
            <button @click="searchMovie" variant="outline-success"> + </button>
         </div>
-        <div v-if="keyword">
-          <div v-if="searchMovieListLen">
+        <div v-if="searchMovieListLen">
+          <div>
               <div>
               <SearchMovieCard 
                v-for="(movie, idx) in searchMovieList" 
@@ -25,18 +23,16 @@
               />
               </div>
           </div>
-          <div v-else>
-            <h5>
-                검색결과가 존재하지 않습니다.
-            </h5>
-          </div>
         </div>
         <div v-else>
-          <GenreCardList :genreList="genre" />
+          <h5>
+              검색결과가 존재하지 않습니다.
+          </h5>
         </div>
       </div>
     </div>
 
+    <GenreCardList :genreList="genre" />
 
     <div>
         <SearchMovieCard 
@@ -69,7 +65,11 @@ export default {
     },
     data() {
         return {
-            genre : null,
+             genre : null,
+            // Array -> null
+            
+
+            // SE
             keyword : null,
 
         };
@@ -109,56 +109,36 @@ export default {
 
 
         // SE
-        // searchMovie(){
-        //   const params = {
-        //     api_key: API_KEY,
-        //     language: 'ko_KR',
-        //     query: this.keyword,
-        //   }
-        //   if (this.keyword){
-        //     // this.$store.dispatch('search_movie', this.keyword)
-        //     const API_URL_SEARCH_MOVIE = `https://api.themoviedb.org/3/search/movie?` 
-        //     axios({
-        //     method: 'get',
-        //     url: API_URL_SEARCH_MOVIE,
-        //     params : params,
-        //     })
-        //       .then((response) => {
-        //         console.log('검색된 키워드에 일치하는 영화목록입니다.')
-        //         console.log(response)
-        //         console.log('====================================')
-        //         this.$store.dispatch('search_movie', response.data.results)
-          
-                
-                
-        //       })
-        //       .catch((error) => {
-        //         // 검색한 키워드의 영화 결과가 없으면 영화 결과가 없다는 페이지로 ..
-        //         console.log(error)
-        //       })
-        //     }
-        //   },
-        // search/<str:keyword>/
-        searchMovie(){
-          if (this.keyword){
-            // this.$store.dispatch('search_movie', this.keyword)
-            const API_URL_SEARCH_MOVIE = `${API_URL}/api/v1/search/${this.keyword}` 
-            axios({
-              method: 'get',
-              url: API_URL_SEARCH_MOVIE,
-            })
-              .then((response) => {
-                console.log('검색된 키워드에 일치하는 영화목록입니다.')
-                console.log(response)
-                console.log('====================================')
-                this.$store.dispatch('search_movie', response.data)
-              })
-              .catch((error) => {
-                // 검색한 키워드의 영화 결과가 없으면 영화 결과가 없다는 페이지로 ..
-                console.log(error)
-              })
-            }
-          },
+         searchMovie(){
+        const params = {
+          api_key: API_KEY,
+          language: 'ko_KR',
+          query: this.keyword,
+        }
+        if (this.keyword){
+          // this.$store.dispatch('search_movie', this.keyword)
+          const API_URL_SEARCH_MOVIE = `https://api.themoviedb.org/3/search/movie?` 
+          axios({
+          method: 'get',
+          url: API_URL_SEARCH_MOVIE,
+          params : params,
+          })
+          .then((response) => {
+            console.log('검색된 키워드에 일치하는 영화목록입니다.')
+            console.log(response)
+            console.log('====================================')
+            this.$store.dispatch('search_movie', response.data.results)
+      
+            
+            
+          })
+          .catch((error) => {
+            // 검색한 키워드의 영화 결과가 없으면 영화 결과가 없다는 페이지로 ..
+            console.log(error)
+          })
+        }
+        this.keyword = null
+      },
 
 
        
@@ -166,10 +146,12 @@ export default {
     created() {
         this.$store.state.searchMovieList=null
         this.getGenreList();
+        this.searchMovie();
+        
         //SE
         // this.keyword = this.$route.params.keyword
         // console.log(this.keyword)
-        this.searchMovie() 
+        
    
     },
 }
