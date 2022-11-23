@@ -45,6 +45,12 @@ def movie_list(request):
 
         return Response(serializer.data)
 
+@api_view(['GET'])
+def movie_list_limit(request, limit):
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies[0:limit+1], many=True)
+    return Response(serializer.data)
+
 #______________________vote_movie______________________
 @api_view(['GET'])
 def movie_vote(request):

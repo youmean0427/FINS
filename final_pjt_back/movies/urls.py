@@ -11,6 +11,8 @@ urlpatterns = [
     path('movies/review/<int:review_pk>/', views.review_detail),
     path('movies/<int:movie_pk>/createreview/', views.review_create),
     path('movies/<str:username>/', views.recommend_movie),
+    path('movies/limit/<int:limit>', views.movie_list_limit),
+
 
     #discoveryMovie
     path('discoverymovie/', views.discovery_movie_list),

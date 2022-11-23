@@ -50,6 +50,9 @@ export default new Vuex.Store({
 
     // follow
     followingList : [],
+
+    // profile movie
+    likeMovieTitle : ''
   },
   getters: {
     isLogin(state) {
@@ -462,6 +465,12 @@ export default new Vuex.Store({
             console.log(err)
           })
       },
+      // -----------------여기까지 팔로우
+      getMovietitle(context, id){
+        console.log('찾는 영화 id = ', id)
+        console.log('찾는 영화 제목:', context.state.movies[id].title)
+        context.state.likeMovieTitle =  context.state.movies[id].title
+      }
 
   },
   modules: {
