@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Movie Page</h1>
-    <button @click="toggleOnOff">User Recommend</button>
+    <b-button @click="toggleOnOff">당신을 위한 추천영화</b-button>
     
     <div v-show="!isActive"><MovieList/></div>
 

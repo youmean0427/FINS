@@ -2,7 +2,6 @@
   <div>
     <div v-if="movie" style="max-width: 20rem;">
       <span>
-        
       <img  :src="movieURL" alt="" style="width: 100%;">
         <router-link :to="{ name: 'MovieDetailView', params: { id: movie.id } }">
           [DETAIL]
@@ -30,7 +29,7 @@ export default {
     },
     movieURL(){
       // TMDB에서 영화 poster url을 불러올때 BASE URL 사용
-      const url = this.$store.state.BASE_POSTER_PATH + this.movie.poster_path
+      const url = this.$store.state.BASE_POSTER_PATH + this.movie.poster
       // console.log(this.movie)
       // return this.movie.poster
       return url

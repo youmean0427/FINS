@@ -4,11 +4,13 @@
     <h5>Write_user : {{ review.write_user }}</h5>
     <h5>Content : {{ review.content }}</h5>
     <h5>Created_at : {{ review.created_at }}</h5>
-    <div v-show='isAuth'>
-      <input v-show='isActive' v-model="inputData" type="text" name="">
-      <button @click="createReviewInput" v-show='!isActive'>Edit</button>
-      <button @click="editReview" v-show='isActive'>Edit</button>
-      <button @click="deleteReview">Delete</button>
+
+    <div v-show='isAuth && loggedIn'>
+    <input v-show='isActive' v-model="inputData" type="text" name="">
+    <button @click="createReviewInput" v-show='!isActive' type="button" class="btn btn-primary" >Edit</button>
+    <button @click="editReview" v-show='isActive' type="button" class="btn btn-primary" >Edit</button>
+
+    <button @click="deleteReview" type="button" class="btn btn-danger">Delete</button>
     </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->
@@ -52,18 +54,22 @@ export default {
       },
       getReview() {
         this.inputData = this.review.content
-      }
+      },
     },
     created(){
-      // console.log(this.nowUser, this.review.write_user)
-      if (this.nowUser === this.review.write_user) {
-        this.isAuth = true
-      }  else {
-        this.isAuth = false
-      }
-      this.getReview()
+        // console.log(this.nowUser, this.review.write_user)
+        if (this.nowUser === this.review.write_user) {
+          this.isAuth = true
+        }  else {
+          this.isAuth = false
+        }
+        this.getReview()
     },
-    
+    computed: {
+      loggedIn(){
+            return this.$store.getters.isLogin
+      }
+    }
     
  
 

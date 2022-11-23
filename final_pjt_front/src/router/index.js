@@ -12,6 +12,7 @@ import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import KeywordMovieView from '../views/movies/KeywordMovieView.vue'
 import PasswordEditView from '../views/accounts/PasswordEditView.vue'
 import PasswordCheckView from '../views/accounts/PasswordCheckView.vue'
+import TestInfiniteLoading from '../views/movies/TestInfiniteLoading.vue'
 import store from '../store/index';
 
 const requireAuth = () => (to, from, next) => {
@@ -24,6 +25,11 @@ const requireAuth = () => (to, from, next) => {
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/movies/beyond',
+    name: 'TestInfiniteLoading',
+    component: TestInfiniteLoading
+  },
   {
     path: '/login',
     name: 'LogInView',
@@ -98,11 +104,7 @@ const routes = [
     name : 'PasswordCheckView',
     component : PasswordCheckView,
   },
-  {
-    path: '/profile/:feed',
-    name : 'FeedDetailView',
-    component : () => import('../views/accounts/FeedDetailView.vue')
-  },
+
   {
     path: '*',
     redirect: { name: 'MovieView' }

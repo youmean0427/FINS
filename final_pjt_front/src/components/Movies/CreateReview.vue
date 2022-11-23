@@ -1,6 +1,5 @@
 <template>
   <div class="review_form">
-      <h1>댓글 작성</h1>
         <form @submit.prevent="createReview">
             <label for="content">내용 ㅣ </label>
             <input type="text" id="content" v-model.trim="content">

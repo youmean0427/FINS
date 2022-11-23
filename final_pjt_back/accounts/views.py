@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .serializers import UserDetailsSerializer,FeelListSerializer, FeedSerializer,FollowSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
-from movies.models import Movie_Image
+from movies.models import Movie_Image, Movie
 import random
 from .models import Feed
 
@@ -94,6 +94,11 @@ def feed_detail(request, feed_pk):
         serializer = FeedSerializer(feed)
         return Response(serializer.data)
     elif request.method == 'DELETE':
+            # like(request, movie_pk) 함수 가져와서 
+            # 좋아요 삭제
+        seri = FeedSerializer(feed)
+        movie = Movie.objects.get(pk=seri.data.get('movie_id')) 
+        movie.movie_like_user.remove(request.user)
         feed.delete() 
         return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == 'PUT':

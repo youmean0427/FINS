@@ -1,13 +1,13 @@
 <template>
   <div>
-    <!-- Keyword에 맞는 영화 페이지 -->
-
-    <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }">
-      {{ keyword.keyword }}
-      
-    </router-link>
     
-    <!-- {{ keyword }} -->
+    <!-- Keyword에 맞는 영화 페이지 -->
+      <button type="button" class="btn btn-secondary">
+        <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }">
+        {{ keyword.keyword }}
+          <!-- {{ keyarr }} -->
+        </router-link>
+      </button>
   </div>
 </template>
 
@@ -32,5 +32,6 @@ export default {
 </script>
 
 <style>
+
 
 </style>

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <h5>{{ feed.id }}</h5>
-    <p>{{ feed.title }}</p>
-      <img @click="clickfeed(feed.id)" :src="poster" style="width:300px;">
-    <!-- <router-link :to="{ name: 'FeedDetailView', params: { id: feedId } }">
-      여기에 이미지
-    </router-link> -->
+    <img @click="clickfeed(feed.id)" :src="poster" style="width:300px;">
   </div>
 </template>
 

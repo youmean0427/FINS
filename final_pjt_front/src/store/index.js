@@ -41,7 +41,7 @@ export default new Vuex.Store({
     // Tinder
     tinderLike: [],
     tinderMovie : [],
-
+   
     // Search
     searchMovieList : [],
 
@@ -50,6 +50,9 @@ export default new Vuex.Store({
 
     // follow
     followingList : [],
+
+    // profile movie
+    likeMovieTitle : ''
   },
   getters: {
     isLogin(state) {
@@ -63,7 +66,6 @@ export default new Vuex.Store({
       // 영화 요청 9번 했을 때 180개의 영화가 담겨있음 
       const randomNumber = _.sample(_.range(0, 180))
       state.randomMovie = state.movieList[randomNumber]
- 
       return state.randomMovie
     },
    
@@ -71,20 +73,31 @@ export default new Vuex.Store({
     
     // !!!!!!!!
     tinderMovie(state){
-      console.log(state.movies, '==')
+      console.log('test')
+      
       for (var i = 0; i < 100; i++){
-        const randomNumber = _.sample(_.range(0, 180))
+        // !!!! DB 데이터 수 확인하기
+        const randomNumber = _.sample(_.range(0, 100))
         state.tinderMovie[i] = {
           url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster,
           idx : randomNumber,
           selected : false,
         }
-      }
+       }
       return state.tinderMovie
     },
 
+
+
      // END Tinder GETTERS
 
+    // searchMovieListLen(state){
+    //   if (!state.searchMovieList){
+    //     return 0
+    //   }else{
+    //     return state.searchMovieList.length
+    //   }
+    // },
 
     // Search ERROR!!
 
@@ -98,6 +111,7 @@ export default new Vuex.Store({
 
   mutations: {
     GET_MOVIES(state,movies){
+      console.log('받아온 영화목록 : ', movies)
       return state.movies = movies
     },
 
@@ -134,9 +148,9 @@ export default new Vuex.Store({
 
     SEARCH_MOVIE(state, m){
       state.searchMovieList = m
-      console.log('검색한 영화리스트 담기 완료')
-      console.log(state.searchMovieList)
-      console.log('======================')
+      // console.log('검색한 영화리스트 담기 완료')
+      // console.log(state.searchMovieList)
+      // console.log('======================')
     },
 
     // _________________END SEARCH MUTAITONS_________________
@@ -148,6 +162,9 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: `${API_URL}/api/v1/movies/`,
+        data : {
+          'len' : 1
+        }
       })
         .then((res) => {
           // console.log(res, context) // 받은 데이터 state에 저장
@@ -451,8 +468,13 @@ export default new Vuex.Store({
           .catch((err) => {
             console.log(err)
           })
-      }
+      },
       // -----------------여기까지 팔로우
+      getMovietitle(context, id){
+        console.log('찾는 영화 id = ', id)
+        console.log('찾는 영화 제목:', context.state.movies[id].title)
+        context.state.likeMovieTitle =  context.state.movies[id].title
+      }
 
   },
   modules: {

@@ -35,8 +35,8 @@ class User(AbstractUser):
 class Feed(models.Model):
     id = models.IntegerField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image_path = models.CharField(max_length=1000)
-    content = models.CharField(max_length=1000)
+    image_path = models.CharField(max_length=100000)
+    content = models.CharField(max_length=1000, null=True, blank=True)
     movie_id = models.IntegerField()
     feed_like_user = models.ManyToManyField(User, related_name='feed_like_user')
     class Meta:

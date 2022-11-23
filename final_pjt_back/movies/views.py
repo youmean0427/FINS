@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import MovieListSerializer, GenreSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
+from .serializers import MovieListSerializer, GenreSerializer,StillImageSerializer, MovieSerializer,ReviewSerializer,KeywordSerializer
 from .models import Movie_Image, Movie, Review, Genre, Keyword
 from accounts.models import Feed
 import random
@@ -32,7 +32,7 @@ def make_still(movie_id):
 @api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie)
+        movies = Movie.objects.all().order_by('id')
         serializer = MovieListSerializer(movies, many=True)
 
         for i in range(len(serializer.data)):
@@ -42,7 +42,23 @@ def movie_list(request):
             mk = serializer.data[i]['movie_key']
             stil_image = make_still(mk)
             serializer.data[i].update(stil_image=stil_image)
+
         return Response(serializer.data)
+
+@api_view(['GET'])
+def movie_list_limit(request, limit):
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies[0:limit+1], many=True)
+    
+    for i in range(len(serializer.data)):
+        if 'movie_key' not in serializer.data[i]:
+            serializer.data[i].update(movie_key='')
+            continue
+        mk = serializer.data[i]['movie_key']
+        stil_image = make_still(mk)
+        serializer.data[i].update(stil_image=stil_image)
+
+    return Response(serializer.data)
 
 #______________________vote_movie______________________
 @api_view(['GET'])
@@ -74,39 +90,100 @@ def recommend_movie(request, username):
     user_like_movie_list = MovieListSerializer(user_like_movie, many=True)
     # 1.. 좋아요를 누르지 않은 영화만 가져온다! 
     user_like_non = Movie.objects.filter(~Q(movie_like_user=userId))
-    
+    # print(user_like_non) QuerySet [<Movie: Movie object (1)>, <Movie: Movie object (2)>,
 
     # 2. 좋아하는 영화 기반 | 포함된 영화 장르만 리스트로 만든다
     len_likemovies = len(user_like_movie_list.data)
+    print(user_like_movie_list.data[0]['title'])
     genres = []
     for l in range(len_likemovies):
         genres += user_like_movie_list.data[l]['genres']
     # 장르의 갯수가 많은 순서로 정렬
+    # print(genres)
+
     genres_dict = {}
     for l in genres:
         if l in genres_dict:
             continue
         genres_dict[l] = genres.count(l)
     # print(genres_dict) # {0: 2, 1: 3, 14: 1, 6: 1, 17: 1, 10: 1, 16: 1, 4: 1, 12: 1, 2: 1, 3: 1, 7: 1, 8: 1}
-    
+    # { 장르 ID : 개수 }
+
     # 2. 키워드 | 좋아하는 영화에서 많이 나온 순서로 키워드 정렬
     mm = list(map(lambda x : MovieSerializer(x).data, user_like_movie))
-    for kw in range(len_likemovies):
-        mm[kw]['keyword']
-        pass
+   
+    # print(mm)
+    # for i in len(mm):
+    #     for n in len(mm[i]['keyword']):
+    #         keyword_id = mm[i]['keyword'][n]['id']
+    #         print(keyword_id)
+
+    # for kw in range(len_likemovies):
+    #     mm[kw]['keyword']
+    #     pass
     # print('\-------------------')
     # print(mm[0]['keyword'][0]['movie_set'])
-    print(mm[0]['keyword'][0]['id'])
+    keywords = []
+    for k in range(len(mm)):
+        for n in range(len(mm[k]['keyword'])):
+            keywords.append(mm[k]['keyword'][n]['id'])
+    # print(keywords)
+
+    keywords_dict = {}
+    for l in keywords:
+        if l in keywords_dict:
+            continue
+        keywords_dict[l] = keywords.count(l)
+    # print(keywords_dict)
+
     # 장르 테이블에서 역참조
     # genre = Genre.objects.get(pk=genre_pk)
     # seri = genre.movie_set.all()
     # # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
     # serializer = MovieListSerializer(seri, many=True)
 
+    # ___________ 유민의 객체 사용법 공부_______________
+    MO = user_like_non[0]
+    # print(user_like_non)
+    # print(MO)
+    # print(MO.title)
+    # print(MO.overview)
+    MO_genres = MO.genres.all()
+    MO_keyword = MO.keyword.all()
+    # print(MO_genres[0].id)
+    # print(MO_keyword[0].id)
+    # __________________________
 
+    
+    reco_result = []
 
+ 
+    for movivi in range(10):
+        MO = user_like_non[movivi]
+        result = 0
+        keyword_result = 0
+        usereco_stil_img = make_still(MO.movie_key)
+        for genre_num in genres_dict:
+            MO_genres = MO.genres.all()
+            
+            for m in range(len(MO_genres)):
+                if MO_genres[m].id == genre_num:
+                    result += genres_dict[genre_num]
+        # print(result)
 
+        for keyword_num in keywords_dict:
+            MO_keyword = MO.keyword.all()
+            
+            for m in range(len(MO_keyword)):
+                if MO_keyword[m].id == keyword_num:
+                    keyword_result += keywords_dict[keyword_num]
+        # print(keyword_result)
 
+        reco_result.append((MO.id, MO.title, MO.overview, MO.poster , usereco_stil_img , result*0.7+keyword_result*0.3))
+        
+    reco_result.sort(key=lambda x: x[1], reverse=True)
+    # print(reco_result)
+    
     # like_movie = GenreSerializer(like_genres[0],  many=True)
     # like_movies = []
     # for g in like_genres:
@@ -115,7 +192,7 @@ def recommend_movie(request, username):
     # like_genre_movies = list(map(lambda x : Movie.objects.get(pk=x), like_genres))
 
     # 3. 해당 리스트에서 키워드가 중복되는 영화들을 우선순위로 보여준다 
-    return Response(mm)
+    return Response(reco_result)
     # return Response(user_like_movie_list.data)
 #______________________movie_detail______________________
 
@@ -242,3 +319,9 @@ def like(request, movie_pk):
         return Response(data)
         # serializer =MovieSerializer(movie)
         # return Response(serializer.data)
+
+@api_view(['GET'])
+def still_images(request,movie_key):
+    stills = Movie_Image.objects.filter(movie_id=movie_key)
+    serializer = StillImageSerializer(stills, many=True)
+    return Response(serializer.data)

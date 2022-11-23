@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>GenreCardList</h1>
-    <GenreCard
-      v-for="genre in genreList"
-      :key="genre.id"
-      :genre="genre"       
-    />
-  </div>
+     <div class="row cardbody ">
+      <GenreCard
+        v-for="genre in genreList"
+        :key="genre.id"
+        :genre="genre"       
+      />
+      </div>
+    </div>
 </template>
 
 <script>
@@ -24,6 +25,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style> 
+ .cardbody{
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 1rem;
+  height: 100%;  
+ }
 </style>
