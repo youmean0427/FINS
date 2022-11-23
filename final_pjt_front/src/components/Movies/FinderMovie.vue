@@ -28,7 +28,9 @@
         offset: 0,
       }),
       created() {
-        this.mock();
+        console.log('?')
+        this.mock()
+        console.log('??')
       },
       computed:{
         source(){
@@ -37,7 +39,7 @@
       },
       methods: {
         mock(count = 5) {
-
+          console.log('a???')
           const list = [];
           for (let i = 0; i < count; i++) {
 
@@ -137,4 +139,3 @@
     background-position: center;
   }
   </style>
-  
