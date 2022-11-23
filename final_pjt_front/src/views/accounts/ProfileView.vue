@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import FeedDetailView from '@/views/accounts/FeedDetailView'
+import FeedDetailView from '@/components/Accounts/FeedDetailView'
 import FeedListType from '@/components/Accounts/FeedListType.vue'
 import FeedCardType from '@/components/Accounts/FeedCardType.vue'
 import FeedModal from '@/components/Accounts/FeedModal.vue'

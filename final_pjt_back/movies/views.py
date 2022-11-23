@@ -49,6 +49,15 @@ def movie_list(request):
 def movie_list_limit(request, limit):
     movies = get_list_or_404(Movie)
     serializer = MovieListSerializer(movies[0:limit+1], many=True)
+    
+    for i in range(len(serializer.data)):
+        if 'movie_key' not in serializer.data[i]:
+            serializer.data[i].update(movie_key='')
+            continue
+        mk = serializer.data[i]['movie_key']
+        stil_image = make_still(mk)
+        serializer.data[i].update(stil_image=stil_image)
+
     return Response(serializer.data)
 
 #______________________vote_movie______________________

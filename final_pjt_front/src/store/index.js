@@ -144,9 +144,9 @@ export default new Vuex.Store({
 
     SEARCH_MOVIE(state, m){
       state.searchMovieList = m
-      console.log('검색한 영화리스트 담기 완료')
-      console.log(state.searchMovieList)
-      console.log('======================')
+      // console.log('검색한 영화리스트 담기 완료')
+      // console.log(state.searchMovieList)
+      // console.log('======================')
     },
 
     // _________________END SEARCH MUTAITONS_________________

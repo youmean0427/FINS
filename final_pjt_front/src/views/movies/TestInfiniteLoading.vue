@@ -3,10 +3,10 @@
     <h1>Infinite Page</h1>    
     <MovieCard
       v-for="movie in movieList"
-      :key="movie.id"
+      :key=movie.id
       :movie="movie"
     />
-    <infinite-loading @infinite="infiniteHandler" spinner="waveDots"></infinite-loading>
+    <infinite-loading @infinite="infiniteHandler" spinner="default"></infinite-loading>
   </div>
 </template>
 
@@ -30,11 +30,13 @@ export default {
         }
     },
     created(){
-        this.getMovies()
+        this.getMovies() 
+        // {
         // this.$http.get('http://127.0.0.1:8000/api/v1/movies/limit/' + this.limit)
         //     .then((response) => {
         //         this.movieList = response.data
         //     })
+        // }
     },
     methods:{
         infiniteHandler($state){
