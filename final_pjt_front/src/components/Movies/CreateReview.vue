@@ -2,12 +2,12 @@
   <div style="margin-right: 20%; margin-left: 20%;">
 
         <form @submit.prevent="createReview">
-            <div class="input-group mb-5" >
-            <input type="text" class="form-control" id="content" v-model.trim="content">
+            <div class="input-group mb-2" >
+            <input type="text" style="text-align:center;" class="form-control" id="content" v-model.trim="content">
             <button class="btn btn-outline-secondary" type="submit" id="submit">+</button>
             </div>
         </form>
-    <progress></progress>
+    <!-- <progress></progress> -->
   </div>
 </template>
 

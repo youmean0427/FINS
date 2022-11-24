@@ -1,15 +1,43 @@
 <template>
   <div>
-    <h1>LogIn Page</h1>
-    <form @submit.prevent="logIn">
-      <label for="username"> 닉네임 : </label>
-      <input type="text" id="username" v-model="username"><br>
 
-      <label for="password"> 비밀번호 : </label>
-      <input type="password" id="password" v-model="password"><br>
-      <p style="color:red">{{alert}}</p>
-      <input type="submit" value="logIn">
-    </form>
+    <div id="layout_03">
+        <div>
+        <form @submit.prevent="logIn">
+          <div style="position: relative;">
+            <div style="z-index: 2;  position: absolute;">
+              <img src="@/assets/Line_01.png" alt="" width="300px">
+            </div>
+            <div style="z-index: 1;">
+              <img src="@/assets/ID.png" alt="" width="125px" >
+            </div>
+          </div>
+          <br>
+          <div class="input-group" >
+           <input type="text" id="username" style="text-align:center;" class="form-control"  v-model="username" ><br>
+          </div>
+          <br>
+             <div style="position: relative;">
+                <div style="z-index: 2;  position: absolute;">
+                <img src="@/assets/Line_01.png" alt="" width="300px">
+                </div>
+                <div style="z-index: 1;">
+                <img src="@/assets/PASSWORD.png" alt="" width="250px">
+                </div>
+              </div>
+          <br>
+
+          <div class="input-group" >
+          <input type="password" id="password" style="text-align:center;" class="form-control" v-model="password"><br>
+          </div>
+          <p style="color:red">{{alert}}</p>
+          <input type="submit" value="logIn">
+        </form>
+        </div>
+
+
+        
+    </div>
   </div>
 </template>
 
@@ -65,3 +93,14 @@ export default {
   }
 }
 </script>
+
+
+<style>
+  #layout_03 {
+    height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

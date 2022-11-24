@@ -1,13 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" >
 
     <!-- nav component로 만들까유?  -->
     <nav class="nav">
       <div>
-        <img class="logo" src="https://user-images.githubusercontent.com/87971876/203655544-3bfcbd1f-655d-4149-a63d-d4f8b59adb52.png" alt="로고">
+        <img class="logo wave-one" src="https://user-images.githubusercontent.com/87971876/203655544-3bfcbd1f-655d-4149-a63d-d4f8b59adb52.png" alt="로고">
       </div>
       <div id="category">
+  
           <router-link class="logobtn" :to="{ name: 'MovieView' }"><img src="https://user-images.githubusercontent.com/87971876/203657294-a2dfa5fd-d787-4e95-9553-b79a2da62d77.png" alt="movive"></router-link>
+     
           <router-link class="logobtn" :to="{ name: 'DiscoveryMovieView' }"><img src="https://user-images.githubusercontent.com/87971876/203657038-453caf98-d389-459a-851d-eb0e697480a7.png" alt="discovery"></router-link>
           <router-link class="logobtn" :to="{ name: 'FinderMovieView' }"><img src="https://user-images.githubusercontent.com/87971876/203657404-6b395133-ea66-4893-ae80-d5e59f92d39a.png" alt="logo"></router-link>
           <!-- <router-link :to="{ name: 'CreateReview' }">Review</router-link> | -->
@@ -30,13 +32,24 @@
 
 <script>
 
-// 비활성화 상태 로고
+// 비활성화 상태 로고 (회색)
 //login // https://user-images.githubusercontent.com/87971876/203659234-dd89b5d2-50c1-4e9c-90a5-14308971c965.png
 //join // https://user-images.githubusercontent.com/87971876/203659278-306c3899-7844-4a0a-bbe2-d3b587b89e39.png
 // mypage //https://user-images.githubusercontent.com/87971876/203659301-44012352-d3d0-4c2f-a48b-f8ad4a1b3eb9.png
 //finder //https://user-images.githubusercontent.com/87971876/203659354-0e1e7b3b-d9c1-49d5-9b83-8cac6ac84d9d.png
 //discovery // https://user-images.githubusercontent.com/87971876/203659428-5ccd4d15-4753-4896-b053-53c305b9647f.png
 // movie // https://user-images.githubusercontent.com/87971876/203659428-5ccd4d15-4753-4896-b053-53c305b9647f.png
+
+// 활성화 상태 로고 (검은색)
+
+// movie // "https://user-images.githubusercontent.com/87971876/203657294-a2dfa5fd-d787-4e95-9553-b79a2da62d77.png
+// discovery // https://user-images.githubusercontent.com/87971876/203657038-453caf98-d389-459a-851d-eb0e697480a7.png
+// finder // https://user-images.githubusercontent.com/87971876/203657404-6b395133-ea66-4893-ae80-d5e59f92d39a.png
+// mypage // https://user-images.githubusercontent.com/87971876/203657545-e8e536dd-da82-47ba-a703-94a8cc2cf9f4.png
+
+// join // https://user-images.githubusercontent.com/87971876/203659148-a11220fc-cb4b-487f-b4c2-ac56992bf3a0.png
+// login // https://user-images.githubusercontent.com/87971876/203659176-b2a548d9-0c77-48de-b532-562625a1b243.png
+// logout // https://user-images.githubusercontent.com/87971876/203656219-c9f7f05b-406e-4b55-9080-f2e8e1d3670c.png
 
 export default {
     name: "App",
@@ -135,4 +148,6 @@ body a {
   text-decoration: none;
   color: black;
 }
+
+
 </style>

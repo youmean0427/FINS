@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- {{this.$route.params}} -->
-
+    
     <KeywordMovieList :movie="movie"/>
-  
+    
   
     
   
@@ -48,7 +48,9 @@ export default {
     created() {
       this.getMovieDetail();
     },
-    
+    props: {
+    keyword_name: Object,
+  },
 }
 </script>
 

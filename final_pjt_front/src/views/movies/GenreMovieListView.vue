@@ -6,6 +6,7 @@
             :movie="genre_movie"
 
         />
+      
     </div>  
 </template>
 

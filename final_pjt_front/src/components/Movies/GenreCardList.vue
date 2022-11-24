@@ -5,10 +5,10 @@
         <input type="radio" class="btn-check" name="genre" id="0" @click="checkSelected(0)" v-model="picked"  value="0" autocomplete="off" >
         <label class="btn btn-outline-dark" for="0">액션</label>
 
-        <input type="radio" class="btn-check" name="genre" id="1" @click="checkSelected(1)" v-model="picked" value="1" autocomplete="off" />
+        <input type="radio" class="btn-check " name="genre" id="1" @click="checkSelected(1)" v-model="picked" value="1" autocomplete="off" />
         <label class="btn btn-outline-dark" for="1">모험</label>
 
-        <input type="radio" class="btn-check" name="genre" id="2" @click="checkSelected(2)" v-model="picked" value="2" autocomplete="off" />
+        <input type="radio" class="btn-check " name="genre" id="2" @click="checkSelected(2)" v-model="picked" value="2" autocomplete="off" />
         <label class="btn btn-outline-dark" for="2">애니메이션</label>
 
         <input type="radio" class="btn-check" name="genre" id="3" @click="checkSelected(3)" v-model="picked" value="3" autocomplete="off" />
@@ -85,4 +85,5 @@ export default {
  .cardbody > *{
     width: 50% !important;
  }
+
 </style>

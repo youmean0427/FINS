@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 30px">
     <b-button @click="toggleOnOff">당신을 위한 추천영화</b-button>
     
     <div v-show="!isActive"><InfiniteMovieList/></div>

@@ -94,7 +94,7 @@ def recommend_movie(request, username):
 
     # 2. 좋아하는 영화 기반 | 포함된 영화 장르만 리스트로 만든다
     len_likemovies = len(user_like_movie_list.data)
-    print(user_like_movie_list.data[0]['title'])
+    # print(user_like_movie_list.data[0]['title'])
     genres = []
     for l in range(len_likemovies):
         genres += user_like_movie_list.data[l]['genres']
