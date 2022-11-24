@@ -1,6 +1,6 @@
 <template>
   <div class="movieCardFrame">
-    <MovieCard
+    <MainMovieCard
       v-for="movie in movieList"
       :key=movie.id
       :movie="movie"
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MovieCard from '@/components/Movies/MovieCard'
+import MainMovieCard from '@/components/Movies/MainMovieCard'
 import InfiniteLoading from 'vue-infinite-loading'
 import axios from 'axios'
 const URL = 'http://127.0.0.1:8000/api/v1/movies/limit/'
@@ -19,7 +19,7 @@ export default {
     
     name : 'InfiniteMovieList',
     components:{
-        MovieCard,
+        MainMovieCard,
         InfiniteLoading
     },
     data(){
@@ -59,6 +59,7 @@ export default {
                         } else {
                             $state.complete()
                         }
+                        console.log(this.movieList)
                     }, 1000)
                 }).catch(error => {
                     console.error(error)
@@ -75,7 +76,10 @@ export default {
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
-    padding: 1rem;
     height: 100%;  
+    width: 100%;
+    flex-wrap: wrap;
+    /* padding-left: 10%; */
+    /* align-items: flex-end; */
   }   
 </style>

@@ -488,13 +488,8 @@ export default new Vuex.Store({
             console.log('-------------',res.data)
             if(res.data.status === '좋아요'){
               context.state.likestatus =  true
-              // let feed_like_user = JSON.parse(JSON.stringify(context.state.user.feed_like_user))
-              // context.state.user.feed_like_user.push(feed_id)
-              // console.log(feed_like_user, '*****************')
             } else{
               JSON.parse(JSON.stringify(context.state.user.feed_like_user))
-              // let feed_like_user = JSON.parse(JSON.stringify(context.state.user.feed_like_user))
-              // context.state.user.feed_like_user = context.state.user.feed_like_user.splice(feed_id, 1)
               context.state.likestatus = false
             }
           })
