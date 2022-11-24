@@ -41,6 +41,8 @@ export default {
   }
   .carditem{
     width: 29%;
+    max-width: 500px;
+    max-height: 500px;
     position: relative;
     box-sizing: border-box;
     display: flex;

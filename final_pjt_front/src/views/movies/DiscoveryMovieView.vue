@@ -24,7 +24,7 @@
             <div class="card" style="border:none;">
               <div v-if="keyword">
                 <div v-if="searchMovieListLen">
-                    <div class="movieCardFrame">
+                    <div class="movieFrame">
                       <MovieCard 
                       v-for="(movie, idx) in searchMovieList" 
                       :key="idx"
@@ -191,11 +191,12 @@ export default {
     justify-content: center;
     flex-flow: row wrap;
   }
-  .movieCardFrame{
+  .movieFrame{
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
     padding: 1rem;
-    height: 100%;  
+    height: 100%;
+    width: 100%;
   }   
 </style>

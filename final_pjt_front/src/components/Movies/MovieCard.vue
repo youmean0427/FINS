@@ -5,18 +5,6 @@
         <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">
-          <!-- <span 
-            style="font-size:0.6em; 
-            max-width: calc(100% - 38px); 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-            display: -webkit-box;
-            -webkit-line-clamp: 3; 
-            -webkit-box-orient: vertical;"
-          >
-          </span>
-           -->
-          <!-- {{movie.overview}} -->
           <h3 id="movieTitle">{{movie.title}}</h3>
       </div>
       
@@ -67,6 +55,12 @@ export default {
     top : 50%;
     left: 50%;
     height: 100%;
+    display:felx;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50%;
+
     /* padding-top:50%; */
    }
   #movie-view-card{
@@ -78,7 +72,6 @@ export default {
    #movie-view-card:hover{
      transition: .5 ease;
      z-index: 1;
-     
    }
    #movie-view-card:hover + .hidden-title{
     transition: .5 ease;
@@ -102,10 +95,10 @@ export default {
   }
 
   /* 중앙 정렬 */
-  .layout_03 {
+  /* .layout_03 {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+    } */
 
 </style>

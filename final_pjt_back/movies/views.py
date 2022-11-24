@@ -65,7 +65,7 @@ def movie_list_limit(request, limit):
             continue
         mk = serializer.data[i]['movie_key']
         stil_image = make_still(mk)
-        serializer.data[i].update(stil_image=stil_image)
+        serializer.data[i].update(still_image=stil_image)
 
     return Response(serializer.data)
 
@@ -259,25 +259,17 @@ def review_detail(request, review_pk):
 def discovery_movie_list(request):
     if request.method == 'GET':
         genres = get_list_or_404(Genre)
-        serializer = GenreSerializer(genres, many=True)
+        serializer = GenreSerializer(genres[:10], many=True)
         return Response(serializer.data)
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 def discovery_movie(request, genre_pk):
     if request.method == 'GET':
         # 장르 테이블에서 역참조
         genre = Genre.objects.get(pk=genre_pk)
         seri = genre.movie_set.all()
         # 영화 obj 쿼리셋을 받아서 영화리스트 시리얼라이저 사용
-        serializer = MovieListSerializer(seri, many=True)
-
-        for i in range(len(serializer.data)):
-            if 'movie_key' not in serializer.data[i]:
-                serializer.data[i].update(movie_key='')
-                continue
-            mk = serializer.data[i]['movie_key']
-            stil_image = make_still(mk)
-            serializer.data[i].update(stil_image=stil_image)
+        serializer = MovieListSerializer(seri[:100], many=True)
         return Response(serializer.data)
 
 @api_view(['GET'])

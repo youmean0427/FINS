@@ -1,24 +1,22 @@
 <template>  
     <div class="genreMovieFrame">
-        <MovieCard
+        <GenreMovieCard
             v-for="genre_movie in genre_movie"
             :key="genre_movie.id"
             :movie="genre_movie"
-
         />
-      
     </div>  
 </template>
 
 <script>
-import MovieCard from "@/components/Movies/MovieCard.vue/"
+import GenreMovieCard from "@/components/Movies/GenreMovieCard.vue/"
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 
 export default {
     name: 'GenreMovieListView',
     components: {
-        MovieCard
+        GenreMovieCard
     },
     data() {
         return {
@@ -63,9 +61,9 @@ export default {
 <style>
     .genreMovieFrame{
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         flex-flow: row wrap;
-        padding: 1rem;
         height: 100%;
+        width: 100%;
     }
 </style>
