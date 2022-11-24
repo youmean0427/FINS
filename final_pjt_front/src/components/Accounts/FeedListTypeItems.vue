@@ -9,7 +9,7 @@
         
       </div>
     </div>
-    <div id="movie-view-card" @click="clickfeed(feed.id)" class="image-container" :style="{backgroundImage:'url('+poster+')'}"> </div>
+    <div id="" @click="clickfeed(feed.id)" class="image-container" :style="{backgroundImage:'url('+poster+')'}"> </div>
 
     <div class="textarea">
       <div class="contenttitle">
@@ -69,6 +69,7 @@ export default {
   padding-top: 50px;
   margin-top:15px;
   width: 900px;
+  min-height: 700px;
 }
 .level-left{
   padding-left:10px;
@@ -87,9 +88,6 @@ export default {
 
 .vuegram-post {
   padding: 5px 0;
-  min-width:300px;
-  max-width: 700px;
-  width: 100%;
 }
   .header {
     /* height: 30px; */
@@ -100,7 +98,7 @@ export default {
       overflow: hidden;
       width:50px;
       margin: 0;
-      height: 50px;
+      height: 100%;
       border-radius: 50%;
   
     }
@@ -123,12 +121,14 @@ export default {
   }
 
   .image-container {
-    height: 330px;
+    min-height: 330px;
+    max-height: 800px;
     /* width : auto; */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    
+    top: inherit;
+    height: 50vh
   }
 
   .content {
@@ -182,11 +182,36 @@ export default {
   .movieTitle{
     color: rgb(145, 145, 145);
   }
-   #movie-view-card{
+   /* .hidden-title{
+    z-index: 2;
+    width: 100%;
+    padding:1em;
+    position: absolute;
+    text-align : center;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    display:none;
+    color:rgb(59, 59, 59);
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0.8) 40%, rgb(121, 128, 121, 0.8) 100%);
+    top : 50%;
+    left: 50%;
+    height: 100%;
+   } */
+  /* #movie-view-card{
     max-width: inherit;
     vertical-align : middle;
     transition: .5s ease;
-    border-radius : 0;
+    border-radius : 6px;
    }
+   #movie-view-card:hover{
+     transition: .5 ease;
+     z-index: 1;
+     
+   }
+   #movie-view-card:hover + .hidden-title{
+    transition: .5 ease;
+    display: block;
+   } */
 
 </style>
