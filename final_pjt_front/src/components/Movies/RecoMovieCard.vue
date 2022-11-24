@@ -3,7 +3,9 @@
     
     <!-- Keyword에 맞는 영화 페이지 -->
     
-        <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }" :keyword_name="keyword.keyword" >
+        <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id, keyword_name : keyword.keyword } }"  >
+
+          
         <button type="button" class="btn btn-outline-secondary custom upper font_font">
           {{ keyword.keyword }}
           <!-- {{ keyarr }} -->

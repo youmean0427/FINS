@@ -1,11 +1,19 @@
 <template>
   <div>
-  <h1>비밀번호 확인</h1>
-    <form @submit.prevent="checkPassword">
-      <label for="password"> 비밀번호 : </label>
-      <input type="password" id="password" v-model="password"><br>
-      <input type="submit" value="checkPassword">
-    </form>
+    <div id="layout_03">
+      <form @submit.prevent="checkPassword">
+        <img src="@/assets/current_password.png" alt="" width="300px">
+        
+        <div class="input-group" >
+        <input type="password" id="password" v-model="password" style="text-align:center; border:none; width:300px;" class="form-control"><br>
+        </div> 
+        
+        <img src="@/assets/Line_00.png" alt="" width="300px" >
+        <div>
+        <img src="@/assets/Edit_button.png" type="submit" value="checkPassword" width="150px">
+      </div>
+      </form>
+    </div>
   </div>
 
 </template>
@@ -94,5 +102,18 @@ export default {
 </script>
 
 <style>
+ .layout_04 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    #layout_03 {
+    height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

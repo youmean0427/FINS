@@ -29,7 +29,7 @@
           <br>
 
           <div class="input-group" >
-          <input type="password" id="password" style="text-align:center; border:none; width:300px;" class="form-control" v-model="password"><br>
+          <input type="password" id="password"  @keyup="logIn" style="text-align:center; border:none; width:300px;" class="form-control" v-model="password"><br>
           </div>
            <img src="@/assets/Line_00.png" alt="" width="300px" >
           <p style="color:red">{{alert}}</p>

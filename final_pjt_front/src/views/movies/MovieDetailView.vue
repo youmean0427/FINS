@@ -86,7 +86,7 @@ export default {
             // youtube_key:'kyMMq8Kz-8I'
             youtube_key: 1,
             user_id: '',
-            // input_value: '좋아요',
+         
             lovevalue: 'Unlove',
             movie_key: 0,
             stil_image: [],
@@ -140,13 +140,14 @@ export default {
                 // console.log(res);
                 console.log("데이터를 받았어요!");
                 this.user_id = res.data.id;
+                console.log(this.user_id)
                 // console.log(this.user_id)
                 // console.log((this.movie.movie_like_user))
                 
                 for (const i in this.movie.movie_like_user ){
-                    // console.log("이것이다", this.movie.movie_like_user[i])
+                    console.log("이것이다", this.movie.movie_like_user[i])
                     if (((this.user_id) === (this.movie.movie_like_user[i]))) {
-                    this.input_value = "싫어요"
+       
                     this.lovevalue = "Love"
                     }
                 }

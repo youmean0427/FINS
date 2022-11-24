@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'SignUpView',
   data() {
@@ -219,7 +221,27 @@ export default {
         this.$store.dispatch('signUp', payload)
       }
 
-    }
+    },
+
+    // __________ Actor ____________
+    getActor(){
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+      .then((res) => {
+        console.log(res.data)
+        this.email = res.data.email
+        
+      })
+      .catch((err) => {
+        console.log('유저정보를 불러오기에 실패했습니다.')
+        console.log(err)
+      })
+    },
   }
 }
 </script>

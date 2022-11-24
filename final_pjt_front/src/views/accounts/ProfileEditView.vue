@@ -1,20 +1,45 @@
 <template>
   <div>
-    <h1>회원정보 수정</h1>
-    <form @submit.prevent="editProfile">
-      <label for="username">닉네임 : </label>
-      <input type="text" id="username" v-model="username"><br>
+    <div id="layout_03">
+      <form @submit.prevent="editProfile">
+        <div style="z-index: 2;  position: absolute;">
+          <img src="@/assets/Line_01.png" alt="" width="300px">
+          </div>
+            <div style="z-index: 1;">
+                <img src="@/assets/ID.png" alt="" width="125px" >
+            </div>
+        <br>
+        <div class="input-group" >
+        <input type="text" id="username" v-model="username" style="text-align:center; border:none; width:300px" class="form-control"><br></div>
+        <img src="@/assets/Line_00.png" alt="" width="300px">
 
-      <label for="email"> 이메일 : </label>
-      <input type="text" id="email" v-model="email">
-      <p id="validEmail">{{validEmail}}</p><br>
-      <br>
-      <label for="profile_img"> 프로필사진 : </label>
-      <input v-if="profile_img" type="image" id="profile_img" v-model="profile_img"><br>
-      
-      <input @click="editProfile" type="button" value="EditProfile">
-    </form> 
-    <router-link :to="{ name: 'PasswordCheckView' }">비밀번호 변경</router-link>
+        <br>
+        <br>
+        <div style="z-index: 2;  position: absolute;">
+          <img src="@/assets/Line_01.png" alt="" width="300px">
+          </div>
+            <div style="z-index: 1;">
+                <img src="@/assets/Email.png" alt="" width="200px" >
+            </div>
+        <br>
+        <div class="input-group" >
+        <input type="text" id="email" v-model="email" style="text-align:center; border:none; width:300px" class="form-control">
+        <p id="validEmail">{{validEmail}}</p><br></div>
+        <img src="@/assets/Line_00.png" alt="" width="300px">
+        
+        <br>
+        <br>
+        <div class="layout_04">
+        <label for="profile_img"> 프로필사진 : </label>
+        <input v-if="profile_img" type="image" id="profile_img" v-model="profile_img">
+        <br>
+        <img src="@/assets/Edit_button.png" @click="editProfile" type="button" value="EditProfile" width="200px">
+        <br>
+        <router-link :to="{ name: 'PasswordCheckView' }"><img src="@/assets/change_password.png" @click="editProfile" type="button" value="EditProfile" width="200px"></router-link>
+        </div>
+      </form> 
+
+    </div>
   </div>
 </template>
 
@@ -93,5 +118,12 @@ export default {
 </script>
 
 <style>
+  .layout_04 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+  
 </style>

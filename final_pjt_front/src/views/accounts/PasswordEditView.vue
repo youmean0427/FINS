@@ -1,17 +1,40 @@
 <template>
   <div>
-    <h1>비밀번호 변경</h1>
+    <div id="layout_03">
     <form @submit.prevent="changePwd">
-      <label for="password1"> 새로운 비밀번호 : </label>
-      <input @keyup="isValidPwd" type="password" id="password1" v-model="password1">
+      
+      <img src="@/assets/New_password.png" alt="" width="300px">
+      <br>
+
+      <div class="input-group">
+        <input @keyup="isValidPwd" type="password" id="password1" 
+        style="text-align:center; border:none; width: 100%;"  class="form-control"
+        v-model="password1">
+      </div>
+      
+      <img src="@/assets/Line_00.png" alt="" width="300px">
+
+      <br>
+      <br>
       <p id="validPwd">{{validPwd}}</p>
       <br>
 
-      <label for="password2"> 비밀번호 확인 : </label>
-      <input @keyup="isValidPwd2" type="password" id="password2" v-model="password2">
-      <p id="validPwd2">{{validPwd2}}</p> <br>
-      <input @click="changePwd" type="button" value="비밀번호변경">
+      <img src="@/assets/change_password.png" alt="" width="300px">
+      <br>
+      <div class="input-group" >
+           <input @keyup="isValidPwd2" type="password" id="password2" style="text-align:center; border:none; width: 100%;" v-model="password2"
+           class="form-control" >
+      </div>
+
+      <img src="@/assets/Line_00.png" alt="" width="300px">
+      <br>
+      <br>
+      <p id="validPwd2">{{validPwd2}}</p> 
+      
+      <br>
+      <img src="@/assets/Edit_button.png" @click="changePwd" type="button" width="40%">
     </form>
+  </div>
   </div>
 </template>
 
@@ -75,5 +98,11 @@ export default {
 </script>
 
 <style>
+  #layout_03 {
+    height: 100vh;
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>

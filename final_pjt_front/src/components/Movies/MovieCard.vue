@@ -5,7 +5,6 @@
         <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">
-          <h3 id="movieTitle">{{movie.title}}</h3>
           <!-- <span 
             style="font-size:0.6em; 
             max-width: calc(100% - 38px); 
@@ -18,8 +17,9 @@
           </span>
            -->
           <!-- {{movie.overview}} -->
-   
+          <h3 id="movieTitle">{{movie.title}}</h3>
       </div>
+      
     </div>
     
 </template>
@@ -92,6 +92,7 @@ export default {
     border:none;
     /* margin-bottom: 20px; */
   }
+  
   #card-frame{
     border:none;
     border-radius: 20px;

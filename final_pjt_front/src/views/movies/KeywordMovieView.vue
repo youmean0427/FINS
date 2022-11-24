@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div style="margin-left: 10%; margin-right: 10%;">
     <!-- {{this.$route.params}} -->
     
+    <h2 style='text-transform: uppercase' >{{this.keyword_name}}</h2>
+    <hr>
     <KeywordMovieList :movie="movie"/>
     
   
@@ -22,6 +24,7 @@ export default {
     data() {
         return {
             movie: null,
+            keyword_name : this.$route.params.keyword_name
             // null 값 오류 확인
         };
     },
@@ -48,9 +51,7 @@ export default {
     created() {
       this.getMovieDetail();
     },
-    props: {
-    keyword_name: Object,
-  },
+
 }
 </script>
 

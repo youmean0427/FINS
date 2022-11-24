@@ -4,9 +4,9 @@
     <!-- <h5>Write_user : {{ review.write_user }}</h5> -->
       <br>
       <h4>{{ review.content }}</h4>
+      
       <br>
       <p> {{ review.created_at.slice(0, 10) }}</p>
-
     <div v-show='isAuth && loggedIn'>
       <div class="input-group" >
 
@@ -20,6 +20,7 @@
     <img src="@/assets/Update.png" alt="" width="50px" height="20px" type="button" @click="editReview" v-show='isActive'>
     |
     <img src="@/assets/Delete.png" width="50px" height="20px" @click="deleteReview" type="button">
+
     </div>
     <hr>
     <!-- <p>{{ movie.title }}</p> -->
@@ -39,7 +40,7 @@ export default {
         return {
         isActive:false,
         inputData:'',
-        nowUser: this.$store.state.now_user_id,
+        nowUser: this.$store.state.now_user_pk,
         isAuth: false,
         }
     },

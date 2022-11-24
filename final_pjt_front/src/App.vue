@@ -1,5 +1,5 @@
 <template>
-  <div id="app"  style="margin-top: 1%;">
+  <div id="app"  style="margin-top: 2%;">
 
     <!-- nav component로 만들까유?  -->
     <img src="@/assets/Line_000.png" alt="" style="margin-left: 2.5%">
