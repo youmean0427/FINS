@@ -27,8 +27,11 @@
         queue: [],
         offset: 0,
       }),
+      beforeCreate(){
+        this.$store.dispatch('getMovies')
+        console.log(this.$store.state.movies.lengths,'~~~~~~~~~~~~~~~~~')
+      },
       created() {
-
         this.mock()
 
       },
