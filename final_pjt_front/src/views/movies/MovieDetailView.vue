@@ -10,10 +10,10 @@
         <img :src="poster" style="width:300px;" alt="">
         <h1>여백</h1>
         <div id="layout_02">
-            <img :src="this.stil_image[0].image_path" class="size_size_0" alt="">
+            <img :src="this.stil_image[0].image_path" class="size_size_0 img2" alt="">
         <div id="layout_01">
-            <img :src="this.stil_image[1].image_path" class="size_size_1" alt="">
-            <img :src="this.stil_image[2].image_path" class="size_size_2" alt="">
+            <img :src="this.stil_image[1].image_path" class="size_size_1 img2" alt="">
+            <img :src="this.stil_image[2].image_path" class="size_size_2 img2" alt="">
         </div>
         </div>
        
@@ -244,6 +244,10 @@ export default {
     justify-content: center;
 
     
+}
+.img2 {
+  animation: rotate_image 6s linear infinite, scale1 6s linear infinite;
+  transform-origin: 50% 50%;
 }
 
 #layout_02 {
