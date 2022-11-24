@@ -15,6 +15,8 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             "last_login",
             "profile_img",
             "like_movies",
+            "feed_like_user",
+            "followers",
         ]
         read_only_fields = [
             "id",

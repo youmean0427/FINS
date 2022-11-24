@@ -11,5 +11,6 @@ urlpatterns = [
     path('feedlist/<str:username>/', views.feed_list),
     path('feed/<int:feed_pk>/',views.feed_detail),
     path('feed/<int:feed_pk>/like/', views.feed_like),
+    path('feed/<int:feed_pk>/likecheck/', views.feed_like_check)
 ]
 

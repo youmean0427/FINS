@@ -28,6 +28,9 @@ urlpatterns = [
     #still images
     path("movie/<int:movie_id>/stills/", views.still_images),
 
+    #movie title
+    path("movie/title/<int:movie_pk>/", views.movie_title),
+
 
 
     # # # 필수 작성

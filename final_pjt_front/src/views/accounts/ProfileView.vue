@@ -19,7 +19,7 @@
     <FeedCardType v-if="!showList" :likeMovies="likeMovies" :username="username"  @showFeedModal="showFeedModal"/>
 
     <FeedDetailView v-if="showModal" @close-modal="closeModal">
-      <FeedModal :id="modalId" :username="username"/>
+      <FeedModal :feedId="feedId" :username="username"/>
     </FeedDetailView> 
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
         isfollow : '팔로우',
 
         showModal : false,
-        modalId : '',
+        feedId : '',
         showList : false,
       }
     },
@@ -107,7 +107,7 @@ export default {
       },
       showFeedModal(id){
         console.log('modal~~~~~~~~~~~~~~~~~~',id)
-        this.modalId = id
+        this.feedId = id
         this.showModal = true
         console.log(this.showModal)
       },

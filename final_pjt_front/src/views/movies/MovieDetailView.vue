@@ -161,7 +161,7 @@ export default {
             console.log(this.movie_key)
             axios({
                 method: "get",
-                url: `http://127.0.0.1:8000/api/v1/movie/${this.movie_key}/stills`,
+                url: `http://127.0.0.1:8000/api/v1/movie/${this.movie.id}/stills`,
             
             })
             .then((res) => {

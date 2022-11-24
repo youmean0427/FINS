@@ -335,3 +335,12 @@ def still_images(request,movie_id):
     stills = Movie_Image.objects.filter(movie_id=movie_key)
     serializer = StillImageSerializer(stills, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def movie_title(request,movie_pk):
+    movie = Movie.objects.get(pk=movie_pk)
+    seri = MovieSerializer(movie)
+    data = {
+        'title' : seri.data.get('title')
+    }
+    return Response(data)
