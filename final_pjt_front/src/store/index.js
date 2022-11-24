@@ -485,7 +485,7 @@ export default new Vuex.Store({
         })
           .then((res) => {
             console.log(res.data)
-            if(res.data === '좋아요'){
+            if(res.data.status  === '좋아요'){
               context.state.likestatus =  true
             } else{
               context.state.likestatus = false

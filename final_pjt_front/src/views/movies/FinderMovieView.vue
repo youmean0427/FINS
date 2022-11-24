@@ -4,7 +4,6 @@
     <img src="@/assets/Finder.png" alt="" width="150px">
     <hr>
     <h4 class="font_font">⬅ 🙅‍♀️  ❤ ➡ </h4>
-  
     <FinderMovie/>
   </div>
 </template>

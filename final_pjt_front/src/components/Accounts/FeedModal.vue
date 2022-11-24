@@ -23,7 +23,7 @@
           </div>
           <div class="feedbtns" style="width:100%">
             <div v-if="!showEdit">
-              <b-button v-if="!likeSwitch" @click="likeFeed" class="heartbtn"><img :src="heartimg" alt="좋아요"></b-button>
+              <b-button v-if="likeSwitch" @click="likeFeed" class="heartbtn"><img :src="heartimg" alt="좋아요"></b-button>
               <b-button v-else @click="likeFeed" class="heartbtn"><img :src="emptyheartimg" alt="싫어요"></b-button>
             </div>
             <div v-if="isMyPage">
@@ -78,14 +78,19 @@ export default {
       return this.feed.content
     },
     likeSwitch(){
-      // return this.$store.state.likestatus
-      if(!this.$store.state.user.feed_like_user){
-        return  false
-      } else if (this.feedId) {
-        return this.$store.state.likestatus
-      }else{
-        return this.$store.state.user.feed_like_user.includes(this.feedId)
-      }
+      console.log(this.$store.state.likestatus)
+      return this.$store.state.likestatus
+      // if(this.feedId in this.$store.state.user.feed_like_user){
+      //   return true
+      // } else {
+      //   return false
+      // }
+      // if(!this.$store.state.user.feed_like_user){
+      //   return  false
+      // } else {
+      //   return true
+      // }
+      
     },
   },
   props: {
@@ -99,6 +104,8 @@ export default {
   },
   methods:{
     likeFeed(){
+      console.log('likeSwitch', this.likeSwitch)
+      console.log('this.$store.state.user', this.$store.state.user)
       this.feedInfo(this.feedId)
       // 로그인한 상태가 아니면 로그인하라고 alert
       if(!this.$store.getters.isLogin){

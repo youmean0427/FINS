@@ -107,7 +107,7 @@
     left: 0;
     right: 0;
     /* Size Control */
-    top: 100px;
+    top: 50px;
     bottom: 46px;
     margin: auto;
     /* Size Control */
