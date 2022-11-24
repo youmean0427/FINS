@@ -25,7 +25,7 @@ export default {
     },
      methods: {
       feedDetail(id) {
-        this.$emit('showFeedDetail', id)
+        this.$emit('showFeedModal', id)
     }
     }
 }

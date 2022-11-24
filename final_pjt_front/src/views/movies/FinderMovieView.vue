@@ -3,7 +3,7 @@
   <div style="margin-left: 20%; margin-right: 20%;">
     <img src="@/assets/Finder.png" alt="" width="150px">
     <hr>
-    <h4 class="font_font">오른쪽은 좋아요, 왼쪽은 싫어요</h4>
+    <h4>오른쪽은 좋아요, 왼쪽은 싫어요</h4>
   
     <FinderMovie/>
   </div>
@@ -23,13 +23,11 @@ export default {
 </script>
 
 <style>
-.font_font {
-         font-family: 'NanumGothic';
-        font-style: normal;
-        /* font-weight: 700; */
-        font-size: 20px;
-        /* line-height: 37px; */
 
-        color: #000000;
-    }
+ @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap');
+    
+* {
+  font-family: 'Nanum Gothic', sans-serif;
+  color: black;
+}
 </style>

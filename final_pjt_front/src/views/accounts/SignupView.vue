@@ -1,24 +1,76 @@
 <template>
   <div>
-    <h1>Sign Up Page</h1>
-    <form @submit.prevent="signUp">
-      <label for="username">닉네임 : </label>
-      <input type="text" id="username" v-model="username"><br>
+    <div id="layout_03">
+      <form @submit.prevent="signUp">
+        <div style="z-index: 2;  position: absolute;">
+              
+              <img v-if="username" src="@/assets/Line_01.png" alt="" width="300px">
+              </div>
+              <div style="z-index: 1;">
+                <img src="@/assets/ID.png" alt="" width="125px" >
+        </div>
+        <br>
+        <div class="input-group" >
+        <input type="text" id="username" v-model="username" style="text-align:center; border:none; width:300px" class="form-control"><br>
+        </div>
+         <img src="@/assets/Line_00.png" alt="" width="300px" >
+        <br>
+        <br>
+        <div style="position: relative;">
+              <div style="z-index: 2;  position: absolute;">
+                <img v-if="!validEmail && email" src="@/assets/Line_02.png" alt="" width="300px">
+                </div>
+                <div style="z-index: 1;">
+                <img src="@/assets/Email.png" alt="" width="250px">
+              </div>
+        </div>
+        <br>
+        <div class="input-group" >
+        <input @keyup="isValidEmail" type="email" id="email" v-model="email" style="text-align:center; border:none; width:300px" class="form-control">
+        </div>
+          <img src="@/assets/Line_00.png" alt="" width="300px" >
+        <br>
+        <p id="validEmail">{{validEmail}}</p><br>
 
-      <label for="email"> 이메일 : </label>
-      <input @keyup="isValidEmail" type="email" id="email" v-model="email">
-      <p id="validEmail">{{validEmail}}</p><br>
 
-      <label for="password1"> 비밀번호 : </label>
-      <input @keyup="isValidPwd" type="password" id="password1" v-model="password1">
-      <p id="validPwd">{{validPwd}}</p>
-      <br>
+        <div style="position: relative;">
+                <div style="z-index: 2;  position: absolute;">
+                <img v-if="!validPwd" src="@/assets/Line_01.png" alt="" width="300px">
+                </div>
+                <div style="z-index: 1;">
+                <img src="@/assets/PASSWORD.png" alt="" width="250px">
+                </div>
+        </div>
+        <br>
+        <div class="input-group" >
+        <input @keyup="isValidPwd" type="password" id="password1" v-model="password1" style="text-align:center; border:none; width:300px" class="form-control">
+        </div>
+        <img src="@/assets/Line_00.png" alt="" width="300px" >
 
-      <label for="password2"> 비밀번호 확인 : </label>
-      <input @keyup="isValidPwd2" type="password" id="password2" v-model="password2">
-      <p id="validPwd2">{{validPwd2}}</p> <br>
-      <input @click="signUp" type="button" value="SignUp">
-    </form> 
+        <br>
+        <p id="validPwd">{{validPwd}}</p>
+        <br>
+
+        <div style="position: relative;">
+              <div style="z-index: 2;  position: absolute;">
+                <img v-if="!validPwd2 && password2" src="@/assets/Line_02.png" alt="" width="300px">
+                </div>
+                <div style="z-index: 1;">
+                <img src="@/assets/PASSWORD_check.png" alt="" width="250px">
+              </div>
+        </div>
+        <br>
+        <div class="input-group" >
+        <input @keyup="isValidPwd2" type="password" id="password2" v-model="password2" style="text-align:center; border:none; width:300px" class="form-control">
+        </div>
+        <img src="@/assets/Line_00.png" alt="" width="300px" >
+        
+        <br>
+
+        <p id="validPwd2">{{validPwd2}}</p> <br>
+        <img src="@/assets/Signup_page.png" @click="signUp" class='signup_h' type="button" width="200px">
+      </form> 
+    </div>
   </div>
 </template>
 
@@ -171,3 +223,13 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.signup_h:hover{
+transform: scale(1.2);
+transition: 0.5s ease;
+}
+
+
+</style>

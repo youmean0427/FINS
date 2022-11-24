@@ -3,34 +3,34 @@
      <div class="row cardbody" >
         
         <input type="radio" class="btn-check" name="genre" id="0" @click="checkSelected(0)" v-model="picked"  value="0" autocomplete="off" >
-        <label class="btn btn-outline-success" for="0">액션</label>
+        <label class="btn btn-outline-dark" for="0">액션</label>
 
-        <input type="radio" class="btn-check" name="genre" id="1" @click="checkSelected(1)" v-model="picked" value="1" autocomplete="off" />
-        <label class="btn btn-outline-success" for="1">모험</label>
+        <input type="radio" class="btn-check " name="genre" id="1" @click="checkSelected(1)" v-model="picked" value="1" autocomplete="off" />
+        <label class="btn btn-outline-dark" for="1">모험</label>
 
-        <input type="radio" class="btn-check" name="genre" id="2" @click="checkSelected(2)" v-model="picked" value="2" autocomplete="off" />
-        <label class="btn btn-outline-success" for="2">애니메이션</label>
+        <input type="radio" class="btn-check " name="genre" id="2" @click="checkSelected(2)" v-model="picked" value="2" autocomplete="off" />
+        <label class="btn btn-outline-dark" for="2">애니메이션</label>
 
         <input type="radio" class="btn-check" name="genre" id="3" @click="checkSelected(3)" v-model="picked" value="3" autocomplete="off" />
-        <label class="btn btn-outline-success" for="3">코미디</label>
+        <label class="btn btn-outline-dark" for="3">코미디</label>
 
         <input type="radio" class="btn-check" name="genre" id="4" @click="checkSelected(4)" v-model="picked" value="4" autocomplete="off" />
-        <label class="btn btn-outline-success" for="4">범죄</label>
+        <label class="btn btn-outline-dark" for="4">범죄</label>
 
         <input type="radio" class="btn-check" name="genre" id="5" @click="checkSelected(5)" v-model="picked" value="5" autocomplete="off" />
-        <label class="btn btn-outline-success" for="5">다큐멘터리</label>
+        <label class="btn btn-outline-dark" for="5">다큐멘터리</label>
 
         <input type="radio" class="btn-check" name="genre" id="6" @click="checkSelected(6)" v-model="picked" value="6" autocomplete="off" />
-        <label class="btn btn-outline-success" for="6">드라마</label>
+        <label class="btn btn-outline-dark" for="6">드라마</label>
 
         <input type="radio" class="btn-check" name="genre" id="8" @click="checkSelected(8)" v-model="picked" value="8" autocomplete="off" />
-        <label class="btn btn-outline-success" for="8">판타지</label>
+        <label class="btn btn-outline-dark" for="8">판타지</label>
 
         <input type="radio" class="btn-check" name="genre" id="14" @click="checkSelected(14)" v-model="picked" value="14" autocomplete="off" />
-        <label class="btn btn-outline-success" for="14">SF</label>
+        <label class="btn btn-outline-dark" for="14">SF</label>
         
         <input type="radio" class="btn-check" name="genre" id="13" @click="checkSelected(13)" v-model="picked" value="13" autocomplete="off" />
-        <label class="btn btn-outline-success" for="13">로맨스</label>
+        <label class="btn btn-outline-dark" for="13">로맨스</label>
       <!-- <GenreCard
         v-for="genre in genreList"
         :key="genre.id"
@@ -85,4 +85,5 @@ export default {
  .cardbody > *{
     width: 50% !important;
  }
+
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Infinite Page</h1>    
+  <div class="movieCardFrame">
     <MovieCard
       v-for="movie in movieList"
       :key=movie.id
@@ -14,11 +13,11 @@
 import MovieCard from '@/components/Movies/MovieCard'
 import InfiniteLoading from 'vue-infinite-loading'
 import axios from 'axios'
-const API_URL = 'http://127.0.0.1:8000'
+const URL = 'http://127.0.0.1:8000/api/v1/movies/limit/'
 
 export default {
     
-    name : 'MovieView',
+    name : 'InfiniteMovieList',
     components:{
         MovieCard,
         InfiniteLoading
@@ -30,28 +29,31 @@ export default {
         }
     },
     created(){
-        this.getMovies() 
-        // {
-        // this.$http.get('http://127.0.0.1:8000/api/v1/movies/limit/' + this.limit)
-        //     .then((response) => {
-        //         this.movieList = response.data
-        //     })
-        // }
+        {
+        axios({
+        method:'get',
+        url: `http://127.0.0.1:8000/api/v1/movies/limit/${this.limit}`,
+        })
+        .then(response => {
+                this.movieList = response.data
+                this.limit+=21
+            })
+
+        }
     },
     methods:{
         infiniteHandler($state){
-            this.limit += 10
             axios({
             method:'get',
-            url: `${API_URL}/api/v1/movies/limit/${this.limit}`,
+            url: `${URL}${this.limit}`,
             })
             .then(response => {
                     setTimeout(() => {
                         if(response.data.length){
                             this.movieList = this.movieList.concat(response.data)
                             $state.loaded(); // 데이터 로딩중 
-                            this.limit += 10
-                            if(this.movieList.legth / 10 == 0){
+                            this.limit += 21
+                            if(this.movieList.legth / 21 == 0){
                                 $state.complete()
                             }
                         } else {
@@ -69,5 +71,11 @@ export default {
 </script>
 
 <style>
-
+    .movieCardFrame{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding: 1rem;
+    height: 100%;  
+  }   
 </style>

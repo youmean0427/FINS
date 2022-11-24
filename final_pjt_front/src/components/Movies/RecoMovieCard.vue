@@ -2,12 +2,14 @@
   <div>
     
     <!-- Keyword에 맞는 영화 페이지 -->
-    <button type="button" class="btn btn-outline-secondary custom upper font_font">
-        <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }" :keyword="keyword.keyword" >
-        {{ keyword.keyword }}
+    
+        <router-link :to="{ name: 'KeywordMovieView', params: { id: keyword.id } }" :keyword_name="keyword.keyword" >
+        <button type="button" class="btn btn-outline-secondary custom upper font_font">
+          {{ keyword.keyword }}
           <!-- {{ keyarr }} -->
+           </button>
         </router-link>
-    </button>
+   
 
     <!-- <KeywordMovieView/> -->
     <br>
@@ -43,6 +45,7 @@ export default {
 
 .custom {
     width: 250px !important;
+ 
 }
 
 .upper{

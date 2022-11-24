@@ -1,22 +1,24 @@
 <template>
 
     <div id="mcard" @click="moveDetail" class="card text-start" v-if="movie" style="max-width: 33.3%;">
-      <div v id="movie-view-card">
+      <div id="movie-view-card">
         <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">
-        <p id="movieTitle">{{movie.title}}</p>
-        <span 
-          style="font-size:0.6em; 
-          max-width: calc(100% - 38px); 
-          overflow: hidden; 
-          text-overflow: ellipsis; 
-          display: -webkit-box;
-          -webkit-line-clamp: 3; 
-          -webkit-box-orient: vertical;"
-        >
-        {{movie.overview}}
-        </span>
+          <h3 id="movieTitle">{{movie.title}}</h3>
+          <!-- <span 
+            style="font-size:0.6em; 
+            max-width: calc(100% - 38px); 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            display: -webkit-box;
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical;"
+          >
+          </span>
+           -->
+          <!-- {{movie.overview}} -->
+   
       </div>
     </div>
     
@@ -97,5 +99,12 @@ export default {
     margin-bottom: 10px;
     margin-left:5px;
   }
+
+  /* 중앙 정렬 */
+  .layout_03 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
 </style>

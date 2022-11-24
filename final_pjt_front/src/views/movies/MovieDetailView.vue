@@ -1,14 +1,16 @@
 <template>
-  <div style="margin-left: 20%; margin-right: 20%;">
+  <div style="margin-left: 10%; margin-right: 10%; margin-top: 3%;">
+    <div>
     <img src="@/assets/Movie.png" alt="" width="150px">
       <!-- <h1>MovieDetail</h1> -->
       <hr>
+        
       <div id="layout_01">
     
         
-        <h1>여백</h1>
-        <img :src="poster" style="width:300px;" alt="">
-        <h1>여백</h1>
+        <br>
+        <img :src="poster" style="width:300px;" class= "poster_size" alt="">
+        <br>
         <div id="layout_02">
             <img :src="this.stil_image[0].image_path" class="size_size_0 img2" alt="">
         <div id="layout_01">
@@ -23,22 +25,24 @@
         <br>
         <br>
         <div id="layout_01">
-            <div width="600px">
+            <div width="600px" style="margin-right: 20px">
             <iframe 
             width="600px"
             height="400px"
+            
             :src="videoUrl"></iframe>
             </div>
-            <h1>여백</h1>
+            
+            
             <div id="layout_02">
-                <h2 class="font_font_big">{{movie.title}}</h2>
+                <h2 >{{movie.title}}</h2>
                 <hr>
                 <!-- <p v-if="loggedIn"><button @click="likeMovie">{{ this.input_value }}</button></p> -->
-                <p v-if="loggedIn"><img type='button' @click="likeMovie" :src='require(`@/assets/${lovevalue}.png`)' width="50px"></p>
+                <p v-if="loggedIn"><img type='button' class='afterlike' @click="likeMovie" :src='require(`@/assets/${lovevalue}.png`)' width="50px"></p>
                 
                 <!-- 좋아요 유저 확인용 -->
                 <!-- <p>{{ movie.movie_like_user}}</p> -->
-                <p class="font_font">{{movie.overview}}</p>
+                <p style="line-height:1.8">{{movie.overview}}</p>
                 
             </div>
         </div>
@@ -59,8 +63,8 @@
 
 
 
-
-
+    
+    </div>
     </div>
 </template>
 
@@ -83,7 +87,7 @@ export default {
             youtube_key: 1,
             user_id: '',
             // input_value: '좋아요',
-            lovevalue: 'Love',
+            lovevalue: 'Unlove',
             movie_key: 0,
             stil_image: [],
         };
@@ -140,10 +144,10 @@ export default {
                 // console.log((this.movie.movie_like_user))
                 
                 for (const i in this.movie.movie_like_user ){
-                    console.log("이것이다", this.movie.movie_like_user[i])
+                    // console.log("이것이다", this.movie.movie_like_user[i])
                     if (((this.user_id) === (this.movie.movie_like_user[i]))) {
                     this.input_value = "싫어요"
-                    this.lovevalue = "Unlove"
+                    this.lovevalue = "Love"
                     }
                 }
                 
@@ -236,7 +240,15 @@ export default {
 </script>
 
 <style>
+
+ @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap');
+    
+* {
+  font-family: 'Nanum Gothic', sans-serif;
+  color: black;
+}
 /* 가로로 정렬 */
+
 #layout_01 {
     display: flex;
     flex-direction: row;
@@ -258,32 +270,14 @@ export default {
 
     
 }
-.font_font {
-         font-family: 'NanumGothic';
-        font-style: normal;
-        /* font-weight: 700; */
-        font-size: 20px;
-        /* line-height: 37px; */
 
-        color: #000000;
-    }
-
-.font_font_big {
-    font-family: 'NanumGothic';
-    font-style: normal;
-    /* font-weight: 700; */
-    font-size: 30px;
-    /* line-height: 37px; */
-
-    color: #000000;
-}
 .size_size_0 {
-/* position: absolute; */
+/* position: static; */
 width: 500px;
 height: 200px;
 left: 868.65px;
 top: 0px;
-
+overflow: hidden;
 transform: rotate(5deg);
 }
 
@@ -293,7 +287,7 @@ width: 300px;
 height: 150px;
 left: 868.65px;
 top: 0px;
-
+overflow: hidden;
 transform: rotate(-10deg);
 }
 
@@ -303,9 +297,44 @@ width: 300px;
 height: 150px;
 left: 868.65px;
 top: 0px;
-
+overflow: hidden;
 transform: rotate(10deg);
+
+
 }
+
+.size_size_0:hover{
+transform: scale(1.2) ;
+transition: 0.5s ease;
+z-index: 2;
+
+}
+
+.size_size_1:hover{
+transform: scale(1.2) ;
+transition: 0.5s ease;
+z-index: 2;
+}
+
+.size_size_2:hover{
+transform: scale(1.2) ;
+transition: 0.5s ease;
+z-index: 2;
+}
+
+.poster_size:hover{
+transform: scale(1.05);
+transition: 0.5s ease;
+z-index: 2;
+}
+.afterlike:hover{
+transform: scale(1.2);
+transition: 0.5s ease;
+}
+
+
+
+
 
 
 </style>
