@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="movieCardFrame">
       <KeywordMovieCard
         v-for="keyword_movie in movie"
         :key="keyword_movie.id"

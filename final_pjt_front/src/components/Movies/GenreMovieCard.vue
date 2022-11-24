@@ -40,7 +40,6 @@ export default {
   .hidden-title{
     z-index: 2;
     width: 100%;
-    padding:1em;
     position: absolute;
     text-align : center;
     transform: translate(-50%, -50%);

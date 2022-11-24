@@ -1,17 +1,14 @@
 <template>
-    <div class="">
-      <br>
+    <div>
        <img src="@/assets/your_fins.png" width="25%" alt="">
- 
-      <br>
-      <hr>
-      <!-- {{ this.user_movie_list }} -->
-      <UserMovieCard
-        v-for="movie in this.user_movie_list"
-        :key="movie.id"
-        :movie="movie"
-      />
-    </div>
+       <div class="movieCardFrame">
+        <UserMovieCard
+          v-for="movie in this.user_movie_list"
+          :key="movie.id"
+          :movie="movie"
+        />
+       </div>
+      </div>
   </template>
   
   <script>
@@ -61,7 +58,6 @@
   
   <style>
   .movie-list {
-    text-align: start;
   }
   </style>
   

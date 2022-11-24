@@ -46,6 +46,7 @@ export default {
         /* bottom: 2%; */
         padding: 10px;
         overflow: hidden;
+        border: none;
     }
     #movie-card{
         width: 100%;

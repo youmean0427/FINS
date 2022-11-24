@@ -192,16 +192,19 @@ export default {
     width: 100%;
     padding: 0;
     margin:0;
+
   }
   .container{
     max-height: max-content;
     width: 100%;
     padding: 0;
     height: 100%;
+    max-width: initial;
   }
   .feedleft, .feedright{
     padding: 0;
     height: 100%;
+    width: 50%;
   }
   .feedleft{
     height: 100%;
@@ -242,14 +245,13 @@ export default {
     padding-top: 10px;
   }
   .rightmiddle{
-    /* height: 70%; */
+    height: 70%;
     display: flex;
     flex-flow: column wrap;
     align-content: space-between;
     padding-left: 10px;
     justify-content: space-between;
-    height: 65%;
-    
+    /* padding-bottom: 50%;     */
   }
   .feedbtns{
     display: flex;

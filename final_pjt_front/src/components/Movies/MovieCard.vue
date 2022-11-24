@@ -40,7 +40,6 @@ export default {
   .hidden-title{
     z-index: 2;
     width: 100%;
-    padding:1em;
     position: absolute;
     text-align : center;
     transform: translate(-50%, -50%);
@@ -50,8 +49,6 @@ export default {
     /* background-color: rgba(228, 228, 228, 0.886); */
     background: rgb(255,255,255);
     background: linear-gradient(90deg, rgba(255,255,255,0.8) 40%, rgb(121, 128, 121, 0.8) 100%);
-    /* background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,1) 30%, rgba(255,255,255,0.7) 100%); */
     top : 50%;
     left: 50%;
     height: 100%;

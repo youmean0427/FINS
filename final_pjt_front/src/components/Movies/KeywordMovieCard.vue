@@ -12,9 +12,6 @@
       <div id="movie-view-card">
        <img class="card-img-top"  :src="url" width="25%" alt="">
         </div>
-      <div class="hidden-title">
-          <h3 id="movieTitle">{{keyword_movie.title}}</h3>
-      </div>
     </div>
     
   </div>

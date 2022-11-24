@@ -97,6 +97,7 @@ export default {
     display: flex;
     justify-content: space-between;
     padding-right: 10px;
+    bottom: 10px;
   }
   .editfeedcon input{
     width : 80%;

@@ -1,12 +1,9 @@
 <template>
   <div>
     <img src="@/assets/Recommend.png" alt="" width="150px">
-    <br>
-    <hr>
-    <br>
     <div >
-      <div id="container">
-        <div class="row">
+      <div id="row">
+        <div class="recobox">
         <RecoMovieCard  class="col-4"
           v-for="keyword in movieKeyword.keyword"
           :key="keyword.id"
@@ -56,5 +53,7 @@ export default {
 </script>
 
 <style>
-
+ .recobox{
+   display: flex;
+ }
 </style>

@@ -40,12 +40,13 @@ export default {
   max-width: 50px;
 }
 .iconbox{
-  display: flex;
-  justify-content: space-evenly;
-  position: absolute;
-  width: 80%;
-  top: 50%;
-  z-index: 0;
-  /* left: 40%; */
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    z-index: 0;
+    left: 38%;
 }
+
 </style>

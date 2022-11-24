@@ -8,7 +8,6 @@
           
         <button type="button" class="btn btn-outline-secondary custom upper font_font">
           {{ keyword.keyword }}
-          <!-- {{ keyarr }} -->
            </button>
         </router-link>
    

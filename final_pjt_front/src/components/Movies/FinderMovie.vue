@@ -110,10 +110,10 @@
     bottom: 46px;
     margin: auto;
     /* Size Control */
-    min-width: 300px;
-    max-width: 375px;
     /* 세로 크기 줄이기 */
-    height: 600px;
+    min-width: 17vw;
+    max-width: 20vw;
+    min-height: 70vh;
   }
   
   .nope-pointer,
@@ -155,9 +155,7 @@
     bottom: 80px;
     left: 0;
     right: 0;
-    margin: auto;
-    width: 112px;
-    height: 78px;
+
   }
   
   .pic {
