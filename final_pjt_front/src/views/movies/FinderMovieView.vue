@@ -1,9 +1,9 @@
 
 <template>
-  <div style="margin-left: 20%; margin-right: 20%;">
+  <div class="finderheader">
     <img src="@/assets/Finder.png" alt="" width="150px">
     <hr>
-    <h4 class="font_font">오른쪽은 좋아요, 왼쪽은 싫어요</h4>
+    <h4 class="font_font">⬅ 🙅‍♀️  ❤ ➡ </h4>
   
     <FinderMovie/>
   </div>
@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style>
+.finderheader{
+  margin: 50px 0 0 0;
+}
 .font_font {
          font-family: 'NanumGothic';
         font-style: normal;

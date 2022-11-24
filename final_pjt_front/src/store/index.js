@@ -442,6 +442,26 @@ export default new Vuex.Store({
         console.log('찾는 영화 id = ', id)
         console.log('찾는 영화 제목:', context.state.movies[id].title)
         context.state.likeMovieTitle =  context.state.movies[id].title
+      },
+      like_feed(context, feed_id){
+        axios({
+          method: 'post',
+          url: `${API_URL}/user/feed/${feed_id}/like/`,
+          headers: {
+            Authorization: `Token ${context.state.token}`
+          },
+        })
+          .then((res) => {
+            console.log(res.data)
+            if(res.data === '좋아요'){
+              return true
+            } else{
+              return false
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
       }
 
   },

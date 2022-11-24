@@ -16,6 +16,9 @@ export default {
     selectedImg(){
       this.$emit('selectedImg',)
     }
+  },
+  created(){
+    console.log('stillimages==========')
   }
 }
 </script>

@@ -7,7 +7,9 @@ urlpatterns = [
     path('isuser/<str:username>/', views.is_user),
     path('follow/<str:username>/', views.follow,),
     path('followings/', views.followinglist),
+
     path('feedlist/<str:username>/', views.feed_list),
     path('feed/<int:feed_pk>/',views.feed_detail),
+    path('feed/<int:feed_pk>/like/', views.feed_like),
 ]
 

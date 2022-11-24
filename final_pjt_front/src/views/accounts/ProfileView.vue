@@ -19,7 +19,7 @@
     <FeedCardType v-if="!showList" :likeMovies="likeMovies" :username="username"  @showFeedModal="showFeedModal"/>
 
     <FeedDetailView v-if="showModal" @close-modal="closeModal">
-      <FeedModal :id="modalId" :user="username"/>
+      <FeedModal :id="modalId" :username="username"/>
     </FeedDetailView> 
   </div>
 </template>

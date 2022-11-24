@@ -26,7 +26,7 @@ urlpatterns = [
     path('movies/like/<int:movie_pk>/', views.like),
 
     #still images
-    path("movie/<int:movie_key>/stills/", views.still_images),
+    path("movie/<int:movie_id>/stills/", views.still_images),
 
 
 

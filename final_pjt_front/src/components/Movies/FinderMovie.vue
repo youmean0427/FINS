@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <Tinder key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
+    <div class="tinderbox">
+      <Tinder class="tinderbox" key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
         <template slot-scope="scope">
           <div
             class="pic"
@@ -9,9 +9,14 @@
             }"
           />
         </template>
-        <img class="like-pointer" slot="like" src="https://user-images.githubusercontent.com/87971876/201873421-3a6e624e-aa15-4b23-abd7-e99c383b2c6d.png" />
-    <img class="nope-pointer" slot="nope" src="https://user-images.githubusercontent.com/87971876/201873445-07aac418-fb7c-4e51-aa1a-280b43243243.png" />
-    <img class="super-pointer" slot="super" src="https://user-images.githubusercontent.com/87971876/201873473-65515497-c38c-488c-8066-3fabc516f98b.png" />
+        <img class="like-pointer lp2" slot="like" :src='require(`@/assets/Love.png`)' />
+        <img class="like-pointer lp3" slot="like" :src='require(`@/assets/Love.png`)' />
+        <img class="like-pointer" slot="like" :src='require(`@/assets/Love.png`)' />
+        <!-- <img class="like-pointer" slot="like" src="https://user-images.githubusercontent.com/87971876/201873421-3a6e624e-aa15-4b23-abd7-e99c383b2c6d.png" /> -->
+        <img class="nope-pointer" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
+        <img class="nope-pointer lp2" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
+        <img class="nope-pointer lp3" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
+        <img class="super-pointer" slot="super" src="https://user-images.githubusercontent.com/87971876/201873473-65515497-c38c-488c-8066-3fabc516f98b.png" />
       </Tinder>
     </div>
   </template>
@@ -86,6 +91,9 @@
   body {
     height: 100%;
   }
+  .tinderbox{
+
+  }
   
   body {
     margin: 0;
@@ -94,17 +102,17 @@
   } */
   
   #app .vue-tinder {
-    position: absolute;
+    position: relative;
     z-index: 1;
     left: 0;
     right: 0;
     /* Size Control */
-    top: 200px;
+    top: 100px;
     bottom: 46px;
     margin: auto;
     /* Size Control */
     min-width: 300px;
-    max-width: 355px;
+    max-width: 375px;
     /* 세로 크기 줄이기 */
     height: 600px;
   }
@@ -113,17 +121,34 @@
   .like-pointer {
     position: absolute;
     z-index: 1;
-    top: 20px;
-    width: 64px;
-    height: 64px;
+    top:0;
+    left: 0;
+    padding-left:90px;
+    padding-top: 140px;
+    width: 370px;
+    height: 370px;
+    opacity: 0.9;
+    transition: 0.3 ease-in;
   }
-  
+  .lp3{
+    width: 300px;
+    height: auto;
+    padding-left:220px;
+    padding-top: 40px;
+  }
+  .lp2{
+    width: 220px;
+    height: auto;
+    padding-left:50px;
+    padding-top: 40px;
+  }
   .nope-pointer {
     right: 10px;
   }
   
   .like-pointer {
     left: 10px;
+    
   }
   
   .super-pointer {

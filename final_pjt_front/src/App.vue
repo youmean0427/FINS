@@ -88,6 +88,8 @@ export default {
   width: 100%;
 }
 nav {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -95,6 +97,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 100vh;
+  
 }
 
 #category  a {

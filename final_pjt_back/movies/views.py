@@ -328,7 +328,10 @@ def like(request, movie_pk):
         # return Response(serializer.data)
 
 @api_view(['GET'])
-def still_images(request,movie_key):
+def still_images(request,movie_id):
+    movie = Movie.objects.get(pk=movie_id)
+    se = MovieSerializer(movie)
+    movie_key = se.data.get('movie_key')
     stills = Movie_Image.objects.filter(movie_id=movie_key)
     serializer = StillImageSerializer(stills, many=True)
     return Response(serializer.data)
