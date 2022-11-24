@@ -1,9 +1,8 @@
 <template>
     <div class="">
       <br>
-      <h3>For you</h3>
-      <br>
-      <h5>좋아하는 영화와 장르를 기반으로 10개의 영화를 추천해줍니다.</h5>
+       <img src="@/assets/your_fins.png" width="25%" alt="">
+ 
       <br>
       <hr>
       <!-- {{ this.user_movie_list }} -->

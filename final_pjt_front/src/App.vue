@@ -2,10 +2,13 @@
   <div id="app"  style="margin-top: 2%;">
 
     <!-- nav component로 만들까유?  -->
+
+   
     <img src="@/assets/Line_000.png" alt="" style="margin-left: 2.5%">
     <nav class="nav">
-       <img class="logo wave-one" src="@/assets/Fins.png" alt="로고">
-      
+       
+       <router-link :to="{ name: 'MovieView' }"><img  class="logo wave-one nav_component" src="@/assets/Fins.png" @click='mov_color' style="margin-left: 2.5%" alt="로고"></router-link>
+
 
       <div id="category">
           
@@ -261,7 +264,12 @@ export default {
       this.logout_color_black= false
       this.logout_color_gray = true
     },
-   }
+   },
+   watch: {
+    $route() {
+      window.scrollTo(0, 0);
+    },
+  },
   }
 </script>
 

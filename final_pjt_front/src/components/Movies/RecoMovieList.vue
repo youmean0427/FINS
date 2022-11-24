@@ -35,7 +35,7 @@ export default {
     },
 
     props: {
-      movieKeyword:Array
+      movieKeyword:Object
     },
 
     computed: {
@@ -47,8 +47,10 @@ export default {
     },
 
     created() {
+   
+    },
+  
 
-    }
 
 }
 </script>
