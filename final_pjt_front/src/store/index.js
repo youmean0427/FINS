@@ -25,7 +25,7 @@ export default new Vuex.Store({
     token: null,
     now_user : '',
     now_user_pk: '',
-    BASE_POSTER_PATH : 'https://image.tmdb.org/t/p/original/',
+    BASE_POSTER_PATH : 'https://image.tmdb.org/t/p/original',
 
     // Tinder
     tinderLike: [],
@@ -138,7 +138,8 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          state.user = res.data
+          state.user = JSON.parse(JSON.stringify(res.data))
+          
           console.log('res.data.username 회원정보 저장', res.data.username)
         })
         .catch((err) => {
@@ -484,10 +485,16 @@ export default new Vuex.Store({
           },
         })
           .then((res) => {
-            console.log(res.data)
-            if(res.data === '좋아요'){
+            console.log('-------------',res.data)
+            if(res.data.status === '좋아요'){
               context.state.likestatus =  true
+              // let feed_like_user = JSON.parse(JSON.stringify(context.state.user.feed_like_user))
+              // context.state.user.feed_like_user.push(feed_id)
+              // console.log(feed_like_user, '*****************')
             } else{
+              JSON.parse(JSON.stringify(context.state.user.feed_like_user))
+              // let feed_like_user = JSON.parse(JSON.stringify(context.state.user.feed_like_user))
+              // context.state.user.feed_like_user = context.state.user.feed_like_user.splice(feed_id, 1)
               context.state.likestatus = false
             }
           })
@@ -495,6 +502,22 @@ export default new Vuex.Store({
             console.log(err)
           })
       }, 
+      getMoviePoster(context, movie_id){
+        let poster = ''
+        axios({
+            method: 'get',
+            url: `${API_URL}/api/v1/movies/${movie_id}/`,
+          })
+            .then((res) => {
+              poster = res.data.poster.slice(1,)
+     
+              console.log('응답받은 포스터', context.state.BASE_POSTER_PATH +poster)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        return context.state.BASE_POSTER_PATH + poster
+      }
       // like_feed_status(context, feed_id){
       //   axios({
       //     method: 'get',

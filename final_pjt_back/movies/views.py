@@ -20,7 +20,9 @@ def make_still(movie_id):
     img_serial = Movie_Image.objects.filter(movie_id=movie_id)
     img_ser_len = len(img_serial)
     if img_ser_len < 1:
-        return '' 
+        movie = Movie.objects.get(movie_key=movie_id)
+        seri = MovieSerializer(movie).data.get('poster')
+        return 'https://image.tmdb.org/t/p/original' + seri 
     rannum = random.randrange(0, img_ser_len)
     stil_image = img_serial[rannum].image_path
     # img_lst = []
@@ -318,6 +320,9 @@ def like(request, movie_pk):
                 movie_id = movie.id,
                 # still cut methods 사용
                 image_path = make_still(movie.movie_key))
+                # if not image_path:
+                #     movie = MovieSerializer(movie).get('poster')
+                
             feed.save()
 
         data = {

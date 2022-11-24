@@ -12,7 +12,6 @@
         <img class="like-pointer lp2" slot="like" :src='require(`@/assets/Love.png`)' />
         <img class="like-pointer lp3" slot="like" :src='require(`@/assets/Love.png`)' />
         <img class="like-pointer" slot="like" :src='require(`@/assets/Love.png`)' />
-        <!-- <img class="like-pointer" slot="like" src="https://user-images.githubusercontent.com/87971876/201873421-3a6e624e-aa15-4b23-abd7-e99c383b2c6d.png" /> -->
         <img class="nope-pointer" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
         <img class="nope-pointer lp2" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
         <img class="nope-pointer lp3" slot="nope" src="https://user-images.githubusercontent.com/87971876/203677620-815c452a-e650-4980-843a-bdc7865bf159.png" />
@@ -120,7 +119,7 @@
   .nope-pointer,
   .like-pointer {
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     top:0;
     left: 0;
     padding-left:90px;
@@ -128,7 +127,6 @@
     width: 370px;
     height: 370px;
     opacity: 0.9;
-    transition: 0.3 ease-in;
   }
   .lp3{
     width: 300px;

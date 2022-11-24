@@ -23,20 +23,7 @@ export default {
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap');
 .finderheader{
   margin: 50px 0 0 0;
-}
-.font_font {
-         font-family: 'NanumGothic';
-        font-style: normal;
-        /* font-weight: 700; */
-        font-size: 20px;
-        /* line-height: 37px; */
-
-}
-* {
-  font-family: 'Nanum Gothic', sans-serif;
-  color: black;
 }
 </style>
