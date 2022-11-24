@@ -18,7 +18,7 @@ export default {
     }
   },
   created(){
-    console.log('stillimages==========')
+    // console.log('stillimages==========', this.image)
   }
 }
 </script>
