@@ -24,7 +24,7 @@ export default {
     },
      methods: {
       feedDetail(id) {
-        this.$emit('showFeedDetail', id)
+        this.$emit('showFeedModal', id)
     }
     }
 }
@@ -33,28 +33,31 @@ export default {
 
 <style>
   .cardgroup{
+    margin-top: 30px;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    max-width: 100%;
+    width:100%;
   }
   .carditem{
-    width: 30%;
+    width: 29%;
     position: relative;
-    align-items: stretch;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
     position: relative;
-    margin: 3px;
     overflow: hidden;
+    margin-right:18px;
+    margin-bottom: 18px;
+    background-color: blue;
   }
   .carditem::after{
     content: "";
     display: block;
     padding-bottom: 100%;
-  }
+  
+}
 
   
 

@@ -1,18 +1,21 @@
 <template>
   <div>
     <br>
-    <input type="text" v-model="feedContent">
-    <br>
-    <EditFeedStills 
+    <div class="stillbox">
+      <EditFeedStills 
+      class="stillitems"
       v-for="(image, key) in still_images"
       :key="image.id"
       :image="image"
       @selectedImg="getImgId(key)"
       :imgid = image.id
     />
+    </div>
     <br>
-    <p>선택한 이미지 = {{selectedImgId}}</p>
-    <b-button @click="editFeed">수정완료</b-button>
+    <div class="editfeedcon">
+      <input type="text" v-model="feedContent">
+      <b-button @click="editFeed">수정완료</b-button>
+    </div>
   </div>
 </template>
 
@@ -46,6 +49,7 @@ export default {
       this.feedContent = this.content
     },
     getImgId(imageId){
+      this.$emit('selectedImg', this.still_images[imageId].image_path)
       this.selectedImgId = imageId
     },
     editFeed(){
@@ -81,5 +85,27 @@ export default {
 </script>
 
 <style>
-
+  .stillbox{
+    display: flex;
+    height: 400px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .editfeedcon{
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+  }
+  .editfeedcon input{
+    width : 80%;
+    border-radius: 7px;
+  }
+  .editfeedcon>input:hover{
+    border: 1px solid navy;
+  }
+  .editfeedcon>button{
+    background-color: aliceblue;
+    color: navy;
+  }
 </style>

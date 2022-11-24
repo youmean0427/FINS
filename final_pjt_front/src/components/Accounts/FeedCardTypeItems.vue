@@ -35,12 +35,15 @@ export default {
     transform: scale(1);
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
-    opacity: 90%;
   }
   .carddiv{
     display: block;
     overflow: hidden;
     object-fit: cover;
+
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .carddiv:hover img{

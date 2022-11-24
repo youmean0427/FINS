@@ -1,10 +1,10 @@
 <template>
   <div>
-     <div class="">
+     <div class="discoverypage">
       <div class="mask d-flex align-items-center h-100">
         <div class="container">
           <div class="row" style="align-items: center;">
-            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <div class="col-12 col-xl-8 mx-auto">
               <div class="card mb-2">
                 <div class="card-body d-flex justify-content-between py-2">
                   <div class="input-group input-group-lg">
@@ -39,7 +39,7 @@
                 </div>
               </div>
               <div v-else>
-                <a style="width:100%;" class="btn btn-success" @click="switchToggle" >장르별 영화검색</a>
+                <a class="genrebox btn btn-dark" @click="switchToggle" >장르별 영화검색</a>
                   <div v-if="showt">
                     <GenreCardList @selectedGenre="getGenreId" @resetGenre="genId = false"/>
                       <div v-if="genreIdSelected" >
@@ -162,6 +162,16 @@ export default {
 </script>
 
 <style>
+.genrebox{
+  width:100%; 
+  background-color:rgb(75, 75, 75);
+  border: 1px solid rgb(75, 75, 75);;
+}
+.discoverypage{
+  width:100%;
+  height: 100%;
+  padding-top:50px;
+}
   #input-group-text{
     background-color: none;
   }

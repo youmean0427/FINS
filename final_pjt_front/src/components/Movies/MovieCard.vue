@@ -1,7 +1,7 @@
 <template>
 
     <div id="mcard" @click="moveDetail" class="card text-start" v-if="movie" style="max-width: 33.3%;">
-      <div v id="movie-view-card">
+      <div id="movie-view-card">
         <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">

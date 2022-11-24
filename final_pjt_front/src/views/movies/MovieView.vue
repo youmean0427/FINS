@@ -2,7 +2,7 @@
   <div>
     <b-button @click="toggleOnOff">당신을 위한 추천영화</b-button>
     
-    <div v-show="!isActive"><MovieList/></div>
+    <div v-show="!isActive"><InfiniteMovieList/></div>
 
     <!-- button toggle -->
     <div v-show="isActive"><UserMovieList/></div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import MovieList from '@/components/Movies/MovieList'
+import InfiniteMovieList from '@/views/movies/InfiniteMovieList'
 import UserMovieList from '@/components/Movies/UserMovieList'
 export default {
     name : 'MovieView',
@@ -21,19 +21,10 @@ export default {
         }
     },
     components:{
-        MovieList,
+        InfiniteMovieList,
         UserMovieList,
     },
-    
-    created(){
-        this.getMovies()
-
-
-    },
     methods:{
-        getMovies(){
-            this.$store.dispatch('getMovies')
-        },
         toggleOnOff: function() {
             this.isActive = !this.isActive;
         }

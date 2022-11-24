@@ -19,17 +19,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      // key: 'key',
-      // paths:['LogIn'], // 해당 모듈의 state값만 localstorage에 저장
-      // storage: {
-        // getItem: (key) => JSON.parse(Cookies.get(key)),
-        // setItem: (key, value) => Cookies.set(key, JSON.stringify(value), {expires: 3, secure: true}),
-        // removeItem: (key) => Cookies.remove(key)
-
-        // getItem: (key) => ls.get(key),
-        // setItem: (key, value) => ls.set(key,value),
-        // removeItem: (key) => ls.remove(key)
-      // }
   })],
   state: {
     movies : [],
@@ -63,8 +52,8 @@ export default new Vuex.Store({
 
     randomMovie(state) {
       // lodash를 사용해서 랜덤한 번호를 추출
-      // 영화 요청 9번 했을 때 180개의 영화가 담겨있음 
-      const randomNumber = _.sample(_.range(0, 180))
+      // 현재 8773개의 영화가 있음
+      const randomNumber = _.sample(_.range(0, 8773))
       state.randomMovie = state.movieList[randomNumber]
       return state.randomMovie
     },
@@ -75,9 +64,9 @@ export default new Vuex.Store({
     tinderMovie(state){
       console.log('test')
       
-      for (var i = 0; i < 100; i++){
+      for (var i = 0; i < 8773; i++){
         // !!!! DB 데이터 수 확인하기
-        const randomNumber = _.sample(_.range(0, 100))
+        const randomNumber = _.sample(_.range(0, 8773))
         state.tinderMovie[i] = {
           url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster,
           idx : randomNumber,
@@ -87,25 +76,6 @@ export default new Vuex.Store({
       return state.tinderMovie
     },
 
-
-
-     // END Tinder GETTERS
-
-    // searchMovieListLen(state){
-    //   if (!state.searchMovieList){
-    //     return 0
-    //   }else{
-    //     return state.searchMovieList.length
-    //   }
-    // },
-
-    // Search ERROR!!
-
-    // searchMovieListLen(state){
-    //   return state.searchMovieList.length
-    // },
-   
-
   },
 
 
@@ -114,8 +84,6 @@ export default new Vuex.Store({
       console.log('받아온 영화목록 : ', movies)
       return state.movies = movies
     },
-
-
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
