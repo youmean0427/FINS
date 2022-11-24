@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-left: 10%; margin-right: 10%; margin-top: 30px;">
+  <div style="margin-left: 10%; margin-right: 10%; margin-top: 3%;">
     <div>
     <img src="@/assets/Movie.png" alt="" width="150px">
       <!-- <h1>MovieDetail</h1> -->
@@ -268,7 +268,7 @@ export default {
 }
 
 .size_size_0 {
-/* position: absolute; */
+/* position: static; */
 width: 500px;
 height: 200px;
 left: 868.65px;
@@ -327,4 +327,10 @@ z-index: 2;
 transform: scale(1.2);
 transition: 0.5s ease;
 }
+
+
+
+
+
+
 </style>

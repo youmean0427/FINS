@@ -10,9 +10,10 @@
     <div v-show='isAuth && loggedIn'>
       <div class="input-group" >
 
-          <input @keyup.enter="editReview" v-show='isActive'  class="form-control" style="text-align:center; margin-right: 20%; margin-left: 20%;" v-model.trim="inputData" type="text" name="">
-
-    </div>
+          <input @keyup.enter="editReview" v-show='isActive'  class="form-control" style="text-align:center; margin-right: 20%; margin-left: 20%; border:none" v-model.trim="inputData" type="text" name="">
+          
+        </div>
+        <img src="@/assets/Line_00.png" alt=""  style="margin-right: 20%; margin-left: 20%;" v-show='isActive' width="60%" >
 
     <br>
     <img src="@/assets/Update.png" alt="" width="50px" height="20px" type="button" @click="createReviewInput" v-show='!isActive' >

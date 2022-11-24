@@ -3,11 +3,18 @@
 
         <form @submit.prevent="createReview">
             <div class="input-group mb-2" >
-            <input type="text" style="text-align:center;" class="form-control" id="content" v-model.trim="content">
-            <button class="btn btn-outline-secondary" type="submit" id="submit">+</button>
+            <input type="text" style="text-align:center;  border:none;" class="form-control" id="content" v-model.trim="content">
+          
+            <button class="btn btn-outline-secondary" type="submit" id="submit" style="border:none">+</button>
             </div>
+            <img src="@/assets/Line_00.png" alt="" width="100%px" >
         </form>
+          
     <!-- <progress></progress> -->
+
+
+
+             
   </div>
 </template>
 

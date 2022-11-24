@@ -1,6 +1,11 @@
 <template>
     <div class="">
-      <h3>UserMovieList</h3>
+      <br>
+      <h3>For you</h3>
+      <br>
+      <h5>좋아하는 영화와 장르를 기반으로 10개의 영화를 추천해줍니다.</h5>
+      <br>
+      <hr>
       <!-- {{ this.user_movie_list }} -->
       <UserMovieCard
         v-for="movie in this.user_movie_list"
