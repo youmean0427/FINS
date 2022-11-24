@@ -41,7 +41,14 @@ export default new Vuex.Store({
     followingList : [],
 
     // profile movie
-    likeMovieTitle : ''
+    likeMovieTitle : '',
+
+    //like feed
+    likestatus : false,
+    gettitle : '',
+
+    //user
+    user : [],
   },
   getters: {
     isLogin(state) {
@@ -122,6 +129,23 @@ export default new Vuex.Store({
     },
 
     // _________________END SEARCH MUTAITONS_________________
+    SAVE_USER(state){
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${state.token}`
+        }
+      })
+        .then((res) => {
+          state.user = res.data
+          console.log('res.data.username 회원정보 저장', res.data.username)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+    }
   },
 
 
@@ -159,6 +183,7 @@ export default new Vuex.Store({
         .then((res) => {
           console.log('회원가입 요청_____',res)
           context.commit('SAVE_TOKEN', res.data.key)
+          context.commit('SAVE_USER')
         })
         .catch((err) =>{
           console.log(err.response.data)
@@ -174,10 +199,10 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
+          console.log('logindata',res.data)
           // console.log(res.data.pk)
           context.commit('SAVE_TOKEN', res.data.key)
-        
+          context.commit('SAVE_USER')
 
         })
         .catch((err)=>{
@@ -259,7 +284,7 @@ export default new Vuex.Store({
             const name = res.data.username
             const name_id = res.data.id
             context.state.now_user = name
-            context.state.now_user_id = name_id
+            context.state.now_user_pk = name_id
           })
           .catch((err) => {
             console.log('-==--------이름을 받아올 수 없엉')
@@ -439,11 +464,52 @@ export default new Vuex.Store({
       },
       // -----------------여기까지 팔로우
       getMovietitle(context, id){
-        console.log('찾는 영화 id = ', id)
-        console.log('찾는 영화 제목:', context.state.movies[id].title)
-        context.state.likeMovieTitle =  context.state.movies[id].title
-      }
-
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/movie/title/${id}`,
+        })
+          .then((res) => {
+            context.state.gettitle = res.data.title
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+      like_feed(context, feed_id){
+        axios({
+          method: 'post',
+          url: `${API_URL}/user/feed/${feed_id}/like/`,
+          headers: {
+            Authorization: `Token ${context.state.token}`
+          },
+        })
+          .then((res) => {
+            console.log(res.data)
+            if(res.data === '좋아요'){
+              context.state.likestatus =  true
+            } else{
+              context.state.likestatus = false
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }, 
+      // like_feed_status(context, feed_id){
+      //   axios({
+      //     method: 'get',
+      //     url: `${API_URL}/user/feed/${feed_id}/likecheck/`,
+      //     headers: {
+      //       Authorization: `Token ${context.state.token}`
+      //     },
+      //   })
+      //     .then((res) => {
+      //       context.state.likestatus = res.data.status
+      //     })
+      //     .catch((err) => {
+      //       console.log(err)
+      //     })
+      // },
   },
   modules: {
     // common,

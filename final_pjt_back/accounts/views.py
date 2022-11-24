@@ -106,3 +106,29 @@ def feed_detail(request, feed_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)
+
+@api_view(['POST'])
+def feed_like(request, feed_pk):
+    if request.user.is_authenticated:
+        feed = Feed.objects.get(pk=feed_pk)
+        liker = get_user_model().objects.get(pk=request.user.pk)
+        if feed.feed_like_user.filter(pk=request.user.pk).exists():
+            feed.feed_like_user.remove(request.user)
+            stts = '좋아요 취소'
+        else:
+            feed.feed_like_user.add(request.user)
+            stts = '좋아요'
+        data = { 'status' : stts }
+        return Response(data)
+    return Response({'status' : '로그인이 필요합니다'}, status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['GET'])
+def feed_like_check(request, feed_pk):
+    if request.user.is_authenticated:
+        feed = Feed.objects.get(pk=feed_pk)
+        if feed.feed_like_user.filter(pk=request.user.pk).exists():
+            stts = True
+        else : 
+            stts = False
+        data = {'status' : stts}
+        return Response(data)

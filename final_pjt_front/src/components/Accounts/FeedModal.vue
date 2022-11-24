@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="feed" class="container">
     <div class="row contentPage">
       <div class="col-6 feedleft">
           <img v-if="testImg" :src="testurl" alt="">
@@ -8,21 +8,24 @@
       <div class="col-6 feedright">
         <div class="userprofile">
           <img src="https://user-images.githubusercontent.com/87971876/203572590-35117aa5-e24e-4c08-9402-489b2c9888da.png" alt="">
-          <p>username</p>
+          <p>{{username}}</p>
         </div>
         <hr>
         <div v-if="showEdit" class="rightmiddle">
             <EditFeed :still_images="still_images" 
                     :content="feed.content" :img="feed.image_path" 
-                    :feedId="feed.id" @changedImg="updateFeed" @selectedImg="selectedImg"/>
+                    :feedId="feedId" @changedImg="updateFeed" @selectedImg="selectedImg"/>
         </div>
         <div v-else class="rightmiddle">
-          <div>
+          <div style="width:100%">
             <h4>{{title}}</h4>
             <p>한줄평 : {{content}}</p>
           </div>
-          <div class="feedbtns">
-            <b-button v-if="!showEdit" @click="likeFeed" class="heartbtn"><img src="https://user-images.githubusercontent.com/87971876/203576382-75664732-87ee-4657-acad-fdad8d9c1c18.png" alt=""></b-button>
+          <div class="feedbtns" style="width:100%">
+            <div v-if="!showEdit">
+              <b-button v-if="!likeSwitch" @click="likeFeed" class="heartbtn"><img :src="heartimg" alt="좋아요"></b-button>
+              <b-button v-else @click="likeFeed" class="heartbtn"><img :src="emptyheartimg" alt="싫어요"></b-button>
+            </div>
             <div v-if="isMyPage">
               <b-button class="feededitbtn" @click="clickEdit">수정</b-button>
               <b-button class="feededitbtn" v-b-modal.modal-1>삭제</b-button>
@@ -52,59 +55,86 @@ export default {
   },
   data(){
     return{
-      feed : '',
+      feed : null,
       movie : [],
       showEdit : false,
       still_images : [],
       testImg : false,
       testurl : '',
+      // likeSwitch : '',
+
+      heartimg : 'https://user-images.githubusercontent.com/87971876/203576382-75664732-87ee-4657-acad-fdad8d9c1c18.png',
+      emptyheartimg : 'https://user-images.githubusercontent.com/87971876/203696448-7c4bce64-5e4b-4781-9c13-f1270808622d.png',
     }
   },
   computed:{
     title(){
-      return this.movie.title
+      return this.$store.state.gettitle
     },
     url(){
       return this.feed.image_path
     },
     content(){
       return this.feed.content
-    }
+    },
+    likeSwitch(){
+      // return this.$store.state.likestatus
+      if(!this.$store.state.user.feed_like_user){
+        return  false
+      } else if (this.feedId) {
+        return this.$store.state.likestatus
+      }else{
+        return this.$store.state.user.feed_like_user.includes(this.feedId)
+      }
+    },
   },
   props: {
-    id: Number,
+    feedId: Number,
     user : String,
+    username : String,
   },
   created(){
-    this.feedInfo()
+    this.feedInfo(this.feedId)
+    // this.likeSwitch = this.feed.feed_like_user.includes(this.$store.state.now_user_pk)
   },
   methods:{
+    likeFeed(){
+      this.feedInfo(this.feedId)
+      // 로그인한 상태가 아니면 로그인하라고 alert
+      if(!this.$store.getters.isLogin){
+        alert('로그인이 필요합니다!') 
+        return
+      } else {
+        this.$store.dispatch('like_feed', this.feedId)
+      }
+    },
     selectedImg(url){
       this.testImg = true
       this.testurl = url
     },
-    getStill(){
+    getStill(id){
       axios({
           method:'get',
-          url: `${API_URL}/api/v1/movie/${this.movie.movie_key}/stills/`,
+          url: `${API_URL}/api/v1/movie/${id}/stills/`,
         })
         .then((res) => {
           this.still_images = res.data
+          // console.log('요청받은 데이터 ====', this.movie.movie_key)
         })
         .catch(() => {return false})
     },
     clickEdit(){
       this.showEdit = true
-      this.getStill()
     },
-    feedInfo(){
+    feedInfo(feedId){
       axios({
           method:'get',
-          url: `${API_URL}/user/feed/${this.id}/`,
+          url: `${API_URL}/user/feed/${feedId}/`,
         })
         .then((res) => {
           this.feed = res.data
-          this.movie = this.$store.state.movies[this.feed.movie_id]
+          this.getStill(this.feed.movie_id)
+          this.$store.dispatch('getMovietitle', this.feed.movie_id)
         })
         .catch(() => {return false})
     },
@@ -128,7 +158,7 @@ export default {
     deleteFeed(){
       axios({
           method:'delete',
-          url: `${API_URL}/user/feed/${this.id}/`,
+          url: `${API_URL}/user/feed/${this.feedId}/`,
           headers: {
           Authorization: `Token ${this.$store.state.token}`
         }
@@ -160,10 +190,11 @@ export default {
     max-height: max-content;
     width: 100%;
     padding: 0;
-    height: 620px;
+    height: 100%;
   }
   .feedleft, .feedright{
     padding: 0;
+    height: 100%;
   }
   .feedleft{
     height: 100%;
@@ -172,6 +203,7 @@ export default {
     justify-content:center;
     align-items:center;
     overflow: hidden;
+    border-radius: 7px 0 0 7px;
   }
   .feedleft img{
     object-fit: cover;
@@ -209,7 +241,7 @@ export default {
     align-content: space-between;
     padding-left: 10px;
     justify-content: space-between;
-    height: 70%;
+    height: 65%;
     
   }
   .feedbtns{

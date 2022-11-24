@@ -81,9 +81,9 @@ genreData = [
 ]
 
 final_result = []
-with open('movie_genre_test.json', 'w', encoding='utf-8') as f:
+with open('movie_genre_final.json', 'w', encoding='utf-8') as f:
     count = 0
-    for i in range(1, 10):
+    for i in range(1, 500):
         requestData = requests.get(f"https://api.themoviedb.org/3/movie/popular?api_key=8d2390a7f14da4093a0836c65dfb59a2&language=ko-KR&page={i}")
         jsonData = requestData.json()
         results=jsonData["results"]

@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div style="width:100%">
     <br>
     <div class="stillbox">
       <EditFeedStills 
-      class="stillitems"
-      v-for="(image, key) in still_images"
-      :key="image.id"
-      :image="image"
-      @selectedImg="getImgId(key)"
-      :imgid = image.id
-    />
+        class="stillitems"
+        v-for="(image, key) in still_images"
+        :key="image.id"
+        :image="image"
+        @selectedImg="getImgId(key)"
+        :imgid = image.id
+      />
     </div>
     <br>
     <div class="editfeedcon">
@@ -37,6 +37,7 @@ export default {
   },
   created(){
     this.set()
+    console.log('sills', this.still_images)
   },
   props :{
     still_images : Array,

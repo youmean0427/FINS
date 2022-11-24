@@ -41,8 +41,8 @@ class Movie(models.Model):
 class Movie_Image(models.Model):
     id = models.IntegerField(primary_key=True)
      # 영화 스틸컷
-    movie_id = models.IntegerField() # 영화의 movie_key
     image_path = models.CharField(max_length=1000)
+    movie_id = models.IntegerField() # 영화의 movie_key
 
     class Meta:
         db_table = 'movie_image'

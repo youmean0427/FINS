@@ -38,6 +38,5 @@ export default {
     justify-content: center;
   }
   #list{
-    width: 80%;
   }
 </style>

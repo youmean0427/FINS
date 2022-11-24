@@ -87,6 +87,9 @@ export default {
 
 .vuegram-post {
   padding: 5px 0;
+  min-width:300px;
+  max-width: 700px;
+  width: 100%;
 }
   .header {
     /* height: 30px; */
@@ -179,36 +182,11 @@ export default {
   .movieTitle{
     color: rgb(145, 145, 145);
   }
-   /* .hidden-title{
-    z-index: 2;
-    width: 100%;
-    padding:1em;
-    position: absolute;
-    text-align : center;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-    display:none;
-    color:rgb(59, 59, 59);
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,0.8) 40%, rgb(121, 128, 121, 0.8) 100%);
-    top : 50%;
-    left: 50%;
-    height: 100%;
-   } */
-  /* #movie-view-card{
+   #movie-view-card{
     max-width: inherit;
     vertical-align : middle;
     transition: .5s ease;
-    border-radius : 6px;
+    border-radius : 0;
    }
-   #movie-view-card:hover{
-     transition: .5 ease;
-     z-index: 1;
-     
-   }
-   #movie-view-card:hover + .hidden-title{
-    transition: .5 ease;
-    display: block;
-   } */
 
 </style>
