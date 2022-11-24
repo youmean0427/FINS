@@ -50,23 +50,23 @@ export default new Vuex.Store({
 
     // Tinder GETTERS
 
-    randomMovie(state) {
-      // lodash를 사용해서 랜덤한 번호를 추출
-      // 현재 8773개의 영화가 있음
-      const randomNumber = _.sample(_.range(0, 8773))
-      state.randomMovie = state.movieList[randomNumber]
-      return state.randomMovie
-    },
+    // randomMovie(state) {
+    //   // lodash를 사용해서 랜덤한 번호를 추출
+    //   // 현재 8773개의 영화가 있음
+    //   const randomNumber = _.sample(_.range(0, 8773))
+    //   state.randomMovie = state.movieList[randomNumber]
+    //   return state.randomMovie
+    // },
    
 
     
     // !!!!!!!!
     tinderMovie(state){
       console.log('test')
-      
+      const lenmovies = state.movies.length
       for (var i = 0; i < 8773; i++){
         // !!!! DB 데이터 수 확인하기
-        const randomNumber = _.sample(_.range(0, 8773))
+        const randomNumber = _.sample(_.range(0, lenmovies))
         state.tinderMovie[i] = {
           url : state.BASE_POSTER_PATH + state.movies[randomNumber].poster,
           idx : randomNumber,
@@ -95,9 +95,9 @@ export default new Vuex.Store({
     },
 
     // _________________TINDER MUTAITONS_________________
-    GET_RANDOM_MOVIES(state, res) {
-      state.randomMovies = res
-      },
+    // GET_RANDOM_MOVIES(state, res) {
+    //   state.randomMovies = res
+    //   },
     MOVIE_LIKE(state, tinderLikeM) {
         state.tinderLike.push(tinderLikeM)
         

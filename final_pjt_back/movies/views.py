@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 # from ..accounts.models import User
 # from myapp.models import Entry
 from django.db.models import Q
-
+ 
 
 
 # 랜덤한 하나의 이미지를 딕셔너리에 담아 반환하는 함수
@@ -28,11 +28,17 @@ def make_still(movie_id):
     #     img_lst.append({ im : img_serial[im].image_path })
     return stil_image
 
-# ______________________인기순 영화목록 (main)vote_movie______________________
+# ____________________랜덤한 100개씩 보내주는 영화목록________________________
 @api_view(['GET'])
 def movie_list(request):
     if request.method == 'GET':
-        movies = Movie.objects.all().order_by('id')
+        # 8773 중에 랜덤한 100개의 데이터를 보내주기
+        movies = []
+        for i in range(1, 100):
+            number = random.randint(1,8773)
+            movie = Movie.objects.get(id = number)
+            movies.append(movie)
+        # movies = Movie.objects.all().order_by('id')
         serializer = MovieListSerializer(movies, many=True)
 
         for i in range(len(serializer.data)):
@@ -45,6 +51,7 @@ def movie_list(request):
 
         return Response(serializer.data)
 
+# ___________________mainpage infinite sroll 적용 영화목록_________________________
 @api_view(['GET'])
 def movie_list_limit(request, limit):
     movies = get_list_or_404(Movie)
