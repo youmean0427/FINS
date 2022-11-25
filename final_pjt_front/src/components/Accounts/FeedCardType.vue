@@ -52,7 +52,7 @@ export default {
     overflow: hidden;
     margin-right:18px;
     margin-bottom: 18px;
-    background-color: blue;
+    background-color: transparent;
   }
   .carditem::after{
     content: "";

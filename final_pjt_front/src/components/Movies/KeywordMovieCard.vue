@@ -1,5 +1,4 @@
 <template>
-  <div>
 
     <!-- <router-link :to="{ name: 'MovieDetailView', params: { id: keyword_movie.id } }">
       [DETAIL]
@@ -8,12 +7,10 @@
     
     <!-- {{keyword_movie.poster}} -->
 
-    <div id="mcard" @click="moveDetail" class="card text-start" v-if="keyword_movie" style="max-width: 33.3%;">
+    <div id="mcard" @click="moveDetail" class="card text-start" v-if="keyword_movie" style="max-width: 23.3%;">
       <div id="movie-view-card">
        <img class="card-img-top"  :src="url" width="25%" alt="">
-        </div>
-    </div>
-    
+        </div>    
   </div>
 </template>
 

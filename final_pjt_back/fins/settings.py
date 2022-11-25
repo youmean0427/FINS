@@ -193,3 +193,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #이미지 파일 관리
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'accounts.serializers.UserDetailsSerializer',
 }
+
+SITE_ID = 1

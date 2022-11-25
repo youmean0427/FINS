@@ -5,7 +5,7 @@
         <img class="card-img-top" :src="url" alt="movieImg">
       </div>
       <div class="hidden-title">
-          <h3 id="movieTitle">{{movie.title}}</h3>
+          <h5 id="movieTitle">{{movie.title}}</h5>
       </div>
       
     </div>
@@ -37,13 +37,16 @@ export default {
 </script>
 
 <style>
+  .hidden-title h5{
+    padding-top: 50%;
+  }
   .hidden-title{
     z-index: 2;
     width: 100%;
     position: absolute;
     text-align : center;
     transform: translate(-50%, -50%);
-    font-weight: bold;
+    /* font-weight: bold; */
     display:none;
     color:rgb(59, 59, 59);
     /* background-color: rgba(228, 228, 228, 0.886); */
@@ -52,15 +55,13 @@ export default {
     top : 50%;
     left: 50%;
     height: 100%;
-    display:felx;
-    flex-flow: column wrap;
-    align-items: center;
-    justify-content: center;
-    padding-top: 50%;
-
-    /* padding-top:50%; */
    }
+  #movie-view-card img{
+    width:inherit;
+    object-fit: cover;
+  }
   #movie-view-card{
+    overflow: hidden;
     width : 100%;
     vertical-align : middle;
     transition: .5s ease;

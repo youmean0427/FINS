@@ -55,5 +55,6 @@ export default {
 <style>
  .recobox{
    display: flex;
+   flex-wrap: wrap;
  }
 </style>
