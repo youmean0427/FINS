@@ -29,8 +29,8 @@
             <div v-if="isMyPage">
               <b-button class="feededitbtn" @click="clickEdit">수정</b-button>
               <b-button class="feededitbtn" v-b-modal.modal-1>삭제</b-button>
-              <b-modal ref="my-modal" hide-footer id="modal-1" title="BootstrapVue">
-                <p class="my-4">{{title}}을 프로필 피드에서 삭제하시겠습니까?</p>
+              <b-modal ref="my-modal" hide-footer id="modal-1" :title="title">
+                <p class="my-4">프로필 피드에서 삭제하시겠습니까?</p>
                 <b-button class="mt-3" variant="outline-danger" block @click="hideModal">취소</b-button>
                 <b-button class="mt-3" variant="outline-warning" block @click="deleteFeed">삭제하기</b-button>
               </b-modal>
@@ -68,6 +68,7 @@ export default {
     }
   },
   computed:{
+
     title(){
       return this.$store.state.gettitle
     },
