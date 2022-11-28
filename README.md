@@ -66,6 +66,7 @@
     400" alt="my page modal edit" src="https://user-images.githubusercontent.com/87971876/204210117-28f66946-7a60-4eb1-a7ce-0092e8dd19f0.png"/>
     <img width="400" alt="my page modal" src="https://user-images.githubusercontent.com/87971876/204210121-292e184a-26e5-4d43-9ea4-40e5a12282c8.png"/>
 </center>
+
 - 리스트형 카드형 두가지로 확인가능
 ![my page gif](https://user-images.githubusercontent.com/87971876/204210110-edd7b541-0be8-4dba-a7a5-14120fb8c6db.gif)
 
