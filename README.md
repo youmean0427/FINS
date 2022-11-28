@@ -68,6 +68,7 @@
 </center>
 
 - 리스트형 카드형 두가지로 확인가능
+
 ![my page gif](https://user-images.githubusercontent.com/87971876/204210110-edd7b541-0be8-4dba-a7a5-14120fb8c6db.gif)
 
 ### ✔️ 영화 검색
