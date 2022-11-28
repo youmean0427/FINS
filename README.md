@@ -5,8 +5,8 @@
 ---
 ### 🧑‍💻 팀원정보 및 업무분담내역
 <center class="half">   
-    <img width="500" alt="main" src="https://user-images.githubusercontent.com/87971876/204215118-099a714a-7888-419b-bd9f-2a711e7a1ada.png">
-    <img width="500" alt="team" src="https://user-images.githubusercontent.com/87971876/204215122-4c70e9e9-12bc-4ad3-a2b6-600ae41aaee7.png">
+    <img width="400" alt="main" src="https://user-images.githubusercontent.com/87971876/204215118-099a714a-7888-419b-bd9f-2a711e7a1ada.png">
+    <img width="400" alt="team" src="https://user-images.githubusercontent.com/87971876/204215122-4c70e9e9-12bc-4ad3-a2b6-600ae41aaee7.png">
 </center>
 
 ---
@@ -22,8 +22,8 @@
 ---
 ### 3. 데이터베이스 모델링 (ERD)
 <center class="half">
-    <img width="500" alt="erd" src="https://user-images.githubusercontent.com/87971876/204215098-49823c59-3ee6-4cac-bc48-d6eb366aa186.png">
-    <img width="500" alt="database" src="https://user-images.githubusercontent.com/87971876/204215095-7bd1e8b7-e9af-4621-a943-d7c747827e8c.png">
+    <img width="400" alt="erd" src="https://user-images.githubusercontent.com/87971876/204215098-49823c59-3ee6-4cac-bc48-d6eb366aa186.png">
+    <img width="400" alt="database" src="https://user-images.githubusercontent.com/87971876/204215095-7bd1e8b7-e9af-4621-a943-d7c747827e8c.png">
 </center>
 
 #### 컴포넌트 구성
@@ -32,16 +32,16 @@
 
 #### 프로토타입
 <center class="third">
-    <img width="333" alt="figma1" src="https://user-images.githubusercontent.com/87971876/204215101-7c9b52f2-3fee-4581-ab7c-be0dec4e42ab.png">
-    <img width="333" alt="figma2" src="https://user-images.githubusercontent.com/87971876/204215105-a2cdb49d-6c4a-4178-b20f-909a78102d9f.png">
-    <img width="333" alt="figma3" src="https://user-images.githubusercontent.com/87971876/204215108-d2befb6f-07b7-4a15-acea-b481a867d163.png">
+    <img width="266" alt="figma1" src="https://user-images.githubusercontent.com/87971876/204215101-7c9b52f2-3fee-4581-ab7c-be0dec4e42ab.png">
+    <img width="266" alt="figma2" src="https://user-images.githubusercontent.com/87971876/204215105-a2cdb49d-6c4a-4178-b20f-909a78102d9f.png">
+    <img width="266" alt="figma3" src="https://user-images.githubusercontent.com/87971876/204215108-d2befb6f-07b7-4a15-acea-b481a867d163.png">
 </center>
 
 ---
 ### 4. 영화 추천 알고리즘에 대한 기술적 설명
 <center class="half">
-    <img width="500" alt="algorithmn" src="https://user-images.githubusercontent.com/87971876/204215092-2943b00d-70f3-4e35-9fc3-28e6b6882f07.png">
-    <img width="500" alt="recomment movies" src="https://user-images.githubusercontent.com/87971876/204210124-831f3c38-c1a0-4bcf-a2d3-45bc5093e457.png">
+    <img width="400" alt="algorithmn" src="https://user-images.githubusercontent.com/87971876/204215092-2943b00d-70f3-4e35-9fc3-28e6b6882f07.png">
+    <img width="400" alt="recomment movies" src="https://user-images.githubusercontent.com/87971876/204210124-831f3c38-c1a0-4bcf-a2d3-45bc5093e457.png">
 </center>
 
 ---
@@ -53,8 +53,8 @@
 - 영화 상세 페이지에서 영화 좋아요
 - 혹은 FINDER 기능을 통해 좋아요를 누르지 않은 영화 중 랜덤한 영화 목록에서 영화 포스터 카드를 움직여 좋아요 기능 구현
     <center class="half">
-    <img width="500" alt="finder" src="https://user-images.githubusercontent.com/87971876/204220431-33b7db68-2c91-4fb5-a33c-dd4c46e05a00.png">
-    <img width="500" alt="finder" src="https://user-images.githubusercontent.com/87971876/204210090-203f92ef-fd34-483e-b2f2-75f0003bf213.gif">
+    <img width="400" alt="finder" src="https://user-images.githubusercontent.com/87971876/204220431-33b7db68-2c91-4fb5-a33c-dd4c46e05a00.png">
+    <img width="400" alt="finder" src="https://user-images.githubusercontent.com/87971876/204210090-203f92ef-fd34-483e-b2f2-75f0003bf213.gif">
 </center>
 
 #### - 마이페이지
@@ -63,8 +63,8 @@
 - 피드 게시글수정 시 원하는 영화의 스틸컷으로 이미지 수정 혹은 한줄 평 추가가능
 <center class="half">
     <img width="
-    500" alt="my page modal edit" src="https://user-images.githubusercontent.com/87971876/204210117-28f66946-7a60-4eb1-a7ce-0092e8dd19f0.png"/>
-    <img width="500" alt="my page modal" src="https://user-images.githubusercontent.com/87971876/204210121-292e184a-26e5-4d43-9ea4-40e5a12282c8.png"/>
+    400" alt="my page modal edit" src="https://user-images.githubusercontent.com/87971876/204210117-28f66946-7a60-4eb1-a7ce-0092e8dd19f0.png"/>
+    <img width="400" alt="my page modal" src="https://user-images.githubusercontent.com/87971876/204210121-292e184a-26e5-4d43-9ea4-40e5a12282c8.png"/>
 </center>
 - 리스트형 카드형 두가지로 확인가능
 ![my page gif](https://user-images.githubusercontent.com/87971876/204210110-edd7b541-0be8-4dba-a7a5-14120fb8c6db.gif)
@@ -78,8 +78,8 @@
 - 영화 상세페이지에서 영화별 키워드 확인
 - 키워드 클릭 시 해당 키워드에 연관된 영화목록 표출
 <center class="half">
-    <img width="500" alt="keyword movie" src="https://user-images.githubusercontent.com/87971876/204210097-06af76bc-d0ee-4223-994f-fadb53f42483.png">
-    <img width="500" alt="movie keyword" src="https://user-images.githubusercontent.com/87971876/204210107-bd4571fb-9d72-42dd-a062-e7a8763589f8.png">
+    <img width="400" alt="keyword movie" src="https://user-images.githubusercontent.com/87971876/204210097-06af76bc-d0ee-4223-994f-fadb53f42483.png">
+    <img width="400" alt="movie keyword" src="https://user-images.githubusercontent.com/87971876/204210107-bd4571fb-9d72-42dd-a062-e7a8763589f8.png">
 </center>
 
 #### - 회원가입, 로그인 페이지 유효성 검사 UI
