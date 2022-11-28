@@ -139,7 +139,7 @@ export default {
             .then((res) => {
                 // console.log(res);
                 console.log("데이터를 받았어요!");
-                this.user_id = res.data.pk;
+                this.user_id = res.data.id;
                 console.log(this.user_id)
                 // console.log(this.user_id)
                 // console.log((this.movie.movie_like_user))
